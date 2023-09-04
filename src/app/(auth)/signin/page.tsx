@@ -19,7 +19,8 @@ const SignIn = async () => {
               <div>
                 <h1 className='text-2xl text-center font-semibold tracking-tight'>Bienvenido!</h1>
               </div>
-              <form className="bg-white rounded px-20 pt-6 pb-8 mb-4">
+              {/* form */}
+              <div className="bg-white rounded px-20 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                     Username
@@ -42,7 +43,7 @@ const SignIn = async () => {
                   </button>
                   <GoogleLoginButton />
                 </div>
-              </form>
+              </div>
               <p className="text-center text-gray-500 text-xs">
                 &copy;2020 Acme Corp. All rights reserved.
               </p>
