@@ -4,7 +4,8 @@ const nextConfig = {
       appDir: true
     },
     images: {
-        domains: ['github.com', 'lh3.googleusercontent.com', 'freecodecamp.org', 'www.freecodecamp.org', 'production.listennotes.com']
+        dangerouslyAllowSVG: true,
+        domains: ['github.com', 'lh3.googleusercontent.com', 'tailwindui.com', 'production.listennotes.com']
     },
     typescript: {
       ignoreBuildErrors: true
