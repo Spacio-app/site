@@ -64,6 +64,8 @@ const Header = () => {
                       className="h-8 w-auto"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                       alt="Your Company"
+                      width={40}
+                      height={40}
                     />
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
