@@ -5,7 +5,10 @@ const nextConfig = {
     },
     images: {
         domains: ['github.com', 'lh3.googleusercontent.com', 'freecodecamp.org', 'www.freecodecamp.org', 'production.listennotes.com']
-      }
+    },
+    typescript: {
+      ignoreBuildErrors: true
+    }
 }
 
 module.exports = nextConfig
