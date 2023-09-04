@@ -9,9 +9,9 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import SignInButton from '@/app/components/SignInButton'
 
-const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Team', href: '#', current: false }
+const navigation: any[] = [
+  // { name: 'Home', href: '#', current: true },
+  // { name: 'Team', href: '#', current: false }
   // { name: 'Projects', href: '#', current: false },
   // { name: 'Calendar', href: '#', current: false },
 ]
@@ -61,8 +61,8 @@ const Header = () => {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
                     <Image
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      className="h-9 w-auto"
+                      src="/rocket.svg"
                       alt="Your Company"
                       width={40}
                       height={40}
