@@ -3,8 +3,6 @@ import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import prisma from '@/app/api/controllers/prisma'
 
-export const runtime = 'edge'
-
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -32,3 +30,5 @@ export const authOptions: AuthOptions = {
 const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }
+
+export const runtime = 'edge'
