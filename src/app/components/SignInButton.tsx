@@ -54,8 +54,8 @@ const SignInButton = () => {
                   className="h-8 w-8 rounded-full"
                   width={40}
                   height={40}
-                  src={session.user.image}
-                  alt={session.user.name as string}
+                  src={session?.user?.image as string}
+                  alt={session?.user?.name as string}
                 />
               </Menu.Button>
             </div>
