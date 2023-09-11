@@ -40,6 +40,8 @@
   },
   "browser": {
     "crypto": false,
-    "stream": false
+    "stream": false,
+    "http": false,
+    "https": false
   }
 }
