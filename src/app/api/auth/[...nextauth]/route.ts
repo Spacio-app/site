@@ -6,7 +6,7 @@ import prisma from '@/app/api/controllers/prisma'
 export const runtime = 'edge'
 
 export const authOptions: any = {
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma as any),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,

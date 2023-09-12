@@ -1,12 +1,8 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client/edge'
+import { withAccelerate } from '@prisma/extension-accelerate'
 
-declare global {
-  // eslint-disable-next-line no-var
-  var prisma: PrismaClient | undefined
-}
+const prisma = new PrismaClient().$extends(withAccelerate())
 
-const client = globalThis.prisma ?? new PrismaClient()
-if (process.env.NODE_ENV !== 'production') globalThis.prisma = client
+// if (process.env.NODE_ENV !== 'production') globalThis.prisma = client
 
-export default client
+export default prisma
