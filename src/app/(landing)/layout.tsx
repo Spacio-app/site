@@ -1,7 +1,6 @@
-import './globals.css'
-import Footer from './home/footer'
-import Header from './home/header'
-import Provider from './home/provider'
+import '@/app/css/globals.css'
+import Provider from '../shared/provider'
+import Header from './header'
 
 export default function RootLayout ({
   children
@@ -15,11 +14,8 @@ export default function RootLayout ({
         <Provider>
             <Header />
                 <main>{ children }</main>
-            <Footer />
         </Provider>
     </body>
     </html>
   )
 }
-
-export const runtime = 'edge'

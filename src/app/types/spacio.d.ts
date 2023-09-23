@@ -11,7 +11,7 @@ declare namespace Spacio {
       result?: Result
     }
 
-    export type Locale = 'es-CL' | 'en-US' | 'pt-BR'
+    export type Locale = 'es-CL' | 'en-US'
   }
 
   export namespace Services {

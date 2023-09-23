@@ -1,11 +1,9 @@
-import NextAuth from 'next-auth'
+import NextAuth, { type AuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import prisma from '@/app/api/controllers/prisma'
 
-export const runtime = 'edge'
-
-export const authOptions: any = {
+export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma as any),
   providers: [
     GoogleProvider({
@@ -27,11 +25,12 @@ export const authOptions: any = {
   pages: {
     signIn: '/signin'
   }
+  // session: {
+  //   strategy: 'jwt'
+  // },
+  // secret: process.env.NEXTAUTH_SECRET as string
 }
 
 const handler = NextAuth(authOptions)
 
-export const GET = handler.handlers.GET
-export const POST = handler.handlers.POST
-
-// export { handler as GET, handler as POST }
+export { handler as GET, handler as POST }

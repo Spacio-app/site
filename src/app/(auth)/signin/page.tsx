@@ -1,5 +1,5 @@
 import GoogleLoginButton from '@/app/components/GoogleSignInButton'
-import '@/app/(site)/globals.css'
+import '@/app/css/globals.css'
 import Image from 'next/image'
 const SignIn = async () => {
   return (
