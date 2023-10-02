@@ -1,6 +1,7 @@
 import '@/app/css/globals.css'
 import Provider from '@/app/shared/provider'
-import Sidenav from './sidenav'
+// import Sidenav from './sidenav'
+import Header from '@/app/(landing)/header'
 
 export default function RootLayout ({
   children
@@ -12,9 +13,10 @@ export default function RootLayout ({
     <head />
     <body>
         <Provider>
-            <Sidenav>
-                <main>{ children }</main>
-            </Sidenav>
+            <Header />
+              <main>{ children }</main>
+            {/* <Sidenav>
+            </Sidenav> */}
         </Provider>
     </body>
     </html>

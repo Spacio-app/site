@@ -12,9 +12,7 @@ export default function RootLayout ({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+        <main>{ children }</main>
     </html>
   )
 }
-
-export const runtime = 'edge'

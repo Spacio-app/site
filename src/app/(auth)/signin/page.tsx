@@ -45,7 +45,7 @@ const SignIn = async () => {
                 </div>
               </div>
               <p className="text-center text-gray-500 text-xs">
-                &copy;2020 Acme Corp. All rights reserved.
+                &copy;2023 Spacio. Todos los derechos reservados.
               </p>
             </div>
           </div>
