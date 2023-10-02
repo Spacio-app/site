@@ -1,29 +1,27 @@
 const getCourseById = async (id: string) => {
-    console.log
-    const response = await fetch(`http://127.0.0.1:3001/content/${id}`)
-    console.log(response)
-    const course = await response.json()
+  const response = await fetch(`http://127.0.0.1:3001/content/${id}`)
+  console.log(response)
+  const course = await response.json()
 
-    return course
+  return course
 }
-  
+
 const Course = async ({ params }: { params: any }) => {
+  const course = await getCourseById(params.id)
+  // if (!course) {
+  //   console.error('Curso no encontrado')
+  //   return
+  // } else {
+  //   console.log(course)
+  // }
 
-const course = await getCourseById(params.id)
-// if (!course) {
-//   console.error('Curso no encontrado')
-//   return
-// } else {
-//   console.log(course)
-// }
+  const { title, videosurl, description, author } = course
 
-const { title, videosurl, description, author, createdat, updatedat } = course
+  // console.log('Detalles del Curso:', course)
 
-// console.log('Detalles del Curso:', course)
+  // Ahora puedes renderizar los datos en tu componente JSX
 
-// Ahora puedes renderizar los datos en tu componente JSX
-
-return (
+  return (
     <>
         <div className="bg-gray-100">
             <div className="container mx-auto py-8">
@@ -42,7 +40,7 @@ return (
 
                     {/* Menú de selección de videos */}
                     <aside className="w-1/4 overflow-y-auto">
-                        <h2 className="text-lg font-semibold mb-4">Clases</h2>
+                        <h2 className="text-lg font-semibold mt-0 mb-4">Clases</h2>
                         <ul>
                             <li className="mb-2">
                                 <a href="#" className="block text-gray-800 hover:text-blue-500">
@@ -71,6 +69,6 @@ return (
         </div>
 
     </>
-)
+  )
 }
 export default Course
