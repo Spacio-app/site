@@ -11,7 +11,9 @@ import { type ReactElement } from 'react'
 // import { useRouter } from 'next/navigation'
 export const getProjects = async () => {
   // give me example url to fetch data
-  const res = await fetch('http://127.0.0.1:3001/content', { cache: 'no-store' })
+  const apiBaseUrl = process.env.API_BASE_URL
+  console.log('apiBaseUrl', apiBaseUrl)
+  const res = await fetch(`${apiBaseUrl}content`, { cache: 'no-store' })
   const projects = await res.json()
 
   return projects
