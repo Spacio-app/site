@@ -12,7 +12,6 @@ import { type ReactElement } from 'react'
 export const getProjects = async () => {
   // give me example url to fetch data
   const apiBaseUrl = process.env.API_BASE_URL
-  console.log('apiBaseUrl', apiBaseUrl)
   const res = await fetch(`${apiBaseUrl}content`, { cache: 'no-store' })
   const projects = await res.json()
 
