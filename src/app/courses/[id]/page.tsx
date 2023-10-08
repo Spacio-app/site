@@ -42,7 +42,7 @@ const Course = async ({ params }: { params: any }) => {
                     <aside className="w-1/4 overflow-y-auto">
                         <h2 className="text-lg font-semibold mt-0 mb-4">Clases</h2>
                         <ul>
-                            <li className="mb-2">
+                            {/* <li className="mb-2">
                                 <a href="#" className="block text-gray-800 hover:text-blue-500">
                                 Video 1: {title}
                                 </a>
@@ -61,7 +61,7 @@ const Course = async ({ params }: { params: any }) => {
                                 <a href="#" className="block text-gray-800 hover:text-blue-500">
                                 Video 4: Título del Video
                                 </a>
-                            </li>
+                            </li> */}
                         </ul>
                     </aside>
                 </div>
