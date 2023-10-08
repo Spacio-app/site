@@ -1,3 +1,5 @@
+import Video from '@/app/components/Video'
+
 const getCourseById = async (id: string) => {
   const apiBaseUrl = process.env.API_BASE_URL
   const response = await fetch(`${apiBaseUrl}content/${id}`)
@@ -31,10 +33,11 @@ const Course = async ({ params }: { params: any }) => {
                     <section className="w-3/4 pr-8">
                         <h1 className="text-3xl font-bold mb-4">{title}</h1>
                         <p className="text-gray-600 mb-4">Autor: {author}</p>
-                        <video controls width="100%">
+                        {/* <video controls width="100%">
                             <source src={videosurl} type="video/mp4" />
                             Tu navegador no admite la reproducción de videos.
-                        </video>
+                        </video> */}
+                        <Video videoUrl={videosurl as string} />
                         <p className="text-gray-800 mt-4">{description}</p>
                         {/* Mostrar otros detalles del curso aquí */}
                     </section>

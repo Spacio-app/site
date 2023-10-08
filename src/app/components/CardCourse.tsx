@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 const CardCourse = ({ id }: { id: string }) => {
   const router = useRouter()
   function handleClick () {
-    router.push(`/courses/${id}`)
+    router.push(`home/courses/${id}`)
   }
 
   return (<>
