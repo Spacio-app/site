@@ -5,6 +5,7 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 import { Menu, Transition } from '@headlessui/react'
 import { BellIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 function classNames (...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -12,6 +13,7 @@ function classNames (...classes: any) {
 
 const SignInButton = () => {
   const { data: session } = useSession()
+  const router = useRouter()
 
   if (session != null) {
     return (
@@ -94,7 +96,11 @@ const SignInButton = () => {
                     <a
                       href="#"
                       className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                      onClick={async () => { await signOut() }}
+                      onClick={async () => {
+                        await signOut({ redirect: false }).then(() => {
+                          router.push('/') // Redirect to the dashboard page after signing out
+                        })
+                      }}
                     >
                       Sign out
                     </a>

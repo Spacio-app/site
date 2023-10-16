@@ -1,4 +1,4 @@
-import '@/app/css/globals.css'
+import '@/css/globals.css'
 import Provider from '../shared/provider'
 import Header from './header'
 

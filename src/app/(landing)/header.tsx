@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import SignInButton from '@/app/components/SignInButton'
+import SignInButton from '@/components/SignInButton'
 
 const navigation: any[] = [
   // { name: 'Home', href: '#', current: true },

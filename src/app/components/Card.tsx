@@ -10,8 +10,8 @@ function Card ({ title, description, author, miniature, createdAt, updatedAt, ca
   return (
     <>
       <div className='bg-white shadow-lg rounded-lg overflow-hidden'>
-        <div className='bg-gray-200 h-40 w-full object-cover'>
-          <Image width={'100'} height={'100'} src={miniature as any} alt={''} />
+        <div className='bg-gray-200 object-contain'>
+          <Image className="w-full max-h-40 object-contain" width={'100'} height={'100'} src={miniature as any} alt={''} />
         </div>
         <div className='p-6'>
           <h1 className='text-2xl font-semibold text-gray-800'>{ title }</h1>
