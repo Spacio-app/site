@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/navigation'
+
 import FormCourses from '@/components/forms/FormCourses'
 
 export default function page () {

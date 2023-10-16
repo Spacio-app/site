@@ -25,21 +25,21 @@ const FormCourses = () => {
   } = useForm({
     defaultValues: {
       title: '',
-      description: '',
-      videos: [{ title: '', desc: '', url: '' }]
+      description: ''
+    //   videos: [{ title: '', desc: '', url: '' }]
     },
     mode: 'onBlur'
   })
 
-  const { fields, append } = useFieldArray({
-    name: 'videos',
-    control
-  })
+  //   const { fields, append } = useFieldArray({
+  //     name: 'videos',
+  //     control
+  //   })
 
   const onSubmit: SubmitHandler<any> = async (data) => {
     data.contentType = 'course'
     data.author = 'Author 1'
-
+    // data.videosURL = data.videosURL[0]
     console.log(data)
 
     axios.postForm('https://api.spacio.app/contentCourse', data)
@@ -93,7 +93,46 @@ const FormCourses = () => {
                 />
             </div>
             <div> LISTA DE VIDEOS </div>
-            {
+            <div className="mb-2">
+                        <label
+                            htmlFor="videosdescriptions"
+                            className="block text-sm font-semibold text-gray-800"
+                        >
+                            Titulo del video
+                        </label>
+                        <input
+                            type="text"
+                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            {...register('videosTitles', { required: false })}
+                        />
+                    </div>
+                    <div className="mb-2">
+                        <label
+                            htmlFor="Video"
+                            className="block text-sm font-semibold text-gray-800"
+                        >
+                            Descripcion del curso
+                        </label>
+                        <input
+                            type="text"
+                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            {...register('videosDescriptions', { required: false })}
+                        />
+                    </div>
+                    <div className="mb-2">
+                        <label
+                            htmlFor="Video"
+                            className="block text-sm font-semibold text-gray-800"
+                        >
+                            Video del curso
+                        </label>
+                        <input
+                            type="file"
+                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            {...register('videosURL', { required: false })}
+                        />
+                    </div>
+            {/* {
                 fields.map((field, index) => (
                 <Fragment key={index}>
                     <div className="mb-2">
@@ -137,7 +176,7 @@ const FormCourses = () => {
                     </div>
                 </Fragment>
                 ))
-            }
+            } */}
             <button
                 type="button"
                 onClick={() => {
@@ -153,7 +192,7 @@ const FormCourses = () => {
             </button>
             <div className="mt-6">
                 <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
-                    Login
+                    Crear Curso
                 </button>
             </div>
         </form>
