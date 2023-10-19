@@ -96,3 +96,7 @@ input::-webkit-search-cancel-button {
 .swiper-button-prev:after {
   color: rgb(0, 0, 0);
 }
+
+.overflow-y-auto::-webkit-scrollbar{
+  width: 7px;
+}

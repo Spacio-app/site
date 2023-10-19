@@ -23,29 +23,32 @@ const FormCourses = () => {
     register,
     handleSubmit
   } = useForm(
-    //     {
-    //       defaultValues: {
-    //         title: '',
-    //         description: ''
-    //         //   videos: [{ title: '', desc: '', url: '' }]
-    //       },
-    //       mode: 'onBlur'
-    //     }
+    {
+      defaultValues: {
+        title: '',
+        description: '',
+        videos: [{ title: '', desc: '', url: '' }]
+      },
+      mode: 'onBlur'
+    }
   )
 
-  //   const { fields, append } = useFieldArray({
-  //     name: 'videos',
-  //     control
-  //   })
+  const { fields, append } = useFieldArray({
+    name: 'videos',
+    control
+  })
 
   const onSubmit: SubmitHandler<any> = async (data) => {
     data.contentType = 'course'
     data.author = 'Author 1'
-    data.VideosURL = data.VideosURL[0]
+    data.videos[0].url = data.videos[0].url[0]
+    // data.videos[1].url = data.videos[1].url[0]
+    // data.videos[2].url = data.videos[2].url[0]
+    // data.videos.url = data.videos.url[0]
 
     console.log(data)
 
-    axios.postForm('https://api.spacio.app/contentCourse', data)
+    axios.postForm('http://127.0.0.1:3001/contentCourse', data)
       .then((response) => {
         console.log(response.data)
       })
@@ -96,46 +99,7 @@ const FormCourses = () => {
                 />
             </div>
             <div> LISTA DE VIDEOS </div>
-            <div className="mb-2">
-                        <label
-                            htmlFor="videosdescriptions"
-                            className="block text-sm font-semibold text-gray-800"
-                        >
-                            Titulo del video
-                        </label>
-                        <input
-                            type="text"
-                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register('videosTitles', { required: false })}
-                        />
-                    </div>
-                    <div className="mb-2">
-                        <label
-                            htmlFor="Video"
-                            className="block text-sm font-semibold text-gray-800"
-                        >
-                            Descripcion del curso
-                        </label>
-                        <input
-                            type="text"
-                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register('videosDescriptions', { required: false })}
-                        />
-                    </div>
-                    <div className="mb-2">
-                        <label
-                            htmlFor="Video"
-                            className="block text-sm font-semibold text-gray-800"
-                        >
-                            Video del curso
-                        </label>
-                        <input
-                            type="file"
-                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register('VideosURL', { required: false })}
-                        />
-                    </div>
-            {/* {
+            {
                 fields.map((field, index) => (
                 <Fragment key={index}>
                     <div className="mb-2">
@@ -179,8 +143,8 @@ const FormCourses = () => {
                     </div>
                 </Fragment>
                 ))
-            } */}
-            {/* <button
+            }
+            <button
                 type="button"
                 onClick={() => {
                   append({
@@ -192,7 +156,7 @@ const FormCourses = () => {
                 }
                 >
                 APPEND
-            </button> */}
+            </button>
             <div className="mt-6">
                 <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
                     Crear Curso

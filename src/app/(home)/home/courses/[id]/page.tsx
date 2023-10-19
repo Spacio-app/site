@@ -26,66 +26,160 @@ const Course = async ({ params }: { params: any }) => {
 
   return (
     <>
-        <section className="container max-w-full pl-28 pr-28">
-            {/* DIV PRINCIPAL DE TODA LA PÁGINA */}
-            <div className="">
-                {/* DIV TÍTULO PRINCIPAL */}
-                <div className="w-full flex">
-                <div className="pt-8 pb-8 text-3xl max-w-full ml-0 w-3/4">
-                    <h1 className="font-bold font-sans capitalize"> { title } </h1>
-                </div>
+        <section className="md:container max-w-full md:mx-auto min-h-screen px-6 lg:px-4 xl:px-4">
+            <div className="shadow-xl mt-2 text-3xl p-6">
+                <h1 className="font-bold font-sans capitalize">{ title }</h1>
+            </div>
+
+            <div className="mt-8 md:flex">
+                {/* VIDEO Y DESCRIPCIÓN (70%) en pantallas grandes */}
+                <div className="lg:w-3/4 md:w-3/4 h-full md:mr-4">
+                <div className="relative group aspect-w-16 aspect-h-9">
+                    <Video videoUrl={videosurl as string} />
+                    <div className="absolute top-0 left-0 group-hover:opacity-100 transition-opacity opacity-0 bg-black text-white p-3 rounded-br-2xl rounded-tl-3xl">
+                    <p className='font-bold capitalize'>Nombre de la clase</p>
+                    </div>
                 </div>
 
-                {/* DIV VIDEO Y LISTA */}
-                <div className='flex flex-col md:flex-row gap-6'>
-                    <div className="w-full md:w-[80%] h-[80%] p-0 relative h-vid group mr-2">
-                        <Video videoUrl={videosurl as string} />
-                        <div className="p-2 absolute top-0 left-0 rounded-tl-none bg-black rounded-br-2xl group-hover:opacity-100 opacity-0 transition-opacity">
-                        <p className="font-bold text-white capitalize"> { title } </p>
+                {/* AUTOR, DESCRIPCIÓN Y FEEDBACK */}
+                <div className="mt-6 mb-6 h-full flex flex-col md:flex-row gap-6">
+                    <div className="lg:w-2/3 md:w-full border border-gray-500 rounded-md">
+                        <div className="border-b border-gray-500 p-4 pl-7 flex flex-col md:flex-row items-center">
+                            <img src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg" alt="perfil" className='mr-3 ml-3 border rounded-xl max-w-[70px]'/>
+                            <h2 className='font-bold p-6 capitalize'><a href=""> { author } </a></h2>
                         </div>
-                    </div>
-                    {/* DIV CONTENIDO DEL CURSO Y LISTADO DE CLASES */}
-                    <div className="w-full md:w-[450px] border-t-2 border-l-2 border-r-2 shadow-xl rounded-xl overflow-hidden max-h-[550px] flex flex-col border-gray-300">
-                        <div className="bg-gray-200 border-b-2 m-5 rounded-xl">
-                            <h2 className="text-lg font-bold p-2.5">Contenido del curso</h2>
-                        </div>
-                        <div className="overflow-y-auto h-[100%] m-5 rounded-lg">
-                            <ul className='text-base'>
-                                <li className="items-center flex mt-3">
-                                {/* <img src={miniature} alt="foto" className='mr-3 border rounded-full p-3 w-'/> */}
-                                <a className='border rounded-lg p-3 md:w-[80%]' href="#">{ videostitles }</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                {/* Descripción, autor, etc */}
-                <div className='flex w-full mt-5 md:w-[80%] shadow-xl'>
-                    <div className="rounded-md border-2 md:w-[70%] border-gray-300 flex flex-col">
-                        {/* DIV PADRE PERFIL */}
-                        <div className='flex p-6 items-center'>
-                            <div className='text-lg font-bold'>Autor:</div>
-                        {/* <div>
-                            <img src={} alt="FOTO" />
-                        </div> */}
-                            <div className='ml-3 capitalize'><a href="#">{ author }</a></div>
-                        </div>
-                        {/* DIV DESCRIPCIÓN */}
-                        <div className='border-t-2 border-gray-300 p-6'>
-                            <div>
-                                <h2 className="text-lg font-bold">Descripción del curso</h2>
-                            </div>
-                        <div className="text-justify">
-                            <p className="pt-2 capitalize">
+                        <div className="border-t border-gray-500 pt-4 pl-11 pr-11 pb-4 md:text-justify">
+                            <h2 className='font-bold capitalize'>Descripción del curso</h2>
+                            <p className='mt-3'>
                             { description }
                             </p>
                         </div>
                     </div>
-                </div>
-                <div className='rounded-md border-2 ml-3 border-gray-300 shadow-xl md:w-[20%]'>
-                    <div className='p-3 text-lg font-bold'>
-                        <h2>Feedback de Estudiantes</h2>
+
+                    {/* FEEDBACK ESTUDIANTES (30%) */}
+                    <div className="lg:w-1/3 md:w-full border border-gray-500 rounded-2xl flex-grow">
+                    <div className='p-6'>
+                        <h2 className='font-bold'>Feedback Estudiantes</h2>
                     </div>
+                    <div className='w-[100%] items-center flex p-3'>
+                        <div className='shadow-lg border-l-2 rounded-2xl w-fit p-11'>
+                        <p className='font-bold text-3xl'>7.0</p>
+                        </div>
+                        <div className='ml-6'>
+                            Puntaje
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                {/* CONTENIDO Y LISTA DE CLASES */}
+                <div className="lg:w-1/4 md:w-1/4 h-full md:ml-4 overflow-hidden max-h-[550px] flex flex-col">
+                <div className='p-3 rounded-2xl border-2 border-gray-300'>
+                    <h2 className='font-bold'>Contenido del curso</h2>
+                </div>
+                <div className='mt-9 overflow-y-auto h-[100%]'>
+                    <ul>
+                        <li className='items-center mt-3 flex mt-[8px]'>
+                            <img
+                            src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                            alt="FOTO"
+                            className='mr-3 border rounded-full w-[60px]' />
+                            <div className='bg-gray-200 p-4 rounded-xl w-full capitalize'>
+                                <a href="">Clase 1</a>
+                            </div>
+                        </li>
+                        <li className='items-center mt-3 flex mt-[8px]'>
+                            <img
+                            src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                            alt="FOTO"
+                            className='mr-3 border rounded-full w-[60px]' />
+                            <div className='bg-gray-200 p-4 rounded-xl w-full capitalize'>
+                                <a href="">Clase 1</a>
+                            </div>
+                        </li>
+                        <li className='items-center mt-3 flex mt-[8px]'>
+                            <img
+                            src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                            alt="FOTO"
+                            className='mr-3 border rounded-full w-[60px]' />
+                            <div className='bg-gray-200 p-4 rounded-xl w-full capitalize'>
+                                <a href="">Clase 1</a>
+                            </div>
+                        </li>
+                        <li className='items-center mt-3 flex mt-[8px]'>
+                            <img
+                            src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                            alt="FOTO"
+                            className='mr-3 border rounded-full w-[60px]' />
+                            <div className='bg-gray-200 p-4 rounded-xl w-full capitalize'>
+                                <a href="">Clase 1</a>
+                            </div>
+                        </li>
+                        <li className='items-center mt-3 flex mt-[8px]'>
+                            <img
+                            src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                            alt="FOTO"
+                            className='mr-3 border rounded-full w-[60px]' />
+                            <div className='bg-gray-200 p-4 rounded-xl w-full capitalize'>
+                                <a href="">Clase 1</a>
+                            </div>
+                        </li>
+                        <li className='items-center mt-3 flex mt-[8px]'>
+                            <img
+                            src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                            alt="FOTO"
+                            className='mr-3 border rounded-full w-[60px]' />
+                            <div className='bg-gray-200 p-4 rounded-xl w-full capitalize'>
+                                <a href="">Clase 1</a>
+                            </div>
+                        </li>
+                        <li className='items-center mt-3 flex mt-[8px]'>
+                            <img
+                            src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                            alt="FOTO"
+                            className='mr-3 border rounded-full w-[60px]' />
+                            <div className='bg-gray-200 p-4 rounded-xl w-full capitalize'>
+                                <a href="">Clase 1</a>
+                            </div>
+                        </li>
+                        <li className='items-center mt-3 flex mt-[8px]'>
+                            <img
+                            src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                            alt="FOTO"
+                            className='mr-3 border rounded-full w-[60px]' />
+                            <div className='bg-gray-200 p-4 rounded-xl w-full capitalize'>
+                                <a href="">Clase 1</a>
+                            </div>
+                        </li>
+                        <li className='items-center mt-3 flex mt-[8px]'>
+                            <img
+                            src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                            alt="FOTO"
+                            className='mr-3 border rounded-full w-[60px]' />
+                            <div className='bg-gray-200 p-4 rounded-xl w-full capitalize'>
+                                <a href="">Clase 1</a>
+                            </div>
+                        </li>
+                        <li className='items-center mt-3 flex mt-[8px]'>
+                            <img
+                            src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                            alt="FOTO"
+                            className='mr-3 border rounded-full w-[60px]' />
+                            <div className='bg-gray-200 p-4 rounded-xl w-full capitalize'>
+                                <a href="">Clase 1</a>
+                            </div>
+                        </li>
+                        <li className='items-center mt-3 flex mt-[8px]'>
+                            <img
+                            src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                            alt="FOTO"
+                            className='mr-3 border rounded-full w-[60px]' />
+                            <div className='bg-gray-200 p-4 rounded-xl w-full capitalize'>
+                                <a href="">Clase 1</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 </div>
             </div>
