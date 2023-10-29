@@ -26,7 +26,7 @@ export const DisplayVideo = ({ videos }: any) => {
           <div className="absolute top-0 left-0 group-hover:opacity-100 transition-opacity opacity-0 bg-black text-white p-3 rounded-br-2xl rounded-tl-3xl">
             <p className="font-bold first-letter:capitalize">{currentVideo.title}</p>
           </div>
-          <div className='w-full border border-gray-500 rounded-md p-4 pl-7 items-center flex-row md:flex-col mt-6 md:text-justify'>
+          <div className='w-full border border-gray-500 rounded-md px-11 py-4 items-center flex-row md:flex-col mt-6 md:text-justify'>
             <div>
               <h2 className='font-bold'>Descripción de video</h2>
             </div>
@@ -35,20 +35,20 @@ export const DisplayVideo = ({ videos }: any) => {
             </div>
           </div>
         </div>
-        <div className="lg:w-[24%] md:w-[24%] h-full overflow-hidden max-h-[550px] flex flex-col">
+        <div className="lg:w-[24%] md:w-[24%] md:h-[550px] h-full overflow-hidden max-h-[550px] flex flex-col rounded-2xl">
           <div className="p-3 rounded-2xl border-2 border-gray-300">
             <h2 className="font-bold">Contenido del curso</h2>
           </div>
-          <div className="mt-9 overflow-y-auto h-[100%]">
+          <div className="mt-5 overflow-y-auto h-[100%]">
             <ul>
               {videos.map((video: VideoType, index: number) => (
-                <li key={index} className="items-center mt-3 flex mt-[8px]" onClick={() => { changeVideo(index) }}>
+                <li key={index} className="items-center flex mt-4" onClick={() => { changeVideo(index) }}>
                   <img
                     src={video.miniatureVideo}
                     alt="FOTO"
-                    className="mr-3 border border-gray-500 w-[50px]"
+                    className="mx-2 border border-gray-500 w-[50px] h-[40px] rounded-full"
                   />
-                  <div className="bg-gray-200 p-4 rounded-xl w-full capitalize">
+                  <div className="bg-gray-200 p-4 rounded-xl w-full first-letter:capitalize hover:bg-gray-300">
                     <a href="#">{video.title}</a>
                   </div>
                 </li>
