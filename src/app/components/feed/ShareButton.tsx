@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import CopyToClipboard from 'react-copy-to-clipboard'
+// import CopyToClipboard from 'react-copy-to-clipboard'
 
 interface ShareButtonProps {
   url: string
@@ -36,11 +36,11 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url, text = 'Compartir' }) =>
 
   return (
     <div className="">
-      <CopyToClipboard text={url} onCopy={handleCopy}>
+{/*       <CopyToClipboard text={url} onCopy={handleCopy}>
         <button className="font-semibold text-sm p-2 rounded-xl hover:bg-slate-200">
           {copied ? 'Enlace Copiado' : text}
         </button>
-      </CopyToClipboard>
+      </CopyToClipboard> */}
     </div>
   )
 }
