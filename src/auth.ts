@@ -1,23 +1,12 @@
-import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from 'next'
-import type { NextAuthOptions as NextAuthConfig } from 'next-auth'
-import { getServerSession } from 'next-auth'
-
+import NextAuth from 'next-auth'
+import type { NextAuthConfig } from 'next-auth'
 import Google from 'next-auth/providers/google'
-
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-// Read more at: https://next-auth.js.org/getting-started/typescript#module-augmentation
-declare module 'next-auth/jwt' {
-  interface JWT {
-    /** The user's role. */
-    userRole?: 'admin'
-  }
-}
-
-export const config = {
+export const authConfig = {
   session: {
     strategy: 'jwt'
   },
@@ -26,34 +15,57 @@ export const config = {
     Google({ clientId: process.env.AUTH_GOOGLE_ID, clientSecret: process.env.AUTH_GOOGLE_SECRET } as any)
   ],
   callbacks: {
-    async signIn ({ account, profile }) {
+    // authorized ({ request, auth }) {
+    //   const { pathname } = request.nextUrl
+    //   return pathname === '/home' && !!auth
+    // },
+    authorized ({ auth }) {
+      return !!auth
+    },
+
+    async signIn ({ account, profile, user }: any) {
+      console.log('USERRRRRRRRR', user)
       // console.log(profile?.email.endsWith('@duocuc.cl'))
+      // console.log('signIn callback', account, profile, user)
       if (profile?.email?.endsWith('@duocuc.cl')) {
-        return true
+        if (user.career === null || user.campus === null || user.careerYear === null || user.aboutMe === null) {
+          console.log('redirect to complete profile')
+          return '/complete-profile' as any
+        } else {
+          console.log('redirect to home')
+          return true
+        }
       } else {
         // Return false to di splay a default error message
         console.log('Error: email not allowed')
         return false
       }
     },
-    session ({ session, token, user }) {
-      console.log('Inside SESSION')
-      console.log('SESSION', session)
-      console.log('TOKEN', token)
-      console.log('USER', user)
+    jwt ({ token, user, account, profile }: any) {
+      // console.log('token', token)
+      // console.log('user', user)
+      // console.log('account', account)
+      // console.log('profile', profile)
+      if (account?.access_token) {
+        token.accessToken = account.access_token
+      }
+      return token
+      // if (user) return { ...token, ...user }
+
+      // return token
+    },
+    session ({ token, session }: any) {
+      // console.log('session callback', token, session)
+      // session.user.career = ''
+      // session.user.campus = ''
+      // session.user.careerYear = ''
+      // session.user.aboutMe = ''
+      session.accessToken = token.accessToken
 
       return session
     },
-    jwt ({ token, user }) {
-      console.log('USUARIO', user)
-      if (user) {
-        console.log('TOKEN', token)
-      }
-      token.userRole = 'admin'
-      return token
-    },
     async redirect () {
-      return '/home'
+      return '/complete-profile'
     }
   },
   pages: {
@@ -62,13 +74,9 @@ export const config = {
   }
 } satisfies NextAuthConfig
 
-// Helper function to get session without passing config every time
-// https://next-auth.js.org/configuration/nextjs#getserversession
-export async function auth (...args: [GetServerSidePropsContext['req'], GetServerSidePropsContext['res']] | [NextApiRequest, NextApiResponse] | []) {
-  return getServerSession(...args, config)
-}
+export const { handlers, auth, signIn, signOut } =
+  NextAuth(authConfig)
 
-// We recommend doing your own environment variable validation
 declare global {
   export interface ProcessEnv {
     NEXTAUTH_SECRET: string

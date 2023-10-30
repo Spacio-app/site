@@ -1,17 +1,18 @@
-'use client'
-
 import Image from 'next/image'
-import { useSession } from 'next-auth/react'
-
-const Landing = () => {
-  const { data } = useSession()
-  console.log(data)
+import { auth } from 'auth'
+const Landing = async () => {
+  // const { data } = useSession()
+  // console.log(data)
+  const session = await auth()
 
   return (
     <>
-      <section className='w-3/4 mx-auto'>
-        <div className='flex items-center mt-12 pt-12'>
-          <div className='flex-4 center py-4'>
+      <section className='p-3 mx-auto'>
+        {/* {
+          session ? <p>{JSON.stringify(session)}</p> : <p>no hay sesion</p>
+        } */}
+        <div className='flex flex-col md:flex-row items-center mt-12'>
+          <div className='center py-4'>
             <Image
               className='wecome-img'
               src='/community.svg'

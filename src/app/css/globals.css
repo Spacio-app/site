@@ -83,7 +83,7 @@ input::-webkit-search-cancel-button {
 }
 
 .swiper-button-next:after {
-  color: rgb(0, 0, 0);
+      color: rgb(0, 0, 0);
 }
 
 .swiper-button-prev {

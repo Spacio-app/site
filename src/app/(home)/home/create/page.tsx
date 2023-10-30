@@ -8,6 +8,7 @@ import 'swiper/css/effect-coverflow'
 import 'swiper/css/navigation'
 
 import FormCourses from '@/components/forms/FormCourses'
+import FormTest from '@/components/forms/FormTest'
 
 export default function page () {
   return (
@@ -17,7 +18,7 @@ export default function page () {
           modules={[EffectCoverflow, Navigation]}
           initialSlide={1}
           effect={'coverflow'}
-          loop={true}
+          // loop={true}
           navigation={true}
           spaceBetween={10}
           slidesPerView={2}
@@ -51,6 +52,15 @@ export default function page () {
             }
           }}
         >
+          <SwiperSlide>
+            <FormCourses />
+          </SwiperSlide>
+          <SwiperSlide>
+            <FormTest />
+          </SwiperSlide>
+          <SwiperSlide>
+            <FormCourses />
+          </SwiperSlide>
           <SwiperSlide>
             <FormCourses />
           </SwiperSlide>

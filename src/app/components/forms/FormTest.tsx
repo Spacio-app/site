@@ -16,25 +16,47 @@ import { Fragment } from 'react'
 // })
 
 const FormTest = () => {
-  //   const apiBaseUrl = process.env.API_BASE_URL
+  const { control, register, handleSubmit, setValue } = useForm({
+    defaultValues: {
+      title: '',
+      description: '',
+      miniature: '',
+      questions: [
+        {
+          questionText: '',
+          options: [
+            {
+              optionText: '',
+              isCorrect: false
+            }
+          ]
+        }
+      ]
+    }
+  })
 
-  const {
-    control,
-    register,
-    handleSubmit
-  } = useForm()
-
-  const { fields, append } = useFieldArray({
-    name: 'video',
+  const { fields: questionsFields, remove, append: appendQuestion } = useFieldArray({
+    name: 'questions',
     control
   })
-  const onSubmit: SubmitHandler<any> = async (data) => {
+
+  const addOptionToQuestion = (questionIndex: any) => {
+    const newOption = {
+      optionText: '',
+      isCorrect: false
+    }
+    const updatedQuestions = [...questionsFields]
+    updatedQuestions[questionIndex].options.push(newOption)
+    setValue('questions', updatedQuestions)
+  }
+
+  const onSubmit = async (data: any) => {
     data.contentType = 'test'
     data.author = 'Author 1'
 
     console.log(data)
 
-    axios.postForm('https://api.spacio.app/contentTest', data)
+    axios.post('http://127.0.0.1:3001/contentTest', data)
       .then((response) => {
         console.log(response.data)
       })
@@ -64,7 +86,7 @@ const FormTest = () => {
                     htmlFor="description"
                     className="block text-sm font-semibold text-gray-800"
                 >
-                    Descripcion del curso
+                    Descripcion de la Prueba
                 </label>
                 <input
                     type="text"
@@ -72,64 +94,86 @@ const FormTest = () => {
                     {...register('description', { required: false })}
                 />
             </div>
+            <div className="mb-2">
+                <label
+                    htmlFor="miniature"
+                    className="block text-sm font-semibold text-gray-800"
+                >
+                    Miniatura del curso
+                </label>
+                <input
+                    type="file"
+                    className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    {...register('miniature', { required: false })}
+                />
+            </div>
             <div> LISTA DE PREGUNTAS </div>
             {
-                fields.map((field, index) => (
-                <Fragment key={index}>
+                questionsFields.map((question, index) => (
+                  <Fragment key={index}>
                     <div className="mb-2">
-                        <label
-                            htmlFor="videosdescriptions"
+                      <label
+                        htmlFor={`questions.${index}.questionText`}
+                        className="block text-sm font-semibold text-gray-800"
+                      >
+                        Pregunta
+                      </label>
+                      <input
+                        type="text"
+                        className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        {...register(`questions.${index}.questionText`, { required: false })}
+                      />
+                    </div>
+                    <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600" type="button" onClick={() => { remove(index) }}>
+                      Eliminar pregunta
+                    </button>
+                    <div>
+                      {question.options.map((option, optionIndex) => (
+                        <div key={optionIndex} className="mb-2">
+                          <label
+                            htmlFor={`questions.${index}.options.${optionIndex}.optionText`}
                             className="block text-sm font-semibold text-gray-800"
-                        >
-                            Titulo del video
-                        </label>
-                        <input
+                          >
+                            Opción {optionIndex + 1}
+                          </label>
+                          <input
                             type="text"
                             className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register(`video.${index}.title`, { required: false })}
-                        />
-                    </div>
-                    <div className="mb-2">
-                        <label
-                            htmlFor="Video"
-                            className="block text-sm font-semibold text-gray-800"
+                            {...register(`questions.${index}.options.${optionIndex}.optionText`, { required: false })}
+                          />
+                          <div className="flex items-center my-4 justify-center">
+                            <input id="default-checkbox"
+                              type="checkbox"
+                              {...register(`questions.${index}.options.${optionIndex}.isCorrect`, { required: false })}
+                              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                            <label htmlFor="default-checkbox" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Respuesta correcta</label>
+                          </div>
+                        </div>
+                      ))}
+                      {question.options.length < 5 && (
+                        <button
+                          type="button"
+                          className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+                          onClick={() => { addOptionToQuestion(index) }}
                         >
-                            Descripcion del curso
-                        </label>
-                        <input
-                            type="text"
-                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register(`video.${index}.desc`, { required: false })}
-                        />
-                    </div>
-                    <div className="mb-2">
-                        <label
-                            htmlFor="Video"
-                            className="block text-sm font-semibold text-gray-800"
-                        >
-                            Video del curso
-                        </label>
-                        <input
-                            type="file"
-                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register(`video.${index}.url`, { required: false })}
-                        />
+                          Agregar opción
+                        </button>
+                      )}
                     </div>
                 </Fragment>
                 ))
             }
             <button
                 type="button"
+                className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
                 onClick={() => {
-                  append({
-                    title: '',
-                    desc: '',
-                    url: ''
+                  appendQuestion({
+                    questionText: '',
+                    options: []
                   })
-                }
-                }
+                }}
                 >
-                APPEND
+                Agregar pregunta
             </button>
             <div className="mt-6">
                 <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">

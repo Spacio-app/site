@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
 import Link from 'next/link'
@@ -10,7 +9,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import SignInButton from '@/components/SignInButton'
 
 const navigation: any[] = [
-  // { name: 'Home', href: '#', current: true },
+  { name: 'Home', href: 'home', current: false }
   // { name: 'Team', href: '#', current: false }
   // { name: 'Projects', href: '#', current: false },
   // { name: 'Calendar', href: '#', current: false },
@@ -20,7 +19,7 @@ function classNames (...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-const Header = () => {
+const Header = ({ sessionData }: any) => {
   return (
     <header>
     {/* <nav className='center flex items-center text-sm font-medium tracking-wider uppercase text-stone-500'>
@@ -86,7 +85,7 @@ const Header = () => {
                     </div>
                   </div>
                 </div>
-                  <SignInButton />
+                  <SignInButton sessionData={sessionData}/>
               </div>
             </div>
             <Disclosure.Panel className="sm:hidden">

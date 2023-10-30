@@ -1,5 +1,13 @@
-import NextAuth from 'next-auth/next'
-import { config } from '../../../../auth'
+import { handlers } from 'auth'
+import type { NextRequest } from 'next/server'
 
-const handler = NextAuth(config)
-export { handler as GET, handler as POST }
+const { GET: AuthGET, POST } = handlers
+export { POST }
+
+// Showcasing advanced initialization in Route Handlers
+export async function GET (request: NextRequest) {
+  // Do something with request
+  const response = await AuthGET(request)
+  // Do something with response
+  return response
+}

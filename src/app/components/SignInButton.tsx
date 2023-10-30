@@ -11,14 +11,16 @@ function classNames (...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-const SignInButton = () => {
-  const { data: session } = useSession()
+const SignInButton = ({ sessionData }: any) => {
+  // const { data: session } = useSession()
+  // console.log('SESSION', session)
+  console.log('SESSIONDATA', sessionData)
   const router = useRouter()
 
-  if (session != null) {
+  if (sessionData != null) {
     return (
       <div className='flex'>
-        <div>
+        {/* <div>
           <div className="relative mx-auto text-gray-600 md:block hidden">
               <input
                 className="border-2 border-gray-300 bg-white h-9 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
@@ -35,7 +37,7 @@ const SignInButton = () => {
                 </svg>
                 </button>
           </div>
-        </div>
+        </div> */}
         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <button
             type="button"
@@ -56,8 +58,8 @@ const SignInButton = () => {
                   className="h-8 w-8 rounded-full"
                   width={40}
                   height={40}
-                  src={session?.user?.image as string}
-                  alt={session?.user?.name as string}
+                  src={sessionData?.user?.image}
+                  alt={sessionData?.user?.name }
                 />
               </Menu.Button>
             </div>
@@ -97,9 +99,7 @@ const SignInButton = () => {
                       href="#"
                       className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                       onClick={async () => {
-                        await signOut({ redirect: false }).then(() => {
-                          router.push('/') // Redirect to the dashboard page after signing out
-                        })
+                        await signOut({ redirect: true })
                       }}
                     >
                       Sign out

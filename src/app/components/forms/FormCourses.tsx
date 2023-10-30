@@ -21,7 +21,10 @@ const FormCourses = () => {
   const {
     control,
     register,
-    handleSubmit
+    handleSubmit,
+    formState: { errors },
+    setError,
+    clearErrors
   } = useForm(
     {
       defaultValues: {
@@ -41,10 +44,9 @@ const FormCourses = () => {
   const onSubmit: SubmitHandler<any> = async (data) => {
     data.contentType = 'course'
     data.author = 'Author 1'
-    data.videos[0].url = data.videos[0].url[0]
-    // data.videos[1].url = data.videos[1].url[0]
-    // data.videos[2].url = data.videos[2].url[0]
-    // data.videos.url = data.videos.url[0]
+    data.videos.map((video: any) => {
+      return (video.url = video.url[0])
+    })
 
     console.log(data)
 
@@ -68,7 +70,12 @@ const FormCourses = () => {
     //   body: formData
     // })
   }
-
+  // const videoRefs = useRef([])
+  // const handleVideoChange = (e, index) => {
+  //   const file = e.target.files[0]
+  //   const newFile = { file, preview: URL.createObjectURL(file) }
+  //   videoRefs.current[index] = newFile
+  // }
   return (
     <div className='bg-indigo-100 flex flex-row justify-center items-center p-2 gap-10'>
         <form onSubmit={handleSubmit(onSubmit)} className="">
@@ -80,7 +87,7 @@ const FormCourses = () => {
                     Titulo del Curso
                 </label>
                 <input
-                    type="text"
+                    type="textarea"
                     className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     {...register('title', { required: true })}
                 />
@@ -92,9 +99,9 @@ const FormCourses = () => {
                 >
                     Descripcion del curso
                 </label>
-                <input
-                    type="text"
-                    className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                <textarea
+                    placeholder="Agregue una descripcion del curso"
+                    className="block w-full px-4 py-6 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     {...register('description', { required: false })}
                 />
             </div>
@@ -137,15 +144,26 @@ const FormCourses = () => {
                         </label>
                         <input
                             type="file"
-                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full px-2 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             {...register(`videos.${index}.url`, { required: false })}
                         />
+                    </div>
+                    <div className="mb-2">
+                        <label
+                            htmlFor="Video"
+                            className="block text-sm font-semibold text-gray-800"
+                        >
+                            Preview del video
+                        </label>
+                        {/* i want to check the video that was uploaded before */}
+                        <video controls/>
                     </div>
                 </Fragment>
                 ))
             }
             <button
                 type="button"
+                className="text-white transition-colors justify-center"
                 onClick={() => {
                   append({
                     title: '',
@@ -155,7 +173,7 @@ const FormCourses = () => {
                 }
                 }
                 >
-                APPEND
+                +
             </button>
             <div className="mt-6">
                 <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">

@@ -1,20 +1,20 @@
 import '@/css/globals.css'
-import Provider from '../shared/provider'
 import Header from './header'
+import { auth } from 'auth'
 
-export default function RootLayout ({
+export default async function RootLayout ({
   children
 }: {
   children: React.ReactNode
 }) {
+  const session = await auth()
+
   return (
     <html lang='en'>
     <head />
     <body>
-        <Provider>
-            <Header />
-                <main>{ children }</main>
-        </Provider>
+        <Header sessionData={session} />
+            <main>{ children }</main>
     </body>
     </html>
   )
