@@ -1,6 +1,6 @@
 'use client'
 
-function ButtonComment ({ texto, onClick }) {
+function ButtonComment ({ texto, onClick }: any) {
   return (
     <button
       onClick={onClick}

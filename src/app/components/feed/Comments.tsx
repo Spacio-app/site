@@ -1,7 +1,7 @@
 'use client'
 import CommentAuthor from './CommentAuthor'
 
-function Comments ({ commentAuthor, comment }) {
+function Comments ({ commentAuthor, comment }: any) {
   return (
     <>
     <div className="py-2 text-sm">

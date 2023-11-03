@@ -1,6 +1,6 @@
 'use client'
 
-function UserProfile ({ userName }) {
+function UserProfile ({ userName }: any) {
   return (
     <div className="flex border-b border-gray-300 p-3.5">
       <img

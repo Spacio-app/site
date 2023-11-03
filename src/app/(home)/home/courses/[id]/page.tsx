@@ -1,16 +1,16 @@
-import Video from "@/components/Video";
-import { DisplayVideo } from "@/components/DisplayVideo";
+import Video from '@/components/Video'
+import { DisplayVideo } from '@/components/DisplayVideo'
 const getCourseById = async (id: string) => {
-  const apiBaseUrl = process.env.API_BASE_URL;
-  const response = await fetch(`${apiBaseUrl}content/${id}`);
-  console.log(response);
-  const course = await response.json();
+  const apiBaseUrl = process.env.API_BASE_URL
+  const response = await fetch(`${apiBaseUrl}content/${id}`)
+  console.log(response)
+  const course = await response.json()
 
-  return course;
-};
+  return course
+}
 
 const Course = async ({ params }: { params: any }) => {
-  const course = await getCourseById(params.id);
+  const course = await getCourseById(params.id)
   // if (!course) {
   //   console.error('Curso no encontrado')
   //   return
@@ -18,7 +18,7 @@ const Course = async ({ params }: { params: any }) => {
   //   console.log(course)
   // }
 
-  const { title, description, author, videos } = course;
+  const { title, description, author, videos } = course
 
   // console.log('Detalles del Curso:', course)
 
@@ -112,6 +112,6 @@ const Course = async ({ params }: { params: any }) => {
             </div>
         </div> */}
     </>
-  );
-};
-export default Course;
+  )
+}
+export default Course

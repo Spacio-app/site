@@ -18,7 +18,7 @@ function PostFeed ({
   comments, // Cambia a un array de comentarios
   imageSrc,
   postType
-}) {
+}: any) {
   const [commentsOpen, setCommentsOpen] = useState(false)
 
   const toggleComment = () => {
@@ -69,7 +69,7 @@ function PostFeed ({
         {commentsOpen && (
           <>
             <div className="border-t border-gray-300 max-h-[500px] overflow-auto">
-              {comments.map((comment, index) => (
+              {comments.map((comment: any, index: any) => (
                 <Comments
                   key={index}
                   commentAuthor={{

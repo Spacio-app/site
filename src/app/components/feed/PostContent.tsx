@@ -1,6 +1,6 @@
 'use client'
 
-function PostContent ({ titlePublication, text, imageSrc = null }) {
+function PostContent ({ titlePublication, text, imageSrc = null }: any) {
   return (
     <div className="px-6 py-3 justify-center text-justify border-b border-gray-300">
       <div className="font-semibold">{titlePublication}</div>

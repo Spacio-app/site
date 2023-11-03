@@ -1,6 +1,6 @@
 'use client'
 
-function CommentAuthor ({ authorName, authorAvatar }) {
+function CommentAuthor ({ authorName, authorAvatar }: any) {
   return (
     <div className="flex items-center space-x-2">
       <img
