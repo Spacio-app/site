@@ -18,7 +18,8 @@ function PostFeed ({
   description,
   comments = [], // Cambia a un array de comentarios
   author,
-  contenttype
+  contenttype,
+  createdat
 }: any) {
   const [commentsOpen, setCommentsOpen] = useState(false)
 
@@ -36,7 +37,7 @@ function PostFeed ({
   return (
     <div className="border border-gray-300 flex-row md:flex rounded-xl">
       <div className="md:w-[100%] shadow-xl rounded-xl">
-        <UserProfile author={author} />
+        <UserProfile createdAt={createdat} author={author} />
         <PostContent
           titlePublication={title}
           text={description}
@@ -75,10 +76,10 @@ function PostFeed ({
                 <Comments
                   key={index}
                   commentAuthor={{
-                    authorName: comment.authorName || '',
-                    authorAvatar: comment.authorAvatar || ''
+                    authorName: comment.author.name || '',
+                    authorAvatar: comment.author.photo || ''
                   }}
-                  comment={comment.commentText || ''}
+                  comment={comment.comment || ''}
                 />
                 ))
                 : null}

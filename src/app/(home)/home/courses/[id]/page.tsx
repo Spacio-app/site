@@ -1,7 +1,8 @@
 import Video from '@/components/Video'
 import { DisplayVideo } from '@/components/DisplayVideo'
+import Image from 'next/image'
 const getCourseById = async (id: string) => {
-  const apiBaseUrl = process.env.API_BASE_URL
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
   const response = await fetch(`${apiBaseUrl}content/${id}`)
   console.log(response)
   const course = await response.json()
@@ -40,13 +41,15 @@ const Course = async ({ params }: { params: any }) => {
           <div className="mt-6 mb-6 h-full flex flex-col md:flex-row gap-6 md:w-[75.3%]">
             <div className="lg:w-2/3 md:w-full border border-gray-500 rounded-md">
               <div className="border-b border-gray-500 p-4 pl-7 flex flex-col md:flex-row items-center">
-                <img
-                  src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg"
+                <Image
+                  width={'100'}
+                  height={'100'}
+                  src={author.photo}
                   alt="perfil"
                   className="mr-3 ml-3 border rounded-xl max-w-[70px]"
                 />
                 <h2 className="font-bold p-6 capitalize">
-                  <a href=""> {author} </a>
+                  <a href=""> {author.name} </a>
                 </h2>
               </div>
               <div className="border-t border-gray-500 pt-4 pl-11 pr-11 pb-4 md:text-justify">

@@ -43,8 +43,6 @@ const FormCourses = ({ session }: any) => {
   })
 
   const onSubmit: SubmitHandler<any> = async (data) => {
-    data.contentType = 'course'
-    data.author = 'Author 1'
     data.videos.map((video: any) => {
       return (video.url = video.url[0])
     })
@@ -59,6 +57,7 @@ const FormCourses = ({ session }: any) => {
     axios.postForm('http://127.0.0.1:3001/contentCourse', data, { headers })
       .then((response) => {
         console.log(response.data)
+        alert('Curso creado con exito')
       })
       .catch((error) => {
         console.error(error)

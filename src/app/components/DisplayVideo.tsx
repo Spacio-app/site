@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Video from './Video'
+import Image from 'next/image'
 
 export const DisplayVideo = ({ videos }: any) => {
   interface VideoType {
@@ -51,7 +52,9 @@ export const DisplayVideo = ({ videos }: any) => {
             <ul>
               {videos.map((video: VideoType, index: number) => (
                 <li key={index} className="items-center flex mt-4" onClick={() => { changeVideo(index) }}>
-                  <img
+                  <Image
+                    width={'100'}
+                    height={'100'}
                     src={video.miniatureVideo}
                     alt="FOTO"
                     className="mx-2 border border-gray-500 w-[50px] h-[40px] rounded-full"

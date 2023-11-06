@@ -32,7 +32,7 @@ function CreatePost () {
   return (
         <form onSubmit={handleSubmit(onSubmit)} className="border border-gray-300 flex-col p-4 space-y-3 rounded-xl">
             <div className="w-[100%] flex">
-                <a href="" className='cursor-pointer'><CommentAuthor authorAvatar={session?.data?.user.image} /></a>
+                <a className='cursor-pointer'><CommentAuthor authorAvatar={session?.data?.user?.image} /></a>
                 <input type="text" placeholder="Título de la publicación" className="flex-1 px-3 py-2 rounded-2xl bg-gray-100 focus:outline-none focus:border focus:border-gray-400 w-[100%] h-[100%]"
                 {...register('title', { required: true })}
                 />

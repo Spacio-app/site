@@ -16,7 +16,7 @@ declare namespace Spacio {
     export interface CardProps {
       title: string
       description: string
-      author: string
+      author: Record<string, string | undefined>
       miniature: string
       // cardType: React.ReactElement
       createdAt: Date | number | string
@@ -29,7 +29,7 @@ declare namespace Spacio {
       id: string
       title: string
       description: string
-      author: string
+      author: Record<string, string | undefined>
       miniature: string
       contenttype: ContentType
       cardType: React.ReactElement

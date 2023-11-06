@@ -13,19 +13,20 @@ import { useSession } from 'next-auth/react'
 
 export default function Page () {
   const session = useSession()
+
   return (
     <section className="mt-10 pb-2">
       <div className='flex items-center justify-center flex-col md:flex-row gap-5 text-white font-semibold'>
         <button className='rounded-full bg-orange-400 p-2 min-w-[160px] hover:bg-orange-500 hover:scale-105 transition duration-150 ease-in'>
           Crear Prueba
         </button>
-        <button className='rounded-full bg-pink-400 p-2 min-w-[160px] hover:bg-pink-500 hover:bg-orange-500 hover:scale-105 transition duration-150 ease-in'>
+        <button className='rounded-full bg-pink-400 p-2 min-w-[160px] hover:bg-pink-500 hover:scale-105 transition duration-150 ease-in'>
           Crear Curso
         </button>
-        <button className='rounded-full bg-purple-400 p-2 min-w-[160px] hover:bg-purple-500 hover:bg-orange-500 hover:scale-105 transition duration-150 ease-in'>
+        <button className='rounded-full bg-purple-400 p-2 min-w-[160px] hover:bg-purple-500  hover:scale-105 transition duration-150 ease-in'>
           Crear Documento
         </button>
-        <button className='rounded-full bg-blue-400 p-2 min-w-[160px] hover:bg-blue-500 hover:bg-orange-500 hover:scale-105 transition duration-150 ease-in'>
+        <button className='rounded-full bg-blue-400 p-2 min-w-[160px] hover:bg-blue-500  hover:scale-105 transition duration-150 ease-in'>
           Crear Publicación
         </button>
       </div>

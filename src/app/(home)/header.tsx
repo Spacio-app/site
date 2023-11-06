@@ -9,8 +9,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import SignInButton from '@/components/SignInButton'
 
 const navigation: any[] = [
-  { name: 'Home', href: 'home', current: false }
-  // { name: 'Team', href: '#', current: false }
+  { name: 'Home', href: '/home', current: false },
+  { name: 'Explora', href: '/home/explore', current: false }
   // { name: 'Projects', href: '#', current: false },
   // { name: 'Calendar', href: '#', current: false },
 ]
