@@ -12,12 +12,13 @@ import WriteComment from './WriteComment'
 import ShareButton from './ShareButton'
 
 function PostFeed ({
-  userName,
-  titlePost,
-  text,
-  comments, // Cambia a un array de comentarios
-  imageSrc,
-  postType
+  session,
+  id,
+  title,
+  description,
+  comments = [], // Cambia a un array de comentarios
+  author,
+  contenttype
 }: any) {
   const [commentsOpen, setCommentsOpen] = useState(false)
 
@@ -28,26 +29,26 @@ function PostFeed ({
   // Esto es porque por alguna razón no funcionaban los % y chatgpt me dio esta opción xd
   let buttonWidth = '50%' // Valor por defecto
 
-  if (postType === 'course') {
+  if (contenttype === 'course') {
     buttonWidth = '33.3%' // Valor para el caso 'course'
   }
 
   return (
     <div className="border border-gray-300 flex-row md:flex rounded-xl">
       <div className="md:w-[100%] shadow-xl rounded-xl">
-        <UserProfile userName={userName} />
+        <UserProfile author={author} />
         <PostContent
-          titlePublication={titlePost}
-          text={text}
-          imageSrc={imageSrc}
+          titlePublication={title}
+          text={description}
+          imageSrc={''}
         />
         <div className="px-6 py-3 flex">
-          {postType === 'course' && (
+          {contenttype === 'course' && (
             <div
               style={{ width: buttonWidth }}
               className="flex justify-center border-r border-gray-300"
             >
-              <Button text={'Ver Curso'} url={'URL_DEL_CURSO'} />
+              <Button text={'Ver Curso'} url={`courses/${id}`} />
             </div>
           )}
           <div
@@ -63,13 +64,14 @@ function PostFeed ({
             style={{ width: buttonWidth }}
             className="flex justify-center border-l border-gray-300"
           >
-            <ShareButton url={'URL_DEL_POST'} text={'Compartir Enlace'} />
+            <ShareButton url={'#'} text={'Compartir Enlace'} />
           </div>
         </div>
         {commentsOpen && (
           <>
             <div className="border-t border-gray-300 max-h-[500px] overflow-auto">
-              {comments.map((comment: any, index: any) => (
+              { comments
+                ? comments.map((comment: any, index: any) => (
                 <Comments
                   key={index}
                   commentAuthor={{
@@ -78,10 +80,11 @@ function PostFeed ({
                   }}
                   comment={comment.commentText || ''}
                 />
-              ))}
+                ))
+                : null}
             </div>
             <div>
-              <WriteComment />
+              <WriteComment id={id} session={session} />
             </div>
           </>
         )}

@@ -3,7 +3,8 @@
 import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
 import axios from 'axios'
 import { Fragment } from 'react'
-
+import { PlusCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
+import { headers } from 'next/dist/client/components/headers'
 // axios.interceptors.response.use(function (response) {
 //   // Optional: Do something with response data
 //   return response
@@ -15,7 +16,7 @@ import { Fragment } from 'react'
 //   return Promise.reject(error)
 // })
 
-const FormCourses = () => {
+const FormCourses = ({ session }: any) => {
   //   const apiBaseUrl = process.env.API_BASE_URL
 
   const {
@@ -36,7 +37,7 @@ const FormCourses = () => {
     }
   )
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: 'videos',
     control
   })
@@ -50,14 +51,28 @@ const FormCourses = () => {
 
     console.log(data)
 
-    axios.postForm('http://127.0.0.1:3001/contentCourse', data)
+    const headers = {
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${session?.accessToken}`,
+      User: JSON.stringify(session?.user)
+    }
+    axios.postForm('http://127.0.0.1:3001/contentCourse', data, { headers })
       .then((response) => {
         console.log(response.data)
       })
       .catch((error) => {
         console.error(error)
       })
+    // const response = await fetch('http://127.0.0.1:3001/contentCourse', {
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   headers,
+    //   body: JSON.stringify(data)
+    // })
 
+    // if (response) {
+    //   console.log('OK')
+    // }
     // const formData = new FormData()
     // formData.append('title', data.title)
 
@@ -77,104 +92,111 @@ const FormCourses = () => {
   //   videoRefs.current[index] = newFile
   // }
   return (
-    <div className='bg-indigo-100 flex flex-row justify-center items-center p-2 gap-10'>
+    <div className='bg-white border p-5 flex flex-row justify-center items-center p-2 gap-10 min-w[auto] min-h[auto] lg:min-w[1200px]'>
         <form onSubmit={handleSubmit(onSubmit)} className="">
-            <div className="mb-2">
-                <label
-                    htmlFor="title"
-                    className="block text-sm font-semibold text-gray-800"
-                >
-                    Titulo del Curso
-                </label>
-                <input
-                    type="textarea"
-                    className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    {...register('title', { required: true })}
-                />
-            </div>
-            <div className="mb-2">
-                <label
-                    htmlFor="description"
-                    className="block text-sm font-semibold text-gray-800"
-                >
-                    Descripcion del curso
-                </label>
-                <textarea
-                    placeholder="Agregue una descripcion del curso"
-                    className="block w-full px-4 py-6 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    {...register('description', { required: false })}
-                />
-            </div>
-            <div> LISTA DE VIDEOS </div>
-            {
-                fields.map((field, index) => (
-                <Fragment key={index}>
+            <div className='flex flex-col md:flex-row gap-10'>
+                <div className='w-auto min-w-auto lg:min-w-[400px]'>
                     <div className="mb-2">
                         <label
-                            htmlFor="videosdescriptions"
+                            htmlFor="title"
                             className="block text-sm font-semibold text-gray-800"
                         >
-                            Titulo del video
+                            Titulo del Curso
                         </label>
                         <input
-                            type="text"
+                            type="textarea"
                             className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register(`videos.${index}.title`, { required: false })}
+                            {...register('title', { required: true })}
                         />
                     </div>
                     <div className="mb-2">
                         <label
-                            htmlFor="Video"
+                            htmlFor="description"
                             className="block text-sm font-semibold text-gray-800"
                         >
                             Descripcion del curso
                         </label>
-                        <input
-                            type="text"
-                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register(`videos.${index}.desc`, { required: false })}
+                        <textarea
+                            placeholder="Agregue una descripcion del curso"
+                            className="block w-full px-4 py-6 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            {...register('description', { required: false })}
                         />
                     </div>
-                    <div className="mb-2">
-                        <label
-                            htmlFor="Video"
-                            className="block text-sm font-semibold text-gray-800"
-                        >
-                            Video del curso
-                        </label>
-                        <input
-                            type="file"
-                            className="block w-full px-2 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                            {...register(`videos.${index}.url`, { required: false })}
-                        />
+                </div>
+                <div className='w-auto flex flex-col items-center gap-2 lg:border-l border-black'>
+                    <div className='mx-auto lg:ml-9'>
+                        {
+                            fields.map((field, index) => (
+                            <div key={index} className='flex flex-col md:flex-row items-center justify-center gap-2'>
+                                <div className="mb-2">
+                                    <label
+                                        htmlFor="videosdescriptions"
+                                        className="block text-sm font-semibold text-gray-800"
+                                    >
+                                        {`Titulo del video ${index + 1}`}
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                                        {...register(`videos.${index}.title`, { required: false })}
+                                    />
+                                </div>
+                                <div className="mb-2">
+                                    <label
+                                        htmlFor="Video"
+                                        className="block text-sm font-semibold text-gray-800"
+                                    >
+                                        {`Descripcion video ${index + 1}`}
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                                        {...register(`videos.${index}.desc`, { required: false })}
+                                    />
+                                </div>
+                                <div className="mb-2">
+                                    <label
+                                        htmlFor="Video"
+                                        className="block text-sm font-semibold text-gray-800"
+                                    >
+                                        {`Video del curso ${index + 1}`}
+                                    </label>
+                                    <input
+                                        type="file"
+                                        className="block w-full px-2 py-2 mt-2 text-indigo-700 bg-white w-[200px] rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                                        {...register(`videos.${index}.url`, { required: false })}
+                                    />
+                                </div>
+                                <button
+                                    type="button"
+                                    className="mt-4 cursor-pointer text-red-500 text-xl w-[30px] h-[30px] transition-colors hover:scale-125 transition duration-150 ease-in"
+                                    onClick={() => {
+                                      remove(index)
+                                    }
+                                    }
+                                    >
+                                    <TrashIcon />
+                                </button>
+                            </div>
+                            ))
+                        }
                     </div>
-                    <div className="mb-2">
-                        <label
-                            htmlFor="Video"
-                            className="block text-sm font-semibold text-gray-800"
+                    <button
+                        type="button"
+                        className="text-black cursor-pointer text-xl rounded-full w-[30px] h-[30px] transition-colors"
+                        onClick={() => {
+                          append({
+                            title: '',
+                            desc: '',
+                            url: ''
+                          })
+                        }
+                        }
                         >
-                            Preview del video
-                        </label>
-                        {/* i want to check the video that was uploaded before */}
-                        <video controls/>
-                    </div>
-                </Fragment>
-                ))
-            }
-            <button
-                type="button"
-                className="text-white transition-colors justify-center"
-                onClick={() => {
-                  append({
-                    title: '',
-                    desc: '',
-                    url: ''
-                  })
-                }
-                }
-                >
-                +
-            </button>
+                        <PlusCircleIcon />
+                    </button>
+                </div>
+            </div>
             <div className="mt-6">
                 <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
                     Crear Curso

@@ -5,6 +5,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
+let redirectUrl: string = '/'
 
 export const authConfig = {
   session: {
@@ -12,28 +13,52 @@ export const authConfig = {
   },
   adapter: PrismaAdapter(prisma),
   providers: [
-    Google({ clientId: process.env.AUTH_GOOGLE_ID, clientSecret: process.env.AUTH_GOOGLE_SECRET } as any)
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET
+    } as any)
   ],
+  events: {
+    createUser: async ({ user }: any) => {
+      console.log('CREATE USER', user)
+      console.log('ID2', user.id)
+      try {
+        await prisma.user.update({
+          data: {
+            career: 'admin'
+          },
+          where: {
+            id: user.id
+          }
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  },
   callbacks: {
-    // authorized ({ request, auth }) {
-    //   const { pathname } = request.nextUrl
-    //   return pathname === '/home' && !!auth
-    // },
-    authorized ({ auth }) {
+    async authorized ({ request, auth }) {
+      // console.log('AUTHORIZEDD', auth, request)
       return !!auth
     },
+    // async authorized ({ auth }) {
+    //   return !!auth
+    // },
 
     async signIn ({ account, profile, user }: any) {
       console.log('USERRRRRRRRR', user)
+      console.log('PROFILEEEEEE', profile)
+      console.log('ACCOUNTTTTT', account)
       // console.log(profile?.email.endsWith('@duocuc.cl'))
       // console.log('signIn callback', account, profile, user)
       if (profile?.email?.endsWith('@duocuc.cl')) {
-        if (user.career === null || user.campus === null || user.careerYear === null || user.aboutMe === null) {
-          console.log('redirect to complete profile')
+        if (!user) {
+          redirectUrl = '/complete-profile'
+          console.log('User not found, redirecting to complete profile')
           return '/complete-profile' as any
         } else {
-          console.log('redirect to home')
-          return true
+          redirectUrl = '/home'
+          return user
         }
       } else {
         // Return false to di splay a default error message
@@ -41,7 +66,19 @@ export const authConfig = {
         return false
       }
     },
-    jwt ({ token, user, account, profile }: any) {
+    async session ({ token, session, user }: any) {
+      console.log('user', user)
+      // console.log('session callback', token, session)
+      // session.user.career = ''
+      // session.user.campus = ''
+      // session.user.careerYear = ''
+      // session.user.aboutMe = ''
+      console.log('TOKEN_USER', token)
+      session.accessToken = token.accessToken
+
+      return session
+    },
+    async jwt ({ token, user, account, profile }: any) {
       // console.log('token', token)
       // console.log('user', user)
       // console.log('account', account)
@@ -49,23 +86,17 @@ export const authConfig = {
       if (account?.access_token) {
         token.accessToken = account.access_token
       }
+      token.user = user
+
       return token
-      // if (user) return { ...token, ...user }
 
       // return token
     },
-    session ({ token, session }: any) {
-      // console.log('session callback', token, session)
-      // session.user.career = ''
-      // session.user.campus = ''
-      // session.user.careerYear = ''
-      // session.user.aboutMe = ''
-      session.accessToken = token.accessToken
-
-      return session
-    },
-    async redirect () {
-      return '/complete-profile'
+    async redirect (request) {
+      // console.log('request', request)
+      // console.log('redirect callback', redirectUrl)
+      // const redirect = redirectUrl
+      return redirectUrl
     }
   },
   pages: {

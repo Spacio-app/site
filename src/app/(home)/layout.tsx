@@ -1,6 +1,7 @@
 import '@/css/globals.css'
 import Header from './header'
 import { auth } from 'auth'
+import { SessionProvider } from 'next-auth/react'
 
 export default async function RootLayout ({
   children
@@ -13,8 +14,10 @@ export default async function RootLayout ({
     <html lang='en'>
     <head />
     <body>
+      <SessionProvider session={session}>
         <Header sessionData={session} />
             <main>{ children }</main>
+      </SessionProvider>
     </body>
     </html>
   )

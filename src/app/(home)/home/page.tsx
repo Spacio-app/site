@@ -11,7 +11,7 @@ import { auth } from 'auth'
 export const getProjects = async () => {
   // give me example url to fetch data
 
-  const apiBaseUrl = process.env.API_BASE_URL
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
   const res = await fetch(`${apiBaseUrl}content`, { cache: 'no-store' })
   const projects = await res.json()
 
@@ -69,7 +69,7 @@ const page = async ({ extraProp }: any) => {
                 return <Card key={id} title={title} description={description}
                   miniature={miniature
                     ? miniature.charAt(0) === 'h' ? miniature : 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Example_image.svg/600px-Example_image.svg.png'
-                    : 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Example_image.svg/600px-Example_image.svg.png'} createdAt={createdAt} author={author} updatedAt={updatedAt} cardType={CardComponentType as ReactElement} />
+                    : 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Example_image.svg/600px-Example_image.svg.png'} createdAt={createdAt} author={author} updatedAt={updatedAt}/>
               })
             }
           </div>

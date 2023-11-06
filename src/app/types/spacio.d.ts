@@ -18,7 +18,7 @@ declare namespace Spacio {
       description: string
       author: string
       miniature: string
-      cardType: React.ReactElement
+      // cardType: React.ReactElement
       createdAt: Date | number | string
       updatedAt: Date | number | string
     }

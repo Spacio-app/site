@@ -14,7 +14,7 @@ function classNames (...classes: any) {
 const SignInButton = ({ sessionData }: any) => {
   // const { data: session } = useSession()
   // console.log('SESSION', session)
-  console.log('SESSIONDATA', sessionData)
+  // console.log('SESSIONDATA', sessionData)
   const router = useRouter()
 
   if (sessionData != null) {
