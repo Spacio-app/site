@@ -29,7 +29,7 @@ function UserProfile ({ author, createdAt }: any) {
         <div>
           <a className="cursor-pointer"><span className="font-bold">{author.name}</span></a>
           <p className="text-gray-400 text-sm">
-            <span>Publicado hace {diffInDays > 0 ? (diffInDays === 1 ? `${diffInDays} dia` : `${diffInDays} dias`) : diffInHours > 0 ? (diffInHours === 1 ? `${diffInHours} hora` : `${diffInHours} horas`) : diffInMinutes > 0 ? (diffInMinutes === 1 ? `${diffInMinutes} minuto` : `${diffInMinutes} minutos`) : 0}</span>
+            <span>Publicado hace {diffInDays > 0 ? (diffInDays === 1 ? `${diffInDays} dia` : `${diffInDays} dias`) : diffInHours > 0 ? (diffInHours === 1 ? `${diffInHours} hora` : `${diffInHours} horas`) : diffInMinutes > 0 ? (diffInMinutes === 1 ? `${diffInMinutes} minuto` : `${diffInMinutes} minutos`) : '0 segundos'}</span>
           </p>
         </div>
       </div>
