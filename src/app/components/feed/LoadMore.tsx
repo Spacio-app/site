@@ -34,7 +34,10 @@ const LoadMore = () => {
     const nextPage = pageLoaded + 1
     // const response = await fetch(`${apiBaseUrl}contentFeed?page=${nextPage}`)
     // const feed = await response.json()
-    setFeedPosts(data)
+    setFeedPosts((prevData: any) => ({
+      ...prevData,
+      data
+    }))
     setPageLoaded(nextPage)
   }
 
