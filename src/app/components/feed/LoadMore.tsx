@@ -45,6 +45,7 @@ const LoadMore = () => {
       if (data) void LoadMoreFeed(data)
     }
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   , [inView, data])
   return (<>
     {feedPosts.map((data: any, index: any) => (

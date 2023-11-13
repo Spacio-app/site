@@ -1,7 +1,7 @@
 'use client'
 import CommentAuthor from './CommentAuthor'
 
-function Comments({ commentAuthor, comment }: any) {
+function Comments ({ commentAuthor, comment }: any) {
   const breakClass = shouldApplyBreakClass(comment) ? 'break-all' : 'break-normal'
 
   return (
@@ -21,7 +21,7 @@ function Comments({ commentAuthor, comment }: any) {
   )
 }
 
-function shouldApplyBreakClass(text) {
+function shouldApplyBreakClass (text: any) {
   const hasSpaces = text.includes(' ')
   return !hasSpaces
 }
