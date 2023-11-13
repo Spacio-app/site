@@ -57,9 +57,9 @@ export const DisplayVideo = ({ videos }: any) => {
                     height={'100'}
                     src={video.miniatureVideo}
                     alt="FOTO"
-                    className="mx-2 border border-gray-500 w-[50px] h-[40px] rounded-full"
+                    className="mx-2 border border-gray-500 w-[50px] h-[40px] rounded-full cursor-pointer"
                   />
-                  <div className="bg-gray-200 p-4 rounded-xl w-full first-letter:capitalize hover:bg-gray-300">
+                  <div className="bg-gray-200 p-4 rounded-2xl w-full first-letter:capitalize hover:bg-gray-300">
                     <a href="#">{video.title}</a>
                   </div>
                 </li>

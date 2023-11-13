@@ -2,6 +2,12 @@
 
 import Image from 'next/image'
 
+// Función para poder aplicar formato capitalize al nombre de usuario por defecto(cuenta duoc)
+
+// function capitalizeWords (str) {
+//   return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase())
+// }
+
 function UserProfile ({ author, createdAt }: any) {
   // const diffInMilliseconds = new Date() - createdAt
   // const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24))
@@ -17,7 +23,7 @@ function UserProfile ({ author, createdAt }: any) {
   const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24))
   return (
       <div className="flex border-b border-gray-300 p-3.5">
-        <a className="cursor-pointer">
+        <a href="#" className="cursor-pointer">
           <Image
             width={50}
             height={50}
@@ -27,7 +33,7 @@ function UserProfile ({ author, createdAt }: any) {
           />
         </a>
         <div>
-          <a className="cursor-pointer"><span className="font-bold">{author.name}</span></a>
+          <a href="#" className="cursor-pointer"><span className="font-bold">{author.name}</span></a>
           <p className="text-gray-400 text-sm">
             <span>Publicado hace {diffInDays > 0 ? (diffInDays === 1 ? `${diffInDays} dia` : `${diffInDays} dias`) : diffInHours > 0 ? (diffInHours === 1 ? `${diffInHours} hora` : `${diffInHours} horas`) : diffInMinutes > 0 ? (diffInMinutes === 1 ? `${diffInMinutes} minuto` : `${diffInMinutes} minutos`) : '0 segundos'}</span>
           </p>
