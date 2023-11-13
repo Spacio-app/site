@@ -3,8 +3,10 @@
 import { useSession } from 'next-auth/react'
 import CommentAuthor from './CommentAuthor'
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
 
 function CreatePost () {
+  const router = useRouter()
   const session = useSession()
   //   console.log('SESSSION', session)
   const { register, handleSubmit, reset } = useForm()
@@ -25,6 +27,7 @@ function CreatePost () {
       const res = await response.json()
       // clean form
       reset()
+      router.refresh()
       // show success message
       console.log(res)
     }

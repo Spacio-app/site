@@ -3,6 +3,19 @@
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import PostFeed from './PostFeed'
+import useSWR, { Cache } from 'swr'
+import axios from 'axios'
+import { revalidate } from '@/(home)/home/page'
+
+const httpclient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL
+})
+
+const feedUrl = '/contentFeed?page=1'
+const getFeed = async () => {
+  const response = await httpclient.get(feedUrl)
+  return response.data
+}
 
 const LoadMore = () => {
   const [feedPosts, setFeedPosts] = useState<any>([])
@@ -10,25 +23,29 @@ const LoadMore = () => {
 
   const { ref, inView } = useInView()
 
-  const loadMoreFeed = async () => {
-    setTimeout(async () => {
-      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
-      const nextPage = pageLoaded + 1
-      const response = await fetch(`${apiBaseUrl}contentFeed?page=${nextPage}`)
-      const feed = await response.json()
-      if (feed) {
-        setFeedPosts((prevFeed: any) => [...prevFeed, ...feed])
-      }
-      setPageLoaded(nextPage)
-    }, 1000)
+  const { data, error } = useSWR('http://127.0.0.1:3001/contentFeed?page=1')
+
+  const LoadMoreFeed = async (data: any) => {
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+    const nextPage = pageLoaded + 1
+    // const response = await fetch(`${apiBaseUrl}contentFeed?page=${nextPage}`)
+    // const feed = await response.json()
+    setFeedPosts(data)
+    setPageLoaded(nextPage)
   }
+
+  useEffect(() => {
+    console.log('DATA', data)
+  }
+  , [data])
+
   useEffect(() => {
     if (inView) {
       console.log('inView')
-      void loadMoreFeed()
+      if (data) void LoadMoreFeed(data)
     }
   }
-  , [inView])
+  , [inView, data])
   return (<>
     {feedPosts.map((data: any, index: any) => (
         <PostFeed key={index} {...data} />
