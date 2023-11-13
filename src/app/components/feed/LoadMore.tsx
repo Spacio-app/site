@@ -18,15 +18,16 @@ const getFeed = async () => {
 }
 
 const LoadMore = () => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+  const feedUrl = apiBaseUrl + 'contentFeed?page=1'
   const [feedPosts, setFeedPosts] = useState<any>([])
   const [pageLoaded, setPageLoaded] = useState(1)
 
   const { ref, inView } = useInView()
 
-  const { data, error } = useSWR('http://127.0.0.1:3001/contentFeed?page=1')
+  const { data, error } = useSWR(feedUrl)
 
   const LoadMoreFeed = async (data: any) => {
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
     const nextPage = pageLoaded + 1
     // const response = await fetch(`${apiBaseUrl}contentFeed?page=${nextPage}`)
     // const feed = await response.json()
