@@ -80,7 +80,7 @@ function PostFeed ({
         {commentsOpen && (
           <>
             <div className=" max-h-[300px] md:max-h-[500px] overflow-auto overflow-x-hidden border-t border-gray-300">
-              {displayedComments.map((comment, index) => (
+              {displayedComments.map((comment: any, index: any) => (
                 <Comments
                   key={index}
                   commentAuthor={{
@@ -98,7 +98,7 @@ function PostFeed ({
         )}
         {comments.length > 2 && !commentsOpen && (
           <div>
-            {comments.slice(0, 2).map((comment, index) => (
+            {comments.slice(0, 2).map((comment: any, index: any) => (
               <Comments
                 key={index}
                 commentAuthor={{

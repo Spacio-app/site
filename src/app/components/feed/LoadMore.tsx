@@ -6,6 +6,7 @@ import PostFeed from './PostFeed'
 import useSWR, { Cache } from 'swr'
 import axios from 'axios'
 import { revalidate } from '@/(home)/home/page'
+import { useRouter } from 'next/navigation'
 
 const httpclient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL
@@ -18,14 +19,16 @@ const getFeed = async () => {
 }
 
 const LoadMore = () => {
+  const router = useRouter()
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+
   const feedUrl = apiBaseUrl + 'contentFeed?page=1'
   const [feedPosts, setFeedPosts] = useState<any>([])
   const [pageLoaded, setPageLoaded] = useState(1)
 
   const { ref, inView } = useInView()
 
-  const { data, error } = useSWR(feedUrl)
+  const { data, error, mutate } = useSWR(feedUrl, { refreshInterval: 1000 })
 
   const LoadMoreFeed = async (data: any) => {
     const nextPage = pageLoaded + 1
@@ -37,8 +40,9 @@ const LoadMore = () => {
 
   useEffect(() => {
     console.log('DATA', data)
+    router.refresh()
   }
-  , [data])
+  , [data, router])
 
   useEffect(() => {
     if (inView) {
