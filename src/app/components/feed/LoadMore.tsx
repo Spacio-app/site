@@ -22,9 +22,9 @@ const LoadMore = () => {
   const router = useRouter()
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
 
-  const feedUrl = apiBaseUrl + 'contentFeed?page=1'
   const [feedPosts, setFeedPosts] = useState<any>([])
   const [pageLoaded, setPageLoaded] = useState(1)
+  const [feedUrl, setFeedUrl] = useState(apiBaseUrl + 'contentFeed?page=1')
 
   const { ref, inView } = useInView()
 
@@ -37,6 +37,11 @@ const LoadMore = () => {
     setFeedPosts(data)
     setPageLoaded(nextPage)
   }
+
+  useEffect(() => {
+    setFeedUrl(apiBaseUrl + `contentFeed?page=${pageLoaded}`)
+  }
+  , [pageLoaded, apiBaseUrl])
 
   useEffect(() => {
     console.log('DATA', data)
