@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 
 interface Option {
   value: string
@@ -10,6 +10,8 @@ interface Option {
 interface SelectProps {
   title: string
   options: Option[]
+  svg: any
+  id: any
 }
 
 const InputOption: React.FC<SelectProps> = ({ title, options, svg, id }) => {

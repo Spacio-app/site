@@ -6,7 +6,7 @@ import { auth } from 'auth'
 
 const page = async () => {
   const session = await auth()
-  const { name, email, image } = session.user
+  const { name, email, image } = session?.user as any
 
   return (
     <>
@@ -158,7 +158,7 @@ const page = async () => {
                     <input
                       type="file"
                       accept='image/*'
-                      style={{display: 'none'}}
+                      style={{ display: 'none' }}
                       id="upload-photo"
                     />
                     <label htmlFor="upload-photo" className='text-blue-400 cursor-pointer text-sm'>Actualizar</label>
