@@ -15,9 +15,26 @@ const Video = ({ videoUrl }: { videoUrl: VideoType }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    console.log('videoURL', videoUrl.url)
-    videoRef.current?.load()
-  }, [videoUrl])
+    const videoElement = videoRef.current
+
+    const handleFullScreenChange = () => {
+      if (document.fullscreenElement === videoElement || document.webkitFullscreenElement === videoElement) {
+        // Si está en pantalla completa, elimina el borde
+        videoElement?.classList.add('border-0')
+      } else {
+        // Si no está en pantalla completa, vuelve a mostrar el borde
+        videoElement?.classList.remove('border-0')
+      }
+    }
+
+    videoElement?.addEventListener('fullscreenchange', handleFullScreenChange)
+    videoElement?.addEventListener('webkitfullscreenchange', handleFullScreenChange)
+
+    return () => {
+      videoElement?.removeEventListener('fullscreenchange', handleFullScreenChange)
+      videoElement?.removeEventListener('webkitfullscreenchange', handleFullScreenChange)
+    }
+  }, [])
 
   return (
     <video ref={videoRef} controls width="100%" height="100%" className="max-h-[550px] border border-gray-300 rounded-3xl h-[550px]">

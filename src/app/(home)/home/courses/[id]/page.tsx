@@ -28,13 +28,13 @@ const Course = async ({ params }: { params: any }) => {
   return (
     <>
       <section className="md:container max-w-full md:mx-auto min-h-screen px-6 lg:px-4 xl:px-4">
-        <div className="shadow-xl mt-2 text-3xl p-6">
+        <div className="mt-2 text-3xl px-2 py-6">
           <h1 className="font-bold font-sans first-letter:capitalize">
             {title}
           </h1>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-2">
           <DisplayVideo videos={videos} />
 
           {/* AUTOR, DESCRIPCIÓN Y FEEDBACK */}
