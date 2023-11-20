@@ -52,16 +52,21 @@ function PostFeed ({
           text={description}
           imageSrc={''}
         />
-        <div className={`px-6 py-3 flex ${buttonStyle}`}>
-          {contenttype === 'course' && (
+        <div className='px-6 py-3 flex'>
+          <ButtonComment
+            texto={commentsOpen ? 'Cerrar Comentarios' : 'Ver Comentarios'}
+            onClick={toggleComment}
+          />
+        {/* <div className={`px-6 py-3 flex ${buttonStyle}`}> */}
+          {/* {contenttype === 'course' && (
             <div
               style={{ width: buttonWidth }}
               className="flex justify-center border-r border-gray-300"
             >
               <Button text={'Ver Curso'} url={`courses/${id}`} />
             </div>
-          )}
-          <div
+          )} */}
+          {/* <div
             style={{ width: buttonWidth }}
             className="flex justify-center border-r border-gray-300"
           >
@@ -75,12 +80,12 @@ function PostFeed ({
             className="flex justify-center border-l border-gray-300"
           >
             <ShareButton url={'#'} text={'Compartir Enlace'} />
-          </div>
+          </div> */}
         </div>
         {commentsOpen && (
           <>
             <div className=" max-h-[300px] md:max-h-[500px] overflow-auto overflow-x-hidden border-t border-gray-300">
-              {displayedComments.map((comment, index) => (
+              {displayedComments.map((comment: any, index) => (
                 <Comments
                   key={index}
                   commentAuthor={{
@@ -98,7 +103,7 @@ function PostFeed ({
         )}
         {comments.length > 2 && !commentsOpen && (
           <div>
-            {comments.slice(0, 2).map((comment, index) => (
+            {comments.slice(0, 2).map((comment: any, index: number) => (
               <Comments
                 key={index}
                 commentAuthor={{
@@ -108,7 +113,7 @@ function PostFeed ({
                 comment={comment.comment || ''}
               />
             ))}
-            <div className='px-6 py-3 ml-4'>
+            <div className='px-6 py-3 ml-4 text-sm'>
               <button onClick={toggleComment} className="text-gray-500 font-medium flex gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
                   <path fill="#666666" d="m229.66 157.66l-48 48A8 8 0 0 1 168 200v-40h-40A104.11 104.11 0 0 1 24 56a8 8 0 0 1 16 0a88.1 88.1 0 0 0 88 88h40v-40a8 8 0 0 1 13.66-5.66l48 48a8 8 0 0 1 0 11.32Z"/>

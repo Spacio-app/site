@@ -22,7 +22,7 @@ export const DisplayVideo = ({ videos }: any) => {
   }
   useEffect(() => {
     console.log('videos', videos)
-  }, [])
+  }, [videos])
   useEffect(() => {
     console.log('currentVideo', currentVideo)
   }, [currentVideo])
@@ -48,7 +48,7 @@ export const DisplayVideo = ({ videos }: any) => {
           <div className="p-3 rounded-2xl border-2 border-gray-300">
             <h2 className="font-bold">Contenido del curso</h2>
           </div>
-          <div className="mt-5 overflow-y-auto h-[100%]">
+          <div className="mt-5 overflow-y-auto-custom h-[100%]">
             <ul>
               {videos.map((video: VideoType, index: number) => (
                 <li key={index} className="items-center flex mt-4" onClick={() => { changeVideo(index) }}>

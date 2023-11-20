@@ -3,10 +3,13 @@
 import Image from 'next/image'
 
 function PostContent ({ titlePublication, text, imageSrc = null }: any) {
+  const breakClass = shouldApplyBreakClass(text) ? 'break-all' : 'break-normal'
+  const breakClass2 = shouldApplyBreakClass(titlePublication) ? 'break-all' : 'break-normal'
+
   return (
     <div className="px-6 py-3 justify-center text-justify border-b border-gray-300">
-      <div className="font-semibold">{titlePublication}</div>
-      <div className="mt-3">
+      <div className={`font-semibold text-sm ${breakClass2}`}>{titlePublication}</div>
+      <div className={`mt-3 text-sm ${breakClass}`}>
         <p>{text}</p>
       </div>
       {imageSrc && (
@@ -20,6 +23,11 @@ function PostContent ({ titlePublication, text, imageSrc = null }: any) {
       )}
     </div>
   )
+}
+
+function shouldApplyBreakClass (text: any) {
+  const hasSpaces = text.includes(' ')
+  return !hasSpaces
 }
 
 export default PostContent

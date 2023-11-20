@@ -46,7 +46,7 @@ const page = async ({ extraProp }: any) => {
             </div>
             <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Aplicar filtros</button>
           </aside> */}
-          <div className="w-full grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 grid-flow gap-x-40 gap-y-16 mx-[10%]">
+          <div className="w-full grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-4 grid-flow gap-x-4 gap-y-20 justify-items-center items-center">
             {
               projects?.map((content: Spacio.Common.Content) => {
                 // <div key={id}>

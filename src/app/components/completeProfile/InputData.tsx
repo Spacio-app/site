@@ -2,7 +2,7 @@
 
 function InputData ({ title, placeHolder, svg, type, name, id }: any) {
   return (
-    <div className="flex flex-col w-[100] lg:w-[50%]">
+    <div className="flex flex-col w-[100] xl:w-[50%]">
       <label htmlFor="name" className="mb-2">
         {title}
       </label>

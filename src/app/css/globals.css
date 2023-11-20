@@ -97,6 +97,6 @@ input::-webkit-search-cancel-button {
   color: rgb(0, 0, 0);
 }
 
-.overflow-y-auto::-webkit-scrollbar{
+.overflow-y-auto-custom::-webkit-scrollbar{
   width: 7px;
 }
