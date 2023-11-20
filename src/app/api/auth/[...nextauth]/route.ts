@@ -1,32 +1,13 @@
-import NextAuth from 'next-auth'
-import GoogleProvider from 'next-auth/providers/google'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import prisma from '@/app/api/controllers/prisma'
+import { handlers } from 'auth'
+import type { NextRequest } from 'next/server'
 
-export const authOptions = {
-  adapter: PrismaAdapter(prisma),
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
-    })
-  ],
-  callbacks: {
-    async session ({ session, token, user }: any) {
-      if (session.user != null) {
-        session.user.id = user.id
-      }
-      return session
-    },
-    async redirect () {
-      return '/home'
-    }
-  },
-  pages: {
-    signIn: '/signin'
-  }
+const { GET: AuthGET, POST } = handlers
+export { POST }
+
+// Showcasing advanced initialization in Route Handlers
+export async function GET (request: NextRequest) {
+  // Do something with request
+  const response = await AuthGET(request)
+  // Do something with response
+  return response
 }
-
-const handler = NextAuth(authOptions)
-
-export { handler as GET, handler as POST }

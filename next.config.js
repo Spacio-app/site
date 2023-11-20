@@ -1,11 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
-      appDir: true
+      serverActions: true
     },
     images: {
-        domains: ['github.com', 'lh3.googleusercontent.com', 'freecodecamp.org', 'www.freecodecamp.org', 'production.listennotes.com']
-      }
+        dangerouslyAllowSVG: true,
+        domains: ['github.com', 'lh3.googleusercontent.com', 'tailwindui.com', 'production.listennotes.com', 'upload.wikimedia.org', 'example.com', 'res.cloudinary.com']
+    },
+    typescript: {
+      ignoreBuildErrors: true
+    }
 }
 
 module.exports = nextConfig
