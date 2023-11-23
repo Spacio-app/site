@@ -12,7 +12,7 @@ const navigation: any[] = [
   { name: 'Home', href: '/home', current: false },
   { name: 'Explorar', href: '/home/explore', current: false },
   { name: 'Crear contenido', href: '/home/create', current: false },
-  { name: 'Sobre Nosotros', href: '#', current: false }
+  { name: 'Sobre Nosotros', href: '/home/about-us', current: false }
   // { name: 'Projects', href: '#', current: false },
   // { name: 'Calendar', href: '#', current: false },
 ]

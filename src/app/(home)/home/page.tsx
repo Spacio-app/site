@@ -27,7 +27,7 @@ const Feed = async ({ params }: { params: any }) => {
       <div className='hidden lg:block lg:w-[25%] xl:w-[20%] border-r border-gray-300'>
         <Sidebar/>
       </div>
-      <div className="grid gap-9 h-fit lg:w-[50%] xl:w-[60%] border-gray-300">
+      <div className="grid gap-9 h-fit lg:w-[50%] xl:w-[60%] border-gray-300 mx-auto">
         <CreatePost />
         {
           feed
