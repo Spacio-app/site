@@ -1,9 +1,11 @@
 'use client'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 function WriteComment ({ id, session }: any) {
   const { register, handleSubmit, reset } = useForm()
+  const router = useRouter()
 
   const onSubmit = async (data: any) => {
     // const session = useSession()
@@ -24,6 +26,7 @@ function WriteComment ({ id, session }: any) {
       const res = await response.json()
       // clean form
       reset()
+      router.refresh()
       // show success message
       console.log(res)
     }

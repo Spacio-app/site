@@ -3,32 +3,52 @@
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import PostFeed from './PostFeed'
+import useSWR, { Cache } from 'swr'
+import * as axios from '@/helper/axiosFetcher'
+import { useRouter } from 'next/navigation'
 
 const LoadMore = () => {
+  const router = useRouter()
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+
   const [feedPosts, setFeedPosts] = useState<any>([])
   const [pageLoaded, setPageLoaded] = useState(1)
+  const [feedUrl, setFeedUrl] = useState(apiBaseUrl + 'contentFeed?page=1')
 
   const { ref, inView } = useInView()
 
-  const loadMoreFeed = async () => {
-    setTimeout(async () => {
-      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
-      const nextPage = pageLoaded + 1
-      const response = await fetch(`${apiBaseUrl}contentFeed?page=${nextPage}`)
-      const feed = await response.json()
-      if (feed) {
-        setFeedPosts((prevFeed: any) => [...prevFeed, ...feed])
-      }
+  const { data, error, mutate } = useSWR(feedUrl, { refreshInterval: 1000 })
+
+  const LoadMoreFeed = async (data: any) => {
+    const nextPage = pageLoaded + 1
+    // const response = await fetch(`${apiBaseUrl}contentFeed?page=${nextPage}`)
+    // const feed = await response.json()
+    setInterval(() => {
+      // console.log('DATA', data)
+      setFeedPosts(data)
       setPageLoaded(nextPage)
-    }, 1000)
+    }, 4000)
   }
+
+  useEffect(() => {
+    setFeedUrl(apiBaseUrl + `contentFeed?page=${pageLoaded}`)
+  }
+  , [pageLoaded, apiBaseUrl])
+
+  useEffect(() => {
+    console.log('DATA', data)
+    router.refresh()
+  }
+  , [data, router])
+
   useEffect(() => {
     if (inView) {
       console.log('inView')
-      void loadMoreFeed()
+      if (data) void LoadMoreFeed(data)
     }
   }
-  , [inView])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  , [inView, data])
   return (<>
     {feedPosts.map((data: any, index: any) => (
         <PostFeed key={index} {...data} />

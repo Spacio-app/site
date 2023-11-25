@@ -1,3 +1,4 @@
+'use client'
 import CreatePost from '@/components/feed/CreatePost'
 import LoadMore from '@/components/feed/LoadMore'
 import PostFeed from '@/components/feed/PostFeed'
@@ -6,37 +7,55 @@ import { auth } from 'auth'
 import Axios from 'axios'
 import Header from '../header'
 import Sidebar2 from '@/components/feed/Sidebar2'
+import { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
+import useSWR, { SWRConfig, mutate, preload, useSWRConfig } from 'swr'
+import { set } from 'zod'
+import fetcher from '@/helper/axiosFetcher'
 
-const getFeed = async () => {
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
-  const response = await fetch(`${apiBaseUrl}contentFeed?page=${1}`)
-  console.log(response)
-  const feed = await response.json()
+const Feed = () => {
+  // const { mutate } = useSWRConfig()
+  // const [feed, setFeed] = useState(useSWR('http://127.0.0.1:3001/contentFeed?page=1').data)
+  const session = useSession()
+  // const feed = useSWR(`${apiBaseUrl}contentFeed?page=${1}`).data
+  const { data: feed, error } = useSWR(`contentFeed?page=${1}`, fetcher, { refreshInterval: 3000 })
+  // useEffect(() => {
+  //   void preload(`${apiBaseUrl}contentFeed?page=${1}`, fetcher).then((data) => {
+  //     console.log('Preloaded', data)
+  //     setFeed(data)
+  //   })
+  // }, [feed])
 
-  return feed
-}
-
-const Feed = async ({ params }: { params: any }) => {
-  const session = await auth()
-  const feed = await getFeed()
-
-  console.log(feed)
+  useEffect(() => {
+    // revalidate data every new post
+    void mutate(`contentFeed?page=${1}`)
+  }
+  , [feed, mutate])
 
   return (
     <section className="flex lg:gap-2 md:mx-[10%] lg:mx-[0%]">
-      <div className='hidden lg:block lg:w-[25%] xl:w-[20%] border-r border-gray-300'>
+       <div className='hidden lg:block lg:w-[25%] xl:w-[20%] border-r border-gray-300'>
         <Sidebar/>
       </div>
       <div className="grid gap-9 h-fit lg:w-[50%] xl:w-[60%] border-gray-300 mx-auto">
-        <CreatePost />
-        {
-          feed
-            ? feed.map((data: any, index: any) => (
-              <PostFeed key={index} session={session} {...data}/>
-            ))
-            : null
-        }
-        <LoadMore />
+        <SWRConfig
+          value={{
+            refreshInterval: 1000,
+            fetcher: async (resource, init) => fetch(resource, init).then(async res => res.json())
+          }}
+        >
+          <CreatePost />
+          {
+            feed
+              ? feed.map((data: any, index: any) => (
+                <PostFeed key={index} session={session} {...data}/>
+              ))
+              : null
+          }
+          {
+            feed ? <LoadMore /> : null
+          }
+        </SWRConfig>
       </div>
       <div className='hidden lg:block lg:w-[25%] xl:w-[20%] border-l border-gray-300'>
         <Sidebar2/>

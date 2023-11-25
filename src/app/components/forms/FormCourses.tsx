@@ -74,8 +74,11 @@ const FormCourses = ({ session }: any) => {
   }
 
   return (
-    <div className='bg-white border p-5 flex flex-col justify-center items-center gap-x-10 gap-y-4 min-w-[auto] min-h-[auto] lg:min-w-[1200px]'>
-      <form onSubmit={handleSubmit(onSubmit)} className="">
+    <div className='bg-white flex flex-row justify-center items-center gap-10 min-w[auto] min-h[auto] lg:min-w[1200px]'>
+        <form onSubmit={handleSubmit(onSubmit)} className="">
+           <div className='border-b text-xl font-semibold text-center py-4'>
+              <h2>Crear Curso</h2>
+            </div>
             <div className='flex flex-col md:flex-row gap-10'>
                 <div className='w-auto min-w-auto lg:min-w-[400px]'>
                     <div className="mb-2">
@@ -190,7 +193,7 @@ const FormCourses = ({ session }: any) => {
                     </button>
                 </div>
             </div>
-            <div className="mt-6">
+            <div className="mt-6 px-10">
                 <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
                     Crear Curso
                 </button>

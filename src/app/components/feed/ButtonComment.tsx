@@ -13,4 +13,3 @@ function ButtonComment ({ texto, onClick }: any) {
 }
 
 export default ButtonComment
-
