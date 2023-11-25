@@ -2,7 +2,11 @@
 import CreatePost from '@/components/feed/CreatePost'
 import LoadMore from '@/components/feed/LoadMore'
 import PostFeed from '@/components/feed/PostFeed'
+import Sidebar from '@/components/feed/Sidebar'
 import { auth } from 'auth'
+import Axios from 'axios'
+import Header from '../header'
+import Sidebar2 from '@/components/feed/Sidebar2'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import useSWR, { SWRConfig, mutate, preload, useSWRConfig } from 'swr'
@@ -49,6 +53,9 @@ const Feed = () => {
             feed ? <LoadMore /> : null
           }
         </SWRConfig>
+      </div>
+      <div className='hidden lg:block lg:w-[25%] xl:w-[20%] border-l border-gray-300'>
+        <Sidebar2/>
       </div>
     </section>
   )

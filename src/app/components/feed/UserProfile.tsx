@@ -30,10 +30,10 @@ function UserProfile ({ author, createdAt }: any) {
             height={50}
             src={author.photo}
             alt="FOTO"
-            className="mr-3 border rounded-full w-[50px] h-fit"
+            className="mr-3 border rounded-full w-[40px] h-fit"
           />
         </a>
-        <div>
+        <div className='text-sm'>
           <a href="#" className="cursor-pointer"><span className="font-bold">{author.name}</span></a>
           <p className="text-gray-400 text-sm">
             <span>Publicado hace {diffInDays > 0 ? (diffInDays === 1 ? `${diffInDays} dia` : `${diffInDays} dias`) : diffInHours > 0 ? (diffInHours === 1 ? `${diffInHours} hora` : `${diffInHours} horas`) : diffInMinutes > 0 ? (diffInMinutes === 1 ? `${diffInMinutes} minuto` : `${diffInMinutes} minutos`) : (diffInSeconds === 1 ? `${diffInSeconds} segundo` : `${diffInSeconds} segundos`)}</span>

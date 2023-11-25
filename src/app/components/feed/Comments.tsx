@@ -8,8 +8,8 @@ function Comments ({ commentAuthor, comment }: any) {
     <div className="py-2 text-sm flex w-full">
       <div className='flex mx-6 w-full'>
         <CommentAuthor authorAvatar={commentAuthor.authorAvatar} />
-        <div className='bg-slate-200 p-4 rounded-xl w-full'>
-          <p className="font-semibold">{commentAuthor.authorName}</p>
+        <div className='bg-slate-200 px-4 py-2 rounded-xl w-full'>
+          <a href=""><p className="font-semibold">{commentAuthor.authorName}</p></a>
           <div className={`${breakClass}`}>
             <p>
               {comment}

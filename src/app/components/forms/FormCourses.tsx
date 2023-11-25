@@ -5,6 +5,7 @@ import axios from 'axios'
 import { Fragment } from 'react'
 import { PlusCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { headers } from 'next/dist/client/components/headers'
+
 // axios.interceptors.response.use(function (response) {
 //   // Optional: Do something with response data
 //   return response
@@ -31,7 +32,8 @@ const FormCourses = ({ session }: any) => {
       defaultValues: {
         title: '',
         description: '',
-        videos: [{ title: '', desc: '', url: '' }]
+        videos: [{ title: '', desc: '', url: '' }],
+        createAnnouncement: false // Nuevo campo para determinar si se debe mostrar en el feed
       },
       mode: 'onBlur'
     }
@@ -124,6 +126,17 @@ const FormCourses = ({ session }: any) => {
                             {...register('description', { required: false })}
                         />
                     </div>
+                    <div className="flex items-center mt-2">
+                      <input
+                        id="checkboxCourse"
+                        type="checkbox"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        {...register('createAnnouncement')} // Registro del nuevo campo
+                      />
+                      <label htmlFor="checkboxCourse" className="ml-2 text-sm font-medium text-gray-600">
+                        Publicar al feed
+                      </label>
+                    </div>
                 </div>
                 <div className='w-auto flex flex-col items-center gap-2 lg:border-l border-black'>
                     <div className='mx-auto lg:ml-9'>
@@ -165,13 +178,13 @@ const FormCourses = ({ session }: any) => {
                                     </label>
                                     <input
                                         type="file"
-                                        className="block w-full px-2 py-2 mt-2 text-indigo-700 bg-white w-[200px] rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                                        className="block w-full px-2 py-2 mt-2 text-indigo-700 bg-white rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                                         {...register(`videos.${index}.url`, { required: false })}
                                     />
                                 </div>
                                 <button
                                     type="button"
-                                    className="mt-4 cursor-pointer text-red-500 text-xl w-[30px] h-[30px] transition-colors hover:scale-125 transition duration-150 ease-in"
+                                    className="mt-4 cursor-pointer text-red-500 text-xl w-[30px] h-[30px] hover:scale-125 transition duration-150 ease-in"
                                     onClick={() => {
                                       remove(index)
                                     }

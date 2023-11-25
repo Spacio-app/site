@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ReactNode, useState } from 'react'
+import { type ReactNode, useState } from 'react'
 
 interface Option {
   value: string
@@ -10,8 +10,8 @@ interface Option {
 interface SelectProps {
   title: string
   options: Option[]
-  svg: any
-  id: any
+  svg: ReactNode
+  id: string
 }
 
 const InputOption: React.FC<SelectProps> = ({ title, options, svg, id }) => {
@@ -22,7 +22,7 @@ const InputOption: React.FC<SelectProps> = ({ title, options, svg, id }) => {
   }
 
   return (
-    <div className="flex flex-col w-[100%] lg:w-[50%]">
+    <div className="flex flex-col w-[100%] xl:w-[50%]">
       <label htmlFor="career" className="mb-2">
         {title}
       </label>

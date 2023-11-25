@@ -3,6 +3,7 @@ import InputData from '@/components/completeProfile/InputData'
 import InputOption from '@/components/completeProfile/InputOption'
 import UserData from '@/components/completeProfile/UserData'
 import { auth } from 'auth'
+import Image from 'next/image'
 
 const page = async () => {
   const session = await auth()
@@ -10,17 +11,17 @@ const page = async () => {
 
   return (
     <>
-      <section className="flex flex-col mx-3 lg:mx-[10%] my-[40px]">
+      <section className="flex flex-col mx-3 xl:mx-[10%] my-[40px]">
         <div className="w-full">
           <h1 className="font-semibold text-2xl">Completar Perfil</h1>
         </div>
-        <div className="flex flex-col lg:flex-row">
-          <div className="h-fit lg:h-screen w-[100%] lg:w-[70%]">
+        <div className="flex flex-col xl:flex-row">
+          <div className="h-fit xl:h-screen w-[100%] xl:w-[70%]">
             <div className="border border-gray-300 mt-6">
               <div className="py-3 px-8 border-b">
                 <h2 className="font-semibold">Información Personal</h2>
               </div>
-              <div className="py-6 px-8 flex flex-col lg:flex-row gap-[30px] lg:gap-[40px]">
+              <div className="py-6 px-8 flex flex-col xl:flex-row gap-[30px] xl:gap-[40px]">
                 <UserData
                   title="Nombre Completo"
                   data={name}
@@ -56,7 +57,7 @@ const page = async () => {
                   }
                 />
               </div>
-              <div className="pb-6 px-8 flex flex-col lg:flex-row gap-[30px] lg:gap-[40px]">
+              <div className="pb-6 px-8 flex flex-col xl:flex-row gap-[30px] xl:gap-[40px]">
                 <InputOption
                   title="Carrera"
                   id="career"
@@ -110,7 +111,7 @@ const page = async () => {
                   ]}
                 />
               </div>
-              <div className='pb-6 px-8 flex flex-col lg:flex-row gap-[30px] lg:gap-[40px]'>
+              <div className='pb-6 px-8 flex flex-col xl:flex-row gap-[30px] xl:gap-[40px]'>
                   <InputData
                   title="Nombre de Usuario"
                   placeHolder="Ingrese su nombre se usuario"
@@ -134,22 +135,22 @@ const page = async () => {
               </div>
             </div>
             <div className='flex justify-center items-center mt-4 mx-[30%]'>
-              <div className='px-8 w-[50%] flex justify-center items-center'>
+              <div className='px-8 w-[100%] xl:w-[50%] flex justify-center items-center'>
                 <button className='border border-gray-300 rounded-md p-[6px] bg-white hover:bg-gray-200 text-black hover:scale-105 transition duration-100 ease-in w-full'>Cancelar</button>
               </div>
-              <div className='px-8 w-[50%] flex justify-center'>
+              <div className='px-8 w-[100%] xl:w-[50%] flex justify-center'>
                 <button className='border border-gray-300 rounded-md p-[6px] bg-blue-500 hover:bg-blue-600 text-white hover:scale-105 transition duration-100 ease-in w-full'>Guardar</button>
               </div>
             </div>
           </div>
-          <div className="h-fit lg:h-screen w-[100%] lg:w-[30%] m-0 mt-6 lg:ml-6">
-            <div className='border border-gray-300 flex flex-col rounded-lg'>
+          <div className="h-fit xl:h-screen w-[100%] xl:w-[30%] m-0 mt-6 xl:ml-6">
+            <div className='border border-gray-300 flex flex-col rounded-xl'>
               <div className='py-3 px-8 border-b'>
                 <h2 className='font-semibold'>Foto de Perfil</h2>
               </div>
               <div className='flex flex-row'>
-                <div className='py-3 px-8 flex flex-col justify-center'>
-                  <img src={image} alt="" className='w-[70px] rounded-full cursor-pointer'/>
+                <div className='py-3 px-8 flex flex-col'>
+                  <Image src={image} width={1000} height={1000} alt="" className='w-[70px] rounded-full cursor-pointer'/>
                 </div>
                 <div className='py-3 flex flex-col'>
                   <span className=''>Cambiar Foto de Perfil</span>

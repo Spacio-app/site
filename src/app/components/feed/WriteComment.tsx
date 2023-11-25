@@ -34,7 +34,7 @@ function WriteComment ({ id, session }: any) {
 
   return (
         <form onSubmit={handleSubmit(onSubmit)} className="p-4 border-t border-gray-300">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 text-sm">
                 {/* <img
                     src="https://marketplace.canva.com/EAFewoMXU-4/1/0/1600w/canva-purple-pink-gradient-man-3d-avatar-0o0qE2T_kr8.jpg" // URL de la imagen de perfil
                     alt="Avatar"
