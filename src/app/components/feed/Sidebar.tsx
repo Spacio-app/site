@@ -6,9 +6,9 @@ const Sidebar = async () => {
   const { name, image } = session?.user as any
 
   return (
-    <div className="h-screen flex flex-col gap-4">
-      <div className='border-b w-full flex justify-center border-gray-300'>
-        <div className="flex flex-col items-center w-[350px] p-3 rounded-md h-[180px]">
+    <div className="h-screen flex flex-col gap-4 px-2">
+      <div className='border-b w-full flex justify-center border-gray-300 py-3'>
+        <div className="flex flex-col items-center w-[350px] p-3 rounded-xl h-[180px] hover:bg-slate-100">
           <div className="h-[60%] flex justify-center items-center">
             <a href="">
               <Image src={image} alt="" width={1000} height={1000} className="rounded-full w-[60px] h-fit" />
@@ -22,7 +22,7 @@ const Sidebar = async () => {
           </div>
         </div>
       </div>
-      <div className='flex gap-2 px-3'>
+      <div className='flex gap-2 px-3 hover:bg-gray-200 rounded-[10px]'>
         <div className='flex justify-center items-center'>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ const Sidebar = async () => {
           </div>
         </div>
       </div>
-      <div className='flex gap-2 px-3'>
+      <div className='flex gap-2 px-3 hover:bg-gray-200 rounded-[10px]'>
         <div className='flex justify-center items-center'>
         <svg
             xmlns="http://www.w3.org/2000/svg"

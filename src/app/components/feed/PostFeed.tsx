@@ -10,6 +10,7 @@ import Comments from './Comments'
 import Button from './Button'
 import WriteComment from './WriteComment'
 import ShareButton from './ShareButton'
+import { auth } from 'auth'
 
 function PostFeed ({
   session,
@@ -43,10 +44,13 @@ function PostFeed ({
     buttonWidth = '33.3%' // Valor para el caso 'course'
   }
 
+  const { name } = session?.user || {}
+  const currentUser = { name }
+
   return (
     <div className="border border-gray-300 flex-row md:flex rounded-xl">
       <div className="md:w-[100%] shadow-xl rounded-xl">
-        <UserProfile createdAt={createdat} author={author} />
+        <UserProfile createdAt={createdat} author={author} currentUser={currentUser} />
         <PostContent
           titlePublication={title}
           text={description}

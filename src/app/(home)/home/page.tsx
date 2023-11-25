@@ -33,8 +33,11 @@ const Feed = () => {
   , [feed, mutate])
 
   return (
-    <section className="flex lg:mx-[30%] mx-[10%]">
-      <div className="grid gap-9 my-6 h-fit w-full">
+    <section className="flex lg:gap-2 md:mx-[10%] lg:mx-[0%]">
+       <div className='hidden lg:block lg:w-[25%] xl:w-[20%] border-r border-gray-300'>
+        <Sidebar/>
+      </div>
+      <div className="grid gap-9 h-fit lg:w-[50%] xl:w-[60%] border-gray-300 mx-auto">
         <SWRConfig
           value={{
             refreshInterval: 1000,

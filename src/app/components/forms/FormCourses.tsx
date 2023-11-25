@@ -1,24 +1,15 @@
 'use client'
 
+import React, { useState } from 'react'
 import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
 import axios from 'axios'
-import { Fragment } from 'react'
 import { PlusCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
-import { headers } from 'next/dist/client/components/headers'
-
-// axios.interceptors.response.use(function (response) {
-//   // Optional: Do something with response data
-//   return response
-// }, async function (error) {
-//   // Do whatever you want with the response error here:
-
-//   // But, be SURE to return the rejected promise, so the caller still has
-//   // the option of additional specialized handling at the call-site:
-//   return Promise.reject(error)
-// })
+import ProgressBar from './ProgressBar'
 
 const FormCourses = ({ session }: any) => {
-  //   const apiBaseUrl = process.env.API_BASE_URL
+  const [loading, setLoading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const [message, setMessage] = useState('')
 
   const {
     control,
@@ -27,17 +18,15 @@ const FormCourses = ({ session }: any) => {
     formState: { errors },
     setError,
     clearErrors
-  } = useForm(
-    {
-      defaultValues: {
-        title: '',
-        description: '',
-        videos: [{ title: '', desc: '', url: '' }],
-        createAnnouncement: false // Nuevo campo para determinar si se debe mostrar en el feed
-      },
-      mode: 'onBlur'
-    }
-  )
+  } = useForm({
+    defaultValues: {
+      title: '',
+      description: '',
+      videos: [{ title: '', desc: '', url: '' }],
+      createAnnouncement: false
+    },
+    mode: 'onBlur'
+  })
 
   const { fields, append, remove } = useFieldArray({
     name: 'videos',
@@ -45,6 +34,9 @@ const FormCourses = ({ session }: any) => {
   })
 
   const onSubmit: SubmitHandler<any> = async (data) => {
+    setLoading(true)
+    setUploadProgress(0)
+
     data.videos.map((video: any) => {
       return (video.url = video.url[0])
     })
@@ -56,49 +48,38 @@ const FormCourses = ({ session }: any) => {
       Authorization: `Bearer ${session?.accessToken}`,
       User: JSON.stringify(session?.user)
     }
-    axios.postForm('http://127.0.0.1:3001/contentCourse', data, { headers })
-      .then((response) => {
-        console.log(response.data)
-        alert('Curso creado con exito')
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-    // const response = await fetch('http://127.0.0.1:3001/contentCourse', {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   headers,
-    //   body: JSON.stringify(data)
-    // })
 
-    // if (response) {
-    //   console.log('OK')
-    // }
-    // const formData = new FormData()
-    // formData.append('title', data.title)
+    try {
+      const response = await axios.post('http://127.0.0.1:3001/contentCourse', data, {
+        headers,
+        onUploadProgress: (progressEvent) => {
+          const total = progressEvent.total?.valueOf() ?? 1 // Valor predeterminado a 1 si total es undefined
+          const progress = Math.round((progressEvent.loaded / total) * 100)
+          setUploadProgress(progress)
+        }
+      })
 
-    // console.log(formData)
-    // const response = await fetch('http://localhost:3001/contentCourse', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': undefined as any
-    //   },
-    //   body: formData
-    // })
+      console.log(response.data)
+      setMessage('¡Curso creado con éxito!')
+    } catch (error) {
+      console.error(error)
+      setMessage('Error al crear el curso')
+    } finally {
+      setLoading(false)
+      // Espera 1 segundo antes de restablecer el progreso
+      setTimeout(() => {
+        setUploadProgress(0)
+      }, 1000)
+    }
   }
-  // const videoRefs = useRef([])
-  // const handleVideoChange = (e, index) => {
-  //   const file = e.target.files[0]
-  //   const newFile = { file, preview: URL.createObjectURL(file) }
-  //   videoRefs.current[index] = newFile
-  // }
+
   return (
     <div className='bg-white flex flex-row justify-center items-center gap-10 min-w[auto] min-h[auto] lg:min-w[1200px]'>
         <form onSubmit={handleSubmit(onSubmit)} className="">
            <div className='border-b text-xl font-semibold text-center py-4'>
               <h2>Crear Curso</h2>
             </div>
-            <div className='flex flex-col md:flex-row gap-10 mt-6 px-10'>
+            <div className='flex flex-col md:flex-row gap-10'>
                 <div className='w-auto min-w-auto lg:min-w-[400px]'>
                     <div className="mb-2">
                         <label
@@ -218,6 +199,8 @@ const FormCourses = ({ session }: any) => {
                 </button>
             </div>
         </form>
+        {loading && <ProgressBar progress={uploadProgress} />}
+        {message && <div className="text-black font-semibold">{message}</div>}
     </div>
   )
 }
