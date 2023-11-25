@@ -71,12 +71,12 @@ const FormTest = () => {
   }
 
   return (
-    <div className='border'>
+    <div className=''>
         <form onSubmit={handleSubmit(onSubmit)} className="">
             <div className='border-b text-xl font-semibold text-center py-4'>
               <h2>Crear Prueba</h2>
             </div>
-            <div className='flex flex-col md:flex-row gap-4 mx-10'>
+            <div className='flex flex-col md:flex-row gap-4 mx-10 mt-4'>
               <div>
                 <div className="w-auto">
                     <label

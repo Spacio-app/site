@@ -4,18 +4,7 @@ import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import PostFeed from './PostFeed'
 import useSWR, { Cache } from 'swr'
-import axios from 'axios'
-import { revalidate } from '@/(home)/home/page'
-
-const httpclient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL
-})
-
-const feedUrl = '/contentFeed?page=1'
-const getFeed = async () => {
-  const response = await httpclient.get(feedUrl)
-  return response.data
-}
+import * as axios from '@/helper/axiosFetcher'
 
 const LoadMore = () => {
   const [feedPosts, setFeedPosts] = useState<any>([])
@@ -30,8 +19,11 @@ const LoadMore = () => {
     const nextPage = pageLoaded + 1
     // const response = await fetch(`${apiBaseUrl}contentFeed?page=${nextPage}`)
     // const feed = await response.json()
-    setFeedPosts(data)
-    setPageLoaded(nextPage)
+    setInterval(() => {
+      // console.log('DATA', data)
+      setFeedPosts(data)
+      setPageLoaded(nextPage)
+    }, 4000)
   }
 
   useEffect(() => {

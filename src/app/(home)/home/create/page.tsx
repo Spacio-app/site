@@ -9,8 +9,8 @@ import 'swiper/css/navigation'
 
 import FormCourses from '@/components/forms/FormCourses'
 import FormTest from '@/components/forms/FormTest'
+import FormPost from '@/components/forms/FormPost'
 import { useSession } from 'next-auth/react'
-
 export default function Page () {
   const session = useSession()
 
@@ -40,9 +40,10 @@ export default function Page () {
           spaceBetween={10}
           slidesPerView={2}
           speed={1500}
+          allowTouchMove={false}
           centeredSlides={true}
           coverflowEffect={{
-            rotate: 0,
+            rotate: 20,
             slideShadows: true
           }}
           className="coverflow"
@@ -73,18 +74,18 @@ export default function Page () {
             }
           }}
         >
-          <SwiperSlide>
+          <SwiperSlide className='min-h-[600px] bg-white border border-gray-200'>
             <FormTest />
           </SwiperSlide>
-          <SwiperSlide>
+          <SwiperSlide className='min-h-[600px] bg-white border border-gray-200'>
             <FormCourses session={session.data}/>
           </SwiperSlide>
-          <SwiperSlide>
-            <FormCourses session={session.data}/>
+          <SwiperSlide className='min-h-[600px] bg-white border border-gray-200'>
+            <FormPost session={session.data} />
           </SwiperSlide>
-          <SwiperSlide>
+          {/* <SwiperSlide>
             <FormCourses session={session.data}/>
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
       </div>
     </section>

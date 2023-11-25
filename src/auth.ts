@@ -67,13 +67,13 @@ export const authConfig = {
       }
     },
     async session ({ token, session, user }: any) {
-      console.log('user', user)
+      // console.log('user', user)
       // console.log('session callback', token, session)
       // session.user.career = ''
       // session.user.campus = ''
       // session.user.careerYear = ''
       // session.user.aboutMe = ''
-      console.log('TOKEN_USER', token)
+      // console.log('TOKEN_USER', token)
       session.accessToken = token.accessToken
 
       return session
