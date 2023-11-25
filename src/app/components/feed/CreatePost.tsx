@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form'
 import UserCreatePost from './UserCreatePost'
 import { useRouter } from 'next/navigation'
 
-
 function CreatePost () {
   const router = useRouter()
   const session = useSession()

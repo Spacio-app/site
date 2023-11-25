@@ -10,16 +10,18 @@ import 'swiper/css/navigation'
 
 import FormCourses from '@/components/forms/FormCourses'
 import FormTest from '@/components/forms/FormTest'
-import FormPost from '@/components/forms/FormPost'
 import { useSession } from 'next-auth/react'
+import FormFile from '@/components/forms/FormFile'
+import FormPost from '@/components/forms/FormPost'
+
 export default function Page () {
   const session = useSession()
 
   const [swiper, setSwiper] = useState(null)
 
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     if (swiper !== null) {
-      swiper.slideTo(index)
+      (swiper as any).slideTo(index)
     }
   }
 
@@ -51,8 +53,8 @@ export default function Page () {
           Crear Publicación
         </button>
       </div>
-      <div className="lg:mx-auto p-2 p-2 mt-4">
-        <Swiper
+      <div className="lg:mx-auto p-2 mt-4">
+      <Swiper
           modules={[EffectCoverflow, Navigation]}
           initialSlide={1}
           effect={'coverflow'}
@@ -60,15 +62,15 @@ export default function Page () {
           // navigation={true}
           spaceBetween={10}
           slidesPerView={2}
-          speed={1500}
           allowTouchMove={false}
+          speed={1500}
           centeredSlides={true}
           coverflowEffect={{
             rotate: 20,
             slideShadows: true
           }}
           className="coverflow"
-          onSwiper={setSwiper}
+          onSwiper={setSwiper as any}
           breakpoints={{
             0: {
               spaceBetween: 20,
@@ -103,12 +105,13 @@ export default function Page () {
             <FormCourses session={session.data}/>
           </SwiperSlide>
           <SwiperSlide className='min-h-[600px] bg-white border border-gray-200'>
-            <FormPost session={session.data} />
+            <FormFile session={session.data}/>
           </SwiperSlide>
-          {/* <SwiperSlide>
-            <FormCourses session={session.data}/>
-          </SwiperSlide> */}
+          <SwiperSlide className='min-h-[600px] bg-white border border-gray-200'>
+            <FormPost session={session.data}/>
+          </SwiperSlide>
         </Swiper>
+
       </div>
     </section>
   )

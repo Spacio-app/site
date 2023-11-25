@@ -48,6 +48,19 @@ const FormTest = () => {
               isCorrect: false
             }
           ]
+        },
+        {
+          questionText: '',
+          options: [
+            {
+              optionText: '',
+              isCorrect: false
+            },
+            {
+              optionText: '',
+              isCorrect: false
+            }
+          ]
         }
       ]
     }
@@ -72,56 +85,50 @@ const FormTest = () => {
     setValue('questions', updatedQuestions)
   }
 
-  const onSubmit = async (data: any) => {
-    data.contentType = 'test'
+  const onSubmit = async (data: any, { session }: any) => {
+    data.contentType = 'application/json'
     data.author = 'Author 1'
-
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${session?.accessToken}`,
+      User: JSON.stringify(session?.user)
+    }
     console.log(data)
-
-    axios
-      .post('http://127.0.0.1:3001/contentTest', data)
-      .then((response) => {
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+    try {
+      const response = await axios.post(
+        'http://127.0.0.1:3001/contentTest', data, { headers })
+      if (response) {
+        const res = response.data
+        console.log(res)
+        alert('Prueba creada correctamente')
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
-    <div className=''>
-        <form onSubmit={handleSubmit(onSubmit)} className="">
-            <div className='border-b text-xl font-semibold text-center py-4'>
-              <h2>Crear Prueba</h2>
-            </div>
-            <div className='flex flex-col md:flex-row gap-4 mx-10 mt-4'>
-              <div>
-                <div className="w-auto">
-                    <label
-                        htmlFor="title"
-                        className="block text-sm font-semibold text-gray-800"
-                    >
-                        Titulo de la Prueba
-                    </label>
-                    <input
-                        type="text"
-                        className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                        {...register('title', { required: true })}
-                    />
-                </div>
-                <div className="w-auto">
-                    <label
-                        htmlFor="description"
-                        className="block text-sm font-semibold text-gray-800"
-                    >
-                        Descripción de la Prueba
-                    </label>
-                    <textarea
-                        placeholder='Descripción de la prueba'
-                        className="block w-full px-4 py-6 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                        {...register('description', { required: false })}
-                    />
-                </div>
+    <div className="border">
+      <form onSubmit={handleSubmit(onSubmit)} className="">
+        <div className="border-b text-xl font-semibold text-center py-4">
+          <h2>Crear Prueba</h2>
+        </div>
+        <div className="flex flex-col md:flex-row gap-4 mx-10 my-6">
+          <div className='w-[100%] md:w-[30%]'>
+            <div className="grid gap-2">
+              <div className="w-auto">
+                <label
+                  htmlFor="title"
+                  className="block text-sm font-semibold text-gray-800"
+                >
+                  Titulo de la Prueba
+                </label>
+                <input
+                  type="text"
+                  className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                  {...register('title', { required: true })}
+                />
+              </div>
               <div className="w-auto">
                 <label
                   htmlFor="description"
@@ -158,11 +165,16 @@ const FormTest = () => {
               >
                 Agregar pregunta
               </button>
+              <div className="mt-6">
+                  <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
+                    Subir Prueba
+                  </button>
+              </div>
             </div>
           </div>
-          <div className="w-[100%] md:w-[60%]">
+          <div className="w-[100%] md:w-[70%]">
             <h2 className="text-lg font-semibold">LISTA DE PREGUNTAS</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
               {questionsFields.map((question, index) => (
                 <Fragment key={index}>
                   <div className="border border-gray-300 shadow-xl">
@@ -247,6 +259,7 @@ const FormTest = () => {
               ))}
             </div>
           </div>
+        </div>
       </form>
     </div>
   )

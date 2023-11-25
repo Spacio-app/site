@@ -35,7 +35,7 @@ const Feed = () => {
   return (
     <section className="flex lg:gap-2 md:mx-[10%] lg:mx-[0%]">
        <div className='hidden lg:block lg:w-[25%] xl:w-[20%] border-r border-gray-300'>
-        <Sidebar/>
+        {/* <Sidebar/> */}
       </div>
       <div className="grid gap-9 h-fit lg:w-[50%] xl:w-[60%] border-gray-300 mx-auto">
         <SWRConfig
@@ -58,7 +58,7 @@ const Feed = () => {
         </SWRConfig>
       </div>
       <div className='hidden lg:block lg:w-[25%] xl:w-[20%] border-l border-gray-300'>
-        <Sidebar2/>
+        {/* <Sidebar2/> */}
       </div>
     </section>
   )

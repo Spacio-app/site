@@ -74,11 +74,11 @@ const FormCourses = ({ session }: any) => {
   }
 
   return (
-    <div className='bg-white flex flex-row justify-center items-center gap-10 min-w[auto] min-h[auto] lg:min-w[1200px]'>
+    <div className='bg-white flex flex-col justify-center items-center gap-10 min-w[auto] min-h[auto] lg:min-w[1200px]'>
+        <div className="border-b text-xl font-semibold text-center py-4 w-full">
+          <h2>Crear Curso</h2>
+        </div>
         <form onSubmit={handleSubmit(onSubmit)} className="">
-           <div className='border-b text-xl font-semibold text-center py-4'>
-              <h2>Crear Curso</h2>
-            </div>
             <div className='flex flex-col md:flex-row gap-10'>
                 <div className='w-auto min-w-auto lg:min-w-[400px]'>
                     <div className="mb-2">

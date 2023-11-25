@@ -13,6 +13,7 @@ function UserProfile ({ author, createdAt, currentUser }: any) {
   const [showMenu, setShowMenu] = useState(false)
 
   const toggleMenu = () => {
+    console.log('sa')
     setShowMenu(!showMenu)
   }
 
@@ -31,10 +32,10 @@ function UserProfile ({ author, createdAt, currentUser }: any) {
   const diffInMilliseconds = Date.now() - createdAtDate
 
   // Calcular la diferencia en días
-  const diffInSeconds = Math.floor(diffInMilliseconds / 1000)
-  const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60))
-  const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60))
-  const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24))
+  const diffInSeconds = Math.abs(Math.floor(diffInMilliseconds / 1000))
+  const diffInMinutes = Math.abs(Math.floor(diffInMilliseconds / (1000 * 60)))
+  const diffInHours = Math.abs(Math.floor(diffInMilliseconds / (1000 * 60 * 60)))
+  const diffInDays = Math.abs(Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24)))
 
   return (
     <>
@@ -57,7 +58,7 @@ function UserProfile ({ author, createdAt, currentUser }: any) {
           </div>
         </div>
         <div className='flex justify-end w-[30%] relative'>
-          {currentUser && currentUser.id === author.id && (
+          {currentUser === author.email && (
             <button
               className={`transition-transform duration-300 ease-in-out transform ${showMenu ? 'rotate-90' : 'rotate-0'}`}
               onClick={toggleMenu}
@@ -65,8 +66,8 @@ function UserProfile ({ author, createdAt, currentUser }: any) {
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#666666" d="M16 12a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2Z"/></svg>
             </button>
           )}
-          {showMenu && currentUser && currentUser.id === author.id && (
-            <div className="absolute right-0 top-[40px] mt-2 w-48 bg-white border rounded-md shadow-lg overflow-hidden transition-all duration-300 max-h-0 opacity-0 ease-in-out">
+          {showMenu && (
+            <div className="absolute right-0 top-[40px] mt-2 w-48 bg-white border rounded-md shadow-lg overflow-hidden transition-all duration-300 ease-in-out">
               <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={deletePost}>
                 Eliminar publicación
               </button>

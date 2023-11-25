@@ -164,7 +164,7 @@ const DraftEditor = ({ setPostData }: any) => {
           placeholder="Escribe algo..."
           handleKeyCommand={handleKeyCommand as any}
           editorState={editorState}
-          // blockStyleFn={myBlockStyleFn as any}
+          blockStyleFn={myBlockStyleFn as any}
           customStyleMap={styleMap as any}
           onChange={(editorState: any) => {
             // const contentState = editorState.getCurrentContent()

@@ -1,11 +1,6 @@
 'use client'
 // It is important to import the Editor which accepts plugins.
-import { EditorState, RichUtils, convertFromRaw } from 'draft-js'
 import { useState } from 'react'
-import Editor from '@draft-js-plugins/editor'
-
-import createImagePlugin from '@draft-js-plugins/image'
-
 import 'draft-js/dist/Draft.css'
 import '@draft-js-plugins/image/lib/plugin.css'
 import dynamic from 'next/dynamic'

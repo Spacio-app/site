@@ -43,7 +43,6 @@
   
 .editor-container {
   width: 100%;
-  border: 1px solid green;
   padding: 1rem;
 }
 
@@ -53,7 +52,7 @@
   flex-basis: 1fr 1fr;
 }
 
-button {
+.toolbar-grid > button {
   margin-right: 8px;
   font-size: 1rem;
   padding: 10px;
@@ -87,14 +86,17 @@ button {
 }
 
 .leftAlign {
-  text-align: left;
+  text-align: left!important;
 }
 .rightAlign {
-  text-align: right;
+  text-align: right!important;
 }
 .centerAlign {
-  text-align: center;
+  text-align: center!important;
 }
 .justifyAlign {
-  text-align: justify;
+  text-align: justify!important;
+}
+.public-DraftStyleDefault-ltr {
+  text-align: unset!important;
 }

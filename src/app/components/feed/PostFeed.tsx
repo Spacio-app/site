@@ -44,13 +44,10 @@ function PostFeed ({
     buttonWidth = '33.3%' // Valor para el caso 'course'
   }
 
-  const { name } = session?.user || {}
-  const currentUser = { name }
-
   return (
     <div className="border border-gray-300 flex-row md:flex rounded-xl">
       <div className="md:w-[100%] shadow-xl rounded-xl">
-        <UserProfile createdAt={createdat} author={author} currentUser={currentUser} />
+        <UserProfile createdAt={createdat} author={author} currentUser={session?.data.user.email} />
         <PostContent
           titlePublication={title}
           text={description}
