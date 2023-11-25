@@ -61,7 +61,7 @@ const page = async ({ extraProp }: any) => {
                 } else if (content.contenttype === 'file') {
                   CardComponentType = <CardFile />
                 } else if (content.contenttype === 'post') {
-                  CardComponentType = <CardPost />
+                  CardComponentType = <CardPost content={content} />
                 }
                 return (CardComponentType)
               }

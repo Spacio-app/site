@@ -18,6 +18,7 @@ function UserProfile ({ author, createdAt }: any) {
   const diffInMilliseconds = Date.now() - createdAtDate
 
   // Calcular la diferencia en días
+  const diffInSeconds = Math.floor(diffInMilliseconds / 1000)
   const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60))
   const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60))
   const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24))
@@ -34,8 +35,8 @@ function UserProfile ({ author, createdAt }: any) {
         </a>
         <div className='text-sm'>
           <a href="#" className="cursor-pointer"><span className="font-bold">{author.name}</span></a>
-          <p className="text-gray-400">
-            <span>Publicado hace {diffInDays > 0 ? (diffInDays === 1 ? `${diffInDays} dia` : `${diffInDays} dias`) : diffInHours > 0 ? (diffInHours === 1 ? `${diffInHours} hora` : `${diffInHours} horas`) : diffInMinutes > 0 ? (diffInMinutes === 1 ? `${diffInMinutes} minuto` : `${diffInMinutes} minutos`) : '0 segundos'}</span>
+          <p className="text-gray-400 text-sm">
+            <span>Publicado hace {diffInDays > 0 ? (diffInDays === 1 ? `${diffInDays} dia` : `${diffInDays} dias`) : diffInHours > 0 ? (diffInHours === 1 ? `${diffInHours} hora` : `${diffInHours} horas`) : diffInMinutes > 0 ? (diffInMinutes === 1 ? `${diffInMinutes} minuto` : `${diffInMinutes} minutos`) : (diffInSeconds === 1 ? `${diffInSeconds} segundo` : `${diffInSeconds} segundos`)}</span>
           </p>
         </div>
       </div>

@@ -1,132 +1,73 @@
 'use client'
+// It is important to import the Editor which accepts plugins.
+import { EditorState, RichUtils, convertFromRaw } from 'draft-js'
+import { useState } from 'react'
+import Editor from '@draft-js-plugins/editor'
 
-import { useForm, type SubmitHandler } from 'react-hook-form'
+import createImagePlugin from '@draft-js-plugins/image'
+
+import 'draft-js/dist/Draft.css'
+import '@draft-js-plugins/image/lib/plugin.css'
+import dynamic from 'next/dynamic'
+import { useForm } from 'react-hook-form'
 import axios from 'axios'
 
-// axios.interceptors.response.use(function (response) {
-//   // Optional: Do something with response data
-//   return response
-// }, async function (error) {
-//   // Do whatever you want with the response error here:
+export const NoSSREditor = dynamic(
+  async () => import('@/components/forms/Editor/DraftEditor'),
+  {
+    ssr: false
+  }
+)
 
-//   // But, be SURE to return the rejected promise, so the caller still has
-//   // the option of additional specialized handling at the call-site:
-//   return Promise.reject(error)
-// })
+// The Editor accepts an array of plugins. In this case, only the imagePlugin
+// is passed in, although it is possible to pass in multiple plugins.
 
-const FormPost = () => {
-  //   const apiBaseUrl = process.env.API_BASE_URL
+const PostForm = ({ session }: any) => {
+  // usar react hook form
+  const [postData, setPostData] = useState()
+  const { control, register, handleSubmit, setValue } = useForm()
 
-  const {
-    register,
-    handleSubmit
-  } = useForm()
+  const onSubmit = async () => {
+    if (!postData) return
+    console.log('POST', postData)
 
-  const onSubmit: SubmitHandler<any> = async (data) => {
-    data.contentType = 'post'
-    data.author = 'Author 1'
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+    // USING AXIOS POST TO SEND DATA TO API
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${session?.accessToken}`,
+      User: JSON.stringify(session?.user)
+    }
 
-    console.log(data)
-
-    axios.postForm('https://api.spacio.app/contentPost', data)
-      .then((response) => {
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-
-    // const formData = new FormData()
-    // formData.append('title', data.title)
-
-    // console.log(formData)
-    // const response = await fetch('http://localhost:3001/contentCourse', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': undefined as any
-    //   },
-    //   body: formData
-    // })
+    try {
+      const response = await axios.post(`${apiBaseUrl}contentPost`, postData, { headers })
+      if (response) {
+        const res = response.data // clean form
+        // reset()
+        // router.refresh()
+        // show success message
+        console.log(res)
+        alert('Publicación creada con exito')
+      }
+    } catch (error) {
+      console.error(error)
+      alert('Error al crear la publicación')
+    }
   }
 
   return (
-    <div className='bg-indigo-100 flex flex-row justify-center items-center p-2 gap-10'>
-        <form onSubmit={handleSubmit(onSubmit)} className="">
-            <div className="mb-2">
-                <label
-                    htmlFor="title"
-                    className="block text-sm font-semibold text-gray-800"
-                >
-                    Titulo del documento
-                </label>
-                <input
-                    type="text"
-                    className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    {...register('title', { required: true })}
-                />
-            </div>
-            <div className="mb-2">
-                <label
-                    htmlFor="description"
-                    className="block text-sm font-semibold text-gray-800"
-                >
-                    Descripcion del documento
-                </label>
-                <input
-                    type="text"
-                    className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    {...register('description', { required: false })}
-                />
-            </div>
-            {/* <div className="mb-2">
-                <label
-                    htmlFor="videosdescriptions"
-                    className="block text-sm font-semibold text-gray-800"
-                >
-                    Titulo del video
-                </label>
-                <input
-                    type="text"
-                    className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    {...register('videosTitles', { required: false })}
-                />
-            </div> */}
-            <div className="mb-2">
-                <label
-                    htmlFor="description"
-                    className="block text-sm font-semibold text-gray-800"
-                >
-                    Descripcion del curso
-                </label>
-                <input
-                    type="text"
-                    className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    {...register('videosDescriptions', { required: false })}
-                />
-            </div>
-
-            {/* <div className="mb-2">
-                <label
-                    htmlFor="Video"
-                    className="block text-sm font-semibold text-gray-800"
-                >
-                    Video del curso
-                </label>
-                <input
-                    type="file"
-                    className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    {...register('videosURL', { required: false })}
-                />
-            </div> */}
-
-            <div className="mt-6">
-                <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
-                    Login
-                </button>
-            </div>
-        </form>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='border-b text-xl font-semibold text-center py-4'>
+          <h2>Crear Publicación</h2>
+        </div>
+        <NoSSREditor setPostData={setPostData} />
+        <div className="mt-6 px-10">
+            <button type="submit" className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
+                Crear Publicación
+            </button>
+        </div>
+    </form>
   )
 }
 
-export default FormPost
+export default PostForm
