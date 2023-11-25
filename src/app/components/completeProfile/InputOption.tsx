@@ -1,0 +1,51 @@
+'use client'
+
+import React, { ReactNode, useState } from 'react'
+
+interface Option {
+  value: string
+  label: string
+}
+
+interface SelectProps {
+  title: string
+  options: Option[]
+  svg: any
+  id: any
+}
+
+const InputOption: React.FC<SelectProps> = ({ title, options, svg, id }) => {
+  const [selectedOption, setSelectedOption] = useState<string>('')
+
+  const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedOption(event.target.value)
+  }
+
+  return (
+    <div className="flex flex-col w-[100%] lg:w-[50%]">
+      <label htmlFor="career" className="mb-2">
+        {title}
+      </label>
+      <div className="relative">
+        <select
+          id={id}
+          value={selectedOption}
+          onChange={handleOptionChange}
+          className="border rounded-sm p-3 text-sm pl-10 w-full"
+        >
+          <option value="">Seleccione una opción</option>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <div className="absolute top-1/2 left-3 transform -translate-y-1/2">
+          {svg}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default InputOption

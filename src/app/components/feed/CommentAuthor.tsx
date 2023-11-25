@@ -2,19 +2,15 @@
 
 import Image from 'next/image'
 
-function CommentAuthor ({ authorName, authorAvatar }: any) {
+function CommentAuthor ({ authorAvatar }: any) {
   return (
-    <div className="flex items-center space-x-2">
-      <Image
-        width={40}
-        height={40}
+    <div className="flex-shrink-0 mr-2">
+      <img
         src={authorAvatar}
-        alt={`Avatar de ${authorName}`}
+        alt="Avatar del autor"
         className="w-8 h-8 rounded-full"
       />
-      <span className="font-semibold">{authorName}</span>
     </div>
   )
 }
-
 export default CommentAuthor

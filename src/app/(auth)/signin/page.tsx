@@ -4,8 +4,8 @@ import Image from 'next/image'
 const SignIn = async () => {
   return (
       <section className='h-full'>
-        <div className='flex items-center h-full bg-gray-400'>
-          <div className='flex-auto max-w-[50%]'>
+        <div className='flex flex-col md:flex-row items-center h-full bg-gray-400'>
+          <div className='flex-auto w-[100%] md:max-w-[50%]'>
             <Image
               className='m-auto'
               src={'/login_door.svg'}
@@ -14,7 +14,7 @@ const SignIn = async () => {
               width={400}
             />
           </div>
-          <div className='flex-auto max-w-[50%] h-full bg-white flex items-center'>
+          <div className='flex-auto w-[100%] md:max-w-[50%] h-full bg-white flex items-center'>
             <div className="w-full">
               <div>
                 <h1 className='text-2xl text-center font-semibold tracking-tight'>Bienvenido!</h1>

@@ -5,17 +5,21 @@ import { useInView } from 'react-intersection-observer'
 import PostFeed from './PostFeed'
 import useSWR, { Cache } from 'swr'
 import * as axios from '@/helper/axiosFetcher'
+import { useRouter } from 'next/navigation'
 
 const LoadMore = () => {
+  const router = useRouter()
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+
   const [feedPosts, setFeedPosts] = useState<any>([])
   const [pageLoaded, setPageLoaded] = useState(1)
+  const [feedUrl, setFeedUrl] = useState(apiBaseUrl + 'contentFeed?page=1')
 
   const { ref, inView } = useInView()
 
-  const { data, error } = useSWR('http://127.0.0.1:3001/contentFeed?page=1')
+  const { data, error, mutate } = useSWR(feedUrl, { refreshInterval: 1000 })
 
   const LoadMoreFeed = async (data: any) => {
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
     const nextPage = pageLoaded + 1
     // const response = await fetch(`${apiBaseUrl}contentFeed?page=${nextPage}`)
     // const feed = await response.json()
@@ -27,9 +31,15 @@ const LoadMore = () => {
   }
 
   useEffect(() => {
-    console.log('DATA', data)
+    setFeedUrl(apiBaseUrl + `contentFeed?page=${pageLoaded}`)
   }
-  , [data])
+  , [pageLoaded, apiBaseUrl])
+
+  useEffect(() => {
+    console.log('DATA', data)
+    router.refresh()
+  }
+  , [data, router])
 
   useEffect(() => {
     if (inView) {
@@ -37,6 +47,7 @@ const LoadMore = () => {
       if (data) void LoadMoreFeed(data)
     }
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   , [inView, data])
   return (<>
     {feedPosts.map((data: any, index: any) => (
