@@ -22,6 +22,7 @@ const FormTest = () => {
       title: '',
       description: '',
       miniature: '',
+      createAnnouncement: false,
       questions: [
         {
           questionText: '',
@@ -96,7 +97,10 @@ const FormTest = () => {
     console.log(data)
     try {
       const response = await axios.post(
-        'http://127.0.0.1:3001/contentTest', data, { headers })
+        'http://127.0.0.1:3001/contentTest',
+        data,
+        { headers }
+      )
       if (response) {
         const res = response.data
         console.log(res)
@@ -114,7 +118,7 @@ const FormTest = () => {
           <h2>Crear Prueba</h2>
         </div>
         <div className="flex flex-col md:flex-row gap-4 mx-10 my-6">
-          <div className='w-[100%] md:w-[30%]'>
+          <div className="w-[100%] md:w-[30%]">
             <div className="grid gap-2">
               <div className="w-auto">
                 <label
@@ -144,31 +148,47 @@ const FormTest = () => {
               </div>
             </div>
             <div className="mt-5">
-              <button
-                type="button"
-                className="px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-400 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
-                onClick={() => {
-                  appendQuestion({
-                    questionText: '',
-                    options: [
-                      {
-                        optionText: '',
-                        isCorrect: false
-                      },
-                      {
-                        optionText: '',
-                        isCorrect: false
-                      }
-                    ]
-                  })
-                }}
-              >
-                Agregar pregunta
-              </button>
+              <div className='flex'>
+                <button
+                  type="button"
+                  className="w-[50%] px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-400 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+                  onClick={() => {
+                    appendQuestion({
+                      questionText: '',
+                      options: [
+                        {
+                          optionText: '',
+                          isCorrect: false
+                        },
+                        {
+                          optionText: '',
+                          isCorrect: false
+                        }
+                      ]
+                    })
+                  }}
+                >
+                  Agregar pregunta
+                </button>
+                <div className="flex items-center mt-2 w-[50%] justify-center">
+                  <input
+                    id="checkboxTest"
+                    type="checkbox"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    {...register('createAnnouncement')} // Registro del nuevo campo
+                  />
+                  <label
+                    htmlFor="checkboxCourse"
+                    className="ml-2 text-sm font-medium text-gray-600"
+                  >
+                    Publicar al feed
+                  </label>
+                </div>
+              </div>
               <div className="mt-6">
-                  <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
-                    Subir Prueba
-                  </button>
+                <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
+                  Subir Prueba
+                </button>
               </div>
             </div>
           </div>

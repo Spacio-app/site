@@ -29,6 +29,7 @@ function WriteComment ({ id, session }: any) {
       router.refresh()
       // show success message
       console.log(res)
+      console.log(Headers)
     }
   }
 
