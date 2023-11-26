@@ -9,10 +9,10 @@ const About = () => {
       <div className="mt-[100px]">
         <div className="pb-[100px]">
           <div className="text-center">
-            <h2 className="text-[60px] font-bold mb-4">¿Quiénes somos?</h2>
+            <h2 className="text-[40px] md:text-[60px] font-bold mb-4">¿Quiénes somos?</h2>
           </div>
           <div className="w-full flex justify-center">
-            <p className="text-gray-600 w-[60%] text-center text-[25px]">
+            <p className="text-gray-600 w-[90%] md:w-[60%] text-center md:text-[25px]">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
