@@ -16,8 +16,8 @@ function WriteComment ({ id, session }: any) {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${session?.accessToken}`,
-        User: JSON.stringify(session?.user)
+        Authorization: `Bearer ${session?.data?.accessToken}`,
+        User: JSON.stringify(session?.data?.user)
       },
       body: JSON.stringify(data)
     })

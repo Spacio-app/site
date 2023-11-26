@@ -1,6 +1,8 @@
 import Video from '@/components/Video'
 import { DisplayVideo } from '@/components/DisplayVideo'
 import Image from 'next/image'
+import { FeedBack } from '@/components/FeedBack'
+import { auth } from 'auth'
 const getCourseById = async (id: string) => {
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
   const response = await fetch(`${apiBaseUrl}content/${id}`)
@@ -11,6 +13,8 @@ const getCourseById = async (id: string) => {
 }
 
 const Course = async ({ params }: { params: any }) => {
+  const session = await auth()
+
   const course = await getCourseById(params.id)
   // if (!course) {
   //   console.error('Curso no encontrado')
@@ -59,6 +63,8 @@ const Course = async ({ params }: { params: any }) => {
             </div>
 
             {/* FEEDBACK ESTUDIANTES (30%) */}
+            <FeedBack session={session} contentID={params.id} />
+            {/*
             <div className="lg:w-1/3 md:w-full border border-gray-500 rounded-2xl flex-grow">
               <div className="p-6">
                 <h2 className="font-bold">Feedback Estudiantes</h2>
@@ -70,6 +76,7 @@ const Course = async ({ params }: { params: any }) => {
                 <div className="ml-6">Puntaje</div>
               </div>
             </div>
+*/}
           </div>
         </div>
       </section>

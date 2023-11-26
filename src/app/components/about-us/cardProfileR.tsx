@@ -6,7 +6,7 @@ function CardProfileL ({ name, role, description, src }: any) {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1024)
+      setIsMobile(window.innerWidth < 1024)
     }
 
     window.addEventListener('resize', handleResize)
@@ -31,10 +31,10 @@ function CardProfileL ({ name, role, description, src }: any) {
           </div>
           <div className="border p-4 shadow-2xl rounded-xl">
             <div className="h-[50%] flex flex-col justify-center items-center border-b border-gray-400">
-              <span className="font-semibold md:text-[40px]">
+              <span className="font-semibold lg:text-[40px] text-center">
                 {name}
               </span>
-              <span className="font-semibold md:text-[25px]">
+              <span className="font-semibold lg:text-[25px] text-center">
                 {role}
               </span>
             </div>
@@ -68,15 +68,15 @@ function CardProfileL ({ name, role, description, src }: any) {
           </div>
           <div className="w-[1018.88px] h-[300px] border p-4 shadow-2xl rounded-xl">
             <div className="h-[50%] flex flex-col justify-center items-center border-b border-gray-400">
-              <span className="font-semibold text-[40px]">
+              <span className="font-semibold text-[30px] 2xl:text-[40px] text-center">
                 {name}
               </span>
-              <span className="font-semibold text-[25px]">
+              <span className="font-semibold text-[20px] 2xl:text-[25px] text-center">
                 {role}
               </span>
             </div>
             <div className="h-[50%] flex justify-center items-center">
-              <p className="w-[80%] text-center">
+              <p className="w-[80%] text-center text-md 2xl:text-base">
                 <span className="mr-2 inline-block">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#666666" d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621c.537-.278 1.24-.375 1.929-.311c1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 0 1-3.5 3.5a3.871 3.871 0 0 1-2.748-1.179Zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621c.537-.278 1.24-.375 1.929-.311c1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 0 1-3.5 3.5a3.871 3.871 0 0 1-2.748-1.179Z"/></svg>
                 </span>

@@ -103,7 +103,7 @@ export default function Page () {
           }}
         >
           <SwiperSlide className='min-h-[600px] bg-white border border-gray-200'>
-            <FormTest />
+            <FormTest session={session.data}/>
           </SwiperSlide>
           <SwiperSlide className='min-h-[600px] bg-white border border-gray-200'>
             <FormCourses session={session.data}/>

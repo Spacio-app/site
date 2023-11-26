@@ -2,8 +2,9 @@
 
 import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form'
 import axios from 'axios'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { PlusCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
+import ProgressBar from './ProgressBar'
 
 // axios.interceptors.response.use(function (response) {
 //   // Optional: Do something with response data
@@ -16,7 +17,7 @@ import { PlusCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
 //   return Promise.reject(error)
 // })
 
-const FormTest = () => {
+const FormTest = ({ session }: any) => {
   const { control, register, handleSubmit, setValue } = useForm({
     defaultValues: {
       title: '',
@@ -86,28 +87,49 @@ const FormTest = () => {
     setValue('questions', updatedQuestions)
   }
 
-  const onSubmit = async (data: any, { session }: any) => {
+  const [loading, setLoading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const [message, setMessage] = useState('')
+
+  const onSubmit = async (data: any) => {
     data.contentType = 'application/json'
-    data.author = 'Author 1'
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${session?.accessToken}`,
       User: JSON.stringify(session?.user)
     }
+    console.log('Encabezados antes de la solicitud:', headers)
     console.log(data)
+    setLoading(true)
+    setUploadProgress(0)
+
     try {
       const response = await axios.post(
         'http://127.0.0.1:3001/contentTest',
         data,
-        { headers }
+        {
+          headers,
+          onUploadProgress: (progressEvent) => {
+            const total = progressEvent.total?.valueOf() ?? 1
+            const progress = Math.round(
+              (progressEvent.loaded / total) * 100
+            )
+            setUploadProgress(progress)
+          }
+        }
       )
-      if (response) {
-        const res = response.data
-        console.log(res)
-        alert('Prueba creada correctamente')
-      }
+
+      console.log(response.data)
+      setMessage('¡Prueba creada con éxito!')
     } catch (error) {
-      console.log(error)
+      console.error(error)
+      setMessage('Error al crear la prueba')
+    } finally {
+      setLoading(false)
+      // Espera 1 segundo antes de restablecer el progreso
+      setTimeout(() => {
+        setUploadProgress(0)
+      }, 1000)
     }
   }
 
@@ -281,6 +303,10 @@ const FormTest = () => {
           </div>
         </div>
       </form>
+      <div className='w-full flex justify-center items-center'>
+        {loading && <ProgressBar progress={uploadProgress} />}
+        {message && <div className="text-black font-semibold">{message}</div>}
+      </div>
     </div>
   )
 }

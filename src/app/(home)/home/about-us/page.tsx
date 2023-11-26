@@ -5,7 +5,7 @@ import CardProfileR from '@/components/about-us/cardProfileR'
 
 const About = () => {
   return (
-    <section className="my-6 flex flex-col gap-3">
+    <section className="my-6 flex flex-col gap-3 h-screen">
       <div className="mt-[100px]">
         <div className="pb-[100px]">
           <div className="text-center">
@@ -44,7 +44,7 @@ const About = () => {
           src="https://holatelcel.com/wp-content/uploads/2020/03/Faker_Interna_Credito_LCK.jpg"
           />
         </div>
-        <div className="mx-[5%] flex gap-6 justify-start">
+        <div className="mx-[5%] flex lg:gap-6 justify-start">
           <CardProfileL
           name="Valentina Jofré Ladron De Guevara"
           role="Gestor, Analista QA y Diseñadora de proyecto"
