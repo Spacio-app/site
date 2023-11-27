@@ -28,7 +28,7 @@ const TestPreview = async ({ params }: any) => {
             <div className="border rounded-xl border-gray-300 mx-[30%] my-6">
                 <div className="flex flex-col justify-center items-center gap-4 py-4">
                     <div className="">
-                        <h2 className="font-semibold text-[40px]">{ test.title }</h2>
+                        <h2 className="font-semibold text-[40px] text-center">{ test.title }</h2>
                     </div>
                     <div className="">
                         <span className="text-[20px]"> <span className='font-semibold'>Hecho por:</span>{' '} {capitalizeWords(test.author.name)}</span>
@@ -51,11 +51,8 @@ const TestPreview = async ({ params }: any) => {
                         </div>
                         <span>Cantidad de preguntas</span>
                       </div>
-                      {
-                        JSON.stringify(test)
-                      }
                       <div>
-                        {test.questions.lenght}
+                        {test.questions.length}
                       </div>
                     </div>
                     <div className='text-center flex flex-col w-[50%]'>
