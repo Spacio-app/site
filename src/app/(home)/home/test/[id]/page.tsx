@@ -25,7 +25,7 @@ const TestPreview = async ({ params }: any) => {
 
   return (
         <section className=''>
-            <div className="border rounded-xl border-gray-300 mx-[30%] my-6">
+            <div className="border rounded-xl border-gray-300 mx-4 md:mx-[30%] my-6">
                 <div className="flex flex-col justify-center items-center gap-4 py-4">
                     <div className="">
                         <h2 className="font-semibold text-[40px] text-center">{ test.title }</h2>
