@@ -75,7 +75,7 @@ export const FeedBack = ({ contentID, session }: any) => {
         <h2 className="font-bold text-center">FeedBack</h2>
         <form className='flex flex-col justify-center items-center' onSubmit={handleSubmit(onSubmit)}>
           <div className='flex justify-center items-center'>
-            <div className="w-[30%] justify-center items-center flex mt-2">mática
+            <div className="w-[30%] justify-center items-center flex mt-2">
               <div className="shadow-lg border-l-2 rounded-2xl w-fit p-8">
               <p className="font-bold text-[28px]">
                 {averageRating ? averageRating.toFixed(1) : 'N/A'}
