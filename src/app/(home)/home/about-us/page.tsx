@@ -5,7 +5,7 @@ import CardProfileR from '@/components/about-us/cardProfileR'
 
 const About = () => {
   return (
-    <section className="my-6 flex flex-col gap-3 h-screen">
+    <section className="my-8 flex flex-col gap-3">
       <div className="mt-[100px]">
         <div className="pb-[100px]">
           <div className="text-center">
@@ -21,7 +21,7 @@ const About = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-x-3 gap-y-[100px] mt-12">
+      <div className="flex flex-col gap-x-3 gap-y-[100px] mt-12 ">
         <div className="mx-[5%] flex gap-6 justify-start">
           <CardProfileL
           name="Cristóbal Alvarez Palacios"

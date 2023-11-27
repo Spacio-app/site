@@ -98,24 +98,24 @@ const FormFile = ({ session }: any) => {
       <div className="border-b text-xl font-semibold text-center py-4 w-full">
         <h2>Subir documento</h2>
       </div>
-      <div className="flex flex-col justify-center items-center h-fit md:h-[500px] mx-auto md:mx-[10%] my-6">
+      <div className="flex flex-col justify-center items-center h-fit md:h-[500px] mx-[5%] md:mx-[10%] my-6">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full h-full flex flex-col justify-center items-center"
         >
           {!documentoCargado
             ? (
-            <><div className='w-[50%] xl:w-[17%] mb-4'>
+            <><div className='w-[100%] mb-4'>
                 <p className='font-medium text-center'>Carga el documento para seguir con el formulario</p>
               </div>
               <div
-                className="border shadow-xl rounded-2xl px-6 sm:w-[80%] sm:h-[80%] md:w-[50%] md:h-[50%] lg:w-[40%] lg:h-[40%] xl:w-[30%] xl:h-[40%]"
+                className="border shadow-xl rounded-2xl px-6 w-[100%] sm:w-[400px] sm:h-[200px]"
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
-              >
+                >
                   <label
                     htmlFor="file"
-                    className="cursor-pointer flex mt-6 h-[30%] rounded-xl items-center justify-center bg-red-500 hover:bg-red-400 px-4 shadow-xl gap-4"
+                    className="cursor-pointer flex mt-6 h-[60px] rounded-xl items-center justify-center bg-red-500 hover:bg-red-400 px-4 shadow-xl gap-4"
                     onClick={() => inputRef.current?.click()}
                   >
                     <svg
@@ -128,8 +128,8 @@ const FormFile = ({ session }: any) => {
                         fill="#ffffff"
                         d="M11 16V7.85l-2.6 2.6L7 9l5-5l5 5l-1.4 1.45l-2.6-2.6V16h-2Zm-5 4q-.825 0-1.413-.588T4 18v-3h2v3h12v-3h2v3q0 .825-.588 1.413T18 20H6Z" />
                     </svg>
-                    <span className="text-white font-semibold text-2xl">
-                      Cargar Archivo
+                    <span className="text-white font-semibold text-2xl text-center">
+                      Cargar documento
                     </span>
                   </label>
                   <input
@@ -156,15 +156,15 @@ const FormFile = ({ session }: any) => {
             : (
             <div className="w-full xl:h-full flex flex-col md:flex-row items-center gap-3">
               <div
-                className="xl:w-[50%] h-[100%] flex flex-col justify-center items-center gap-6 mx-[5%] md:mx-auto"
+                className="xl:w-fit h-[100%] flex flex-col justify-center items-center gap-6 mx-[5%] md:mx-auto"
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
-              >
+                >
                 <div
                   className="border shadow-xl rounded-2xl px-6 w-fit md:h-[55%] xl:h-[45%]"
                   onDragOver={handleDragOver}
                   onDrop={handleDrop}
-                >
+                  >
                   <label
                     htmlFor="file"
                     className="cursor-pointer flex mt-6 h-[30%] rounded-xl items-center justify-center bg-red-500 hover:bg-red-400 px-4 shadow-xl gap-4"

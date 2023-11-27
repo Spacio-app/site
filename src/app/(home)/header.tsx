@@ -7,6 +7,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import SignInButton from '@/components/SignInButton'
+import { twMerge } from 'tailwind-merge'
 
 const navigation: any[] = [
   { name: 'Home', href: '/home', current: false },
@@ -21,7 +22,7 @@ function classNames (...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-const Header = ({ sessionData }: any) => {
+const Header = ({ sessionData, className }: any) => {
   const [isSticky, setSticky] = useState(false)
 
   const handleScroll = () => {
@@ -42,7 +43,7 @@ const Header = ({ sessionData }: any) => {
   }, [])
 
   return (
-    <header className={`${isSticky ? 'fixed top-0 left-0 w-full bg-stone-800 shadow-md' : 'relative'} z-50`}>
+    <header className={twMerge('top-0 left-0 w-full shadow-md z-50', className)}>
     {/* <nav className='center flex items-center text-sm font-medium tracking-wider uppercase text-stone-500'>
         <ul className='ml-auto flex justify-center gap-8'>
           <li>
@@ -59,7 +60,7 @@ const Header = ({ sessionData }: any) => {
         </ul>
       </nav> */}
 
-      <Disclosure as="nav" className="bg-stone-800">
+      <Disclosure as="nav" className={'bg-transparent z-10'}>
         {({ open }) => (
           <>
             <div className="px-2 sm:px-6 lg:px-8">
@@ -80,20 +81,22 @@ const Header = ({ sessionData }: any) => {
                 </div>
                 <div className="flex items-center justify-center sm:items-stretch gap-3 flex-grow">
                   <div className="flex items-center">
-                    <Image
-                      className="h-9 w-auto"
-                      src="/rocket.svg"
-                      alt="Your Company"
-                      width={40}
-                      height={40}
-                    />
+                    <a className="flex items-center gap-4 text-white" href="/">
+                      <Image
+                        className="h-9 w-auto"
+                        src="/rocket.svg"
+                        alt="Your Company"
+                        width={40}
+                        height={40}
+                      />
+                      Spacio
+                    </a>
                   </div>
                   <div className='flex items-center border-gray-300 pr-6'>
-                    <a href="/home"><h1 className='text-gray-300 font-medium'>Spacio</h1></a>
                   </div>
                   <div className="hidden sm:flex flex-1 justify-end">
                     <div className="flex gap-6 justify-center items-center">
-                    {navigation.map((item) => (
+                    {sessionData && navigation.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
@@ -116,7 +119,7 @@ const Header = ({ sessionData }: any) => {
             </div>
             <Disclosure.Panel className="sm:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2">
-                {navigation.map((item) => (
+                {sessionData && navigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
                     as="a"

@@ -40,7 +40,7 @@ function UserProfile ({ author, createdAt, currentUser }: any) {
   return (
     <>
       <div className="flex border-b border-gray-300 p-3.5">
-        <div className='flex w-[70%]'>
+        <div className='flex w-[80%]'>
           <a href="#" className="cursor-pointer">
             <Image
               width={50}
@@ -57,7 +57,7 @@ function UserProfile ({ author, createdAt, currentUser }: any) {
             </p>
           </div>
         </div>
-        <div className='flex justify-end w-[30%] relative'>
+        <div className='flex justify-end w-[20%] relative'>
           {currentUser === author.email && (
             <button
               className={`transition-transform duration-300 ease-in-out transform ${showMenu ? 'rotate-90' : 'rotate-0'}`}

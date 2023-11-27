@@ -22,7 +22,9 @@ const page = async ({ extraProp }: any) => {
   return (
     <>
       <section>
-                <h1 className='ml-6 mt-6 text-2xl font-semibold tracking-tight'> Bienvenido Usuario { session?.user.name } </h1>
+        <div className='text-center mt-4'>
+          <h1 className='font-semibold text-[30px]'>!Explora contenido interesante¡</h1>
+        </div>
         <div className='mt-4 flex gap-6 p-6'>
           {/* <aside className="w-52 bg-gray-100 p-4 rounded-lg">
             <h2 className="text-lg font-medium mb-2">Filtros</h2>
@@ -57,9 +59,9 @@ const page = async ({ extraProp }: any) => {
                 if (content.contenttype === 'course') {
                   CardComponentType = <CardCourse content={content} />
                 } else if (content.contenttype === 'test') {
-                  CardComponentType = <CardTest />
+                  CardComponentType = <CardTest content={content} />
                 } else if (content.contenttype === 'file') {
-                  CardComponentType = <CardFile />
+                  CardComponentType = <CardFile content={content} />
                 } else if (content.contenttype === 'post') {
                   CardComponentType = <CardPost content={content} />
                 }

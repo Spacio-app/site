@@ -33,7 +33,7 @@ export default function Page () {
           onClick={() => { goToSlide(0) }} // Ir al primer Slide (FormTest)
         >
           <span className="hidden md:inline">Crear Prueba</span>
-          <span className="md:hidden"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48"><path fill="#ffffff" fill-rule="evenodd" d="M39 13a3 3 0 0 0-3 3v2h6v-2a3 3 0 0 0-3-3Zm3 7h-6v16.5l3 4.5l3-4.5V20ZM6 9v30a3 3 0 0 0 3 3h22a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3Zm14 6a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2h-8a1 1 0 0 1-1-1Zm1 3a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-8Zm-1 10a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2h-8a1 1 0 0 1-1-1Zm1 3a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-8Zm-9-3v3h3v-3h-3Zm-1-2h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1Zm6.707-10.293a1 1 0 0 0-1.414-1.414L13 17.586l-1.293-1.293a1 1 0 0 0-1.414 1.414L13 20.414l4.707-4.707Z" clip-rule="evenodd"/></svg></span>
+          <span className="md:hidden"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48"><path fill="#ffffff" fillRule="evenodd" d="M39 13a3 3 0 0 0-3 3v2h6v-2a3 3 0 0 0-3-3Zm3 7h-6v16.5l3 4.5l3-4.5V20ZM6 9v30a3 3 0 0 0 3 3h22a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3Zm14 6a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2h-8a1 1 0 0 1-1-1Zm1 3a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-8Zm-1 10a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2h-8a1 1 0 0 1-1-1Zm1 3a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-8Zm-9-3v3h3v-3h-3Zm-1-2h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1Zm6.707-10.293a1 1 0 0 0-1.414-1.414L13 17.586l-1.293-1.293a1 1 0 0 0-1.414 1.414L13 20.414l4.707-4.707Z" clipRule="evenodd"/></svg></span>
         </button>
         <button
           className='rounded-full bg-pink-400 p-2 min-w-[45px] md:rounded-full md:bg-pink-400 md:p-2 md:min-w-[160px] hover:bg-pink-500 hover:scale-105 transition duration-150 ease-in'
@@ -47,7 +47,7 @@ export default function Page () {
           onClick={() => { goToSlide(2) }} // Ir al tercer Slide (FormCourses)
         >
           <span className="hidden md:inline">Crear Documento</span>
-          <span className="md:hidden"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2zM9 9h1m-1 4h6m-6 4h6"/></g></svg></span>
+          <span className="md:hidden"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2zM9 9h1m-1 4h6m-6 4h6"/></g></svg></span>
         </button>
         <button
           className='rounded-full bg-blue-400 p-2 min-w-[45px] md:rounded-full md:bg-blue-400 md:p-2 md:min-w-[160px] hover:bg-blue-500 hover:scale-105 transition duration-150 ease-in'
@@ -102,17 +102,25 @@ export default function Page () {
             }
           }}
         >
-          <SwiperSlide className='min-h-[600px] bg-white border border-gray-200'>
-            <FormTest session={session.data}/>
+          <SwiperSlide className='bg-white'>
+            <div className='h-[calc(100vh-190px)] border border-gray-200 overflow-auto'>
+              <FormTest session={session.data}/>
+            </div>
           </SwiperSlide>
-          <SwiperSlide className='min-h-[600px] bg-white border border-gray-200'>
-            <FormCourses session={session.data}/>
+          <SwiperSlide className='min-h-[600px] bg-white'>
+            <div className='h-[calc(100vh-200px)] border border-gray-200 overflow-auto'>
+              <FormCourses session={session.data}/>
+            </div>
           </SwiperSlide>
-          <SwiperSlide className='min-h-[600px] bg-white border border-gray-200'>
-            <FormFile session={session.data}/>
+          <SwiperSlide className='min-h-[600px] bg-white'>
+            <div className='h-[calc(100vh-200px)] border border-gray-200 overflow-auto'>
+              <FormFile session={session.data}/>
+            </div>
           </SwiperSlide>
-          <SwiperSlide className='min-h-[600px] bg-white border border-gray-200'>
-            <FormPost session={session.data}/>
+          <SwiperSlide className='min-h-[600px] bg-white'>
+            <div className='h-[calc(100vh-200px)] border border-gray-200 overflow-auto'>
+              <FormPost session={session.data}/>
+            </div>
           </SwiperSlide>
         </Swiper>
 

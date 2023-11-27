@@ -18,51 +18,21 @@ import './DraftEditor.css'
 import createToolbarPlugin from '@draft-js-plugins/static-toolbar'
 import Toolbar from './Toolbar'
 // import ImageAdd from './AddImage'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
 
 const DraftEditor = ({ setPostData }: any) => {
   const imagePlugin = createImagePlugin()
+  const [urlImage, setUrlImage] = useState('')
+  const [modal, setModal] = useState(false)
   const [editorState, setEditorState] = useState(
-    EditorState.createWithContent(
-      convertFromRaw({
-        blocks: [
-          {
-            key: '3eesq',
-            text: 'A Text-editor with super cool features built in Draft.js.',
-            type: 'unstyled',
-            depth: 0,
-            inlineStyleRanges: [
-              {
-                offset: 19,
-                length: 6,
-                style: 'BOLD'
-              },
-              {
-                offset: 25,
-                length: 5,
-                style: 'ITALIC'
-              },
-              {
-                offset: 30,
-                length: 8,
-                style: 'UNDERLINE'
-              }
-            ],
-            entityRanges: [],
-            data: {}
-          },
-          {
-            key: '9adb5',
-            text: 'Tell us a story!',
-            type: 'header-one',
-            depth: 0,
-            inlineStyleRanges: [],
-            entityRanges: [],
-            data: {}
-          }
-        ],
-        entityMap: {}
-      })
-    )
+    EditorState.createEmpty()
   )
   const editor = useRef(null)
 
@@ -149,8 +119,8 @@ const DraftEditor = ({ setPostData }: any) => {
 
   const insertImage = () => {
     // input in alert box to get image url
-    const url = prompt('Enter Image URL') as string
-    const newState = addImage(editorState, url, {})
+    setModal(false)
+    const newState = addImage(editorState, urlImage, {})
     // setEditorState(newState);  does not seems to work all time, use settimeout
     setTimeout(setEditorState, 0, newState)
   }
@@ -175,9 +145,22 @@ const DraftEditor = ({ setPostData }: any) => {
           plugins={plugins}
         />
       </div>
-      <button className="mt-5 bg-gray-300 rounded p-3" onClick={(insertImage)}>
-        Agergar Imagen
-      </button>
+      <Dialog open={modal} onOpenChange={setModal}>
+        <DialogTrigger className='mt-5 bg-gray-300 rounded p-3'>Agregar Imagen</DialogTrigger>
+        <DialogContent>
+          <DialogHeader className='flex flex-col gap-4'>
+            <DialogTitle>Ingresa URL de la imagen</DialogTitle>
+            <input
+              type="text"
+              className='border border-gray-300 rounded p-2 w-full'
+              onChange={(e) => { setUrlImage(e.target.value) }}
+            />
+          </DialogHeader>
+          <DialogDescription>
+            <button onClick={insertImage} disabled={urlImage === ''} className='bg-[#037AF6] text-white text-md rounded p-3'>Agregar imagen</button>
+          </DialogDescription>
+        </DialogContent>
+      </Dialog>
       {/* <ImageAdd
           editorState={editorState}
           onChange={setEditorState}
