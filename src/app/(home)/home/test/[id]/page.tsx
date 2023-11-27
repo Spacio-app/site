@@ -52,7 +52,7 @@ const TestPreview = async ({ params }: any) => {
                         <span>Cantidad de preguntas</span>
                       </div>
                       <div>
-                        1
+                        {test.questions.lenght}
                       </div>
                     </div>
                     <div className='text-center flex flex-col w-[50%]'>
