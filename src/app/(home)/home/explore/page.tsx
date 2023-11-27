@@ -23,7 +23,7 @@ const page = async ({ extraProp }: any) => {
     <>
       <section>
         <div className='text-center mt-4'>
-          <h1 className='font-semibold text-[30px]'>!Explora contenido interesante¡</h1>
+          <h1 className='font-semibold text-[30px]'>¡Explora contenido interesante!</h1>
         </div>
         <div className='mt-4 flex gap-6 p-6'>
           {/* <aside className="w-52 bg-gray-100 p-4 rounded-lg">
