@@ -17,7 +17,7 @@ function PostFeed ({
   id,
   title,
   description,
-  comments = [], // Cambia a un array de comentarios
+  comments, // Cambia a un array de comentarios
   author,
   contenttype,
   createdat,
@@ -34,9 +34,9 @@ function PostFeed ({
     }
   }
 
-  const commentCount = comments.length
+  const commentCount = comments ? comments.length : 0
 
-  const buttonStyle = comments.length > 1 && !commentsOpen ? 'border-b border-gray-300' : ''
+  const buttonStyle = comments && comments.length > 1 && !commentsOpen ? 'border-b border-gray-300' : ''
 
   // Esto es porque por alguna razón no funcionaban los % y chatgpt me dio esta opción xd
   let buttonWidth = '50%' // Valor por defecto
@@ -87,7 +87,7 @@ function PostFeed ({
         {commentsOpen && (
           <>
             <div className=" max-h-[300px] md:max-h-[500px] overflow-auto overflow-x-hidden border-t border-gray-300">
-              {displayedComments.map((comment: any, index: any) => (
+              {displayedComments?.map((comment: any, index: any) => (
                 <Comments
                   key={index}
                   commentAuthor={{
@@ -103,7 +103,7 @@ function PostFeed ({
             </div>
           </>
         )}
-        {comments.length > 2 && !commentsOpen && (
+        {comments && comments.length > 2 && !commentsOpen && (
           <div>
             {comments.slice(0, 2).map((comment: any, index: number) => (
               <Comments

@@ -1,4 +1,5 @@
 'use client'
+import { mutate } from 'swr'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
@@ -26,7 +27,8 @@ function WriteComment ({ id, session }: any) {
       const res = await response.json()
       // clean form
       reset()
-      router.refresh()
+      void mutate('/contentPost', res)
+      // router.refresh()
       // show success message
       console.log(res)
       console.log(Headers)
