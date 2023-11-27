@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation'
 const CardFile = ({ content }: { content: Spacio.Common.Content }) => {
   const router = useRouter()
   function handleClick () {
-    router.push(`/home/#/${content.id}`)
+    console.log(content)
+    // router.push(`/home/#/${content.id}`)
   }
   return (
     <>
@@ -24,10 +25,8 @@ const CardFile = ({ content }: { content: Spacio.Common.Content }) => {
                 <div className='text-sm font-medium text-gray-900 capitalize'>
                 { content.author.name }
                 </div>
-                  {/* <button onClick={handleClick}>Ver Documento</button> */}
-                <form method="get" action={content.filesURL[0]>
-                  <button type="submit">Descargar Documento</button>
-                </form>
+                  <button onClick={handleClick}>Ver Documento</button>
+                  <a href={"#"} download>Descargar Documento</a>
               </div>
             </div>
           </div>
