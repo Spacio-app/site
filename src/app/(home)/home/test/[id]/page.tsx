@@ -51,6 +51,9 @@ const TestPreview = async ({ params }: any) => {
                         </div>
                         <span>Cantidad de preguntas</span>
                       </div>
+                      {
+                        JSON.stringify(test)
+                      }
                       <div>
                         {test.questions.lenght}
                       </div>
