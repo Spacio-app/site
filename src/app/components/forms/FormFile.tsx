@@ -13,6 +13,7 @@ interface FormData {
 }
 
 const FormFile = ({ session }: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
   const [loading, setLoading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
   const [message, setMessage] = useState('')
@@ -49,7 +50,7 @@ const FormFile = ({ session }: any) => {
 
     try {
       const response = await axios.post(
-        'http://127.0.0.1:3001/contentCourse',
+        `${apiBaseUrl}/contentFile`,
         formData,
         {
           headers,

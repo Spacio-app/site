@@ -1,6 +1,7 @@
 import '@/css/globals.css'
 import { auth } from 'auth'
 import { SessionProvider } from 'next-auth/react'
+import { permanentRedirect } from 'next/navigation'
 
 export default async function RootLayout ({
   children
@@ -8,6 +9,9 @@ export default async function RootLayout ({
   children: React.ReactNode
 }) {
   const session = await auth()
+
+  console.log('SESSION', session)
+
   return (
     <html lang='en'>
     <head />

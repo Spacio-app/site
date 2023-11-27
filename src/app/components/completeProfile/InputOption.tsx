@@ -12,9 +12,10 @@ interface SelectProps {
   options: Option[]
   svg: ReactNode
   id: string
+  register: any
 }
 
-const InputOption: React.FC<SelectProps> = ({ title, options, svg, id }) => {
+const InputOption: React.FC<SelectProps> = ({ title, options, svg, id, register }) => {
   const [selectedOption, setSelectedOption] = useState<string>('')
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -29,9 +30,8 @@ const InputOption: React.FC<SelectProps> = ({ title, options, svg, id }) => {
       <div className="relative">
         <select
           id={id}
-          value={selectedOption}
-          onChange={handleOptionChange}
           className="border rounded-sm p-3 text-sm pl-10 w-full"
+          {...register}
         >
           <option value="">Seleccione una opción</option>
           {options.map((option) => (

@@ -20,12 +20,15 @@ export const authConfig = {
   ],
   events: {
     createUser: async ({ user }: any) => {
-      console.log('CREATE USER', user)
-      console.log('ID2', user.id)
+      // console.log('CREATE USER', user)
+      // console.log('ID2', user.id)
       try {
         await prisma.user.update({
           data: {
-            career: 'admin'
+            career: '',
+            campus: '',
+            careerYear: '',
+            aboutMe: ''
           },
           where: {
             id: user.id
@@ -46,15 +49,15 @@ export const authConfig = {
     // },
 
     async signIn ({ account, profile, user }: any) {
-      console.log('USERRRRRRRRR', user)
-      console.log('PROFILEEEEEE', profile)
-      console.log('ACCOUNTTTTT', account)
+      // console.log('USERRRRRRRRR', user)
+      // console.log('PROFILEEEEEE', profile)
+      // console.log('ACCOUNTTTTT', account)
       // console.log(profile?.email.endsWith('@duocuc.cl'))
       // console.log('signIn callback', account, profile, user)
       if (profile?.email?.endsWith('@duocuc.cl')) {
         if (!user) {
           redirectUrl = '/complete-profile'
-          console.log('User not found, redirecting to complete profile')
+          // console.log('User not found, redirecting to complete profile')
           return '/complete-profile' as any
         } else {
           redirectUrl = '/home'
@@ -66,37 +69,42 @@ export const authConfig = {
         return false
       }
     },
-    async session ({ token, session, user }: any) {
-      // console.log('user', user)
-      // console.log('session callback', token, session)
-      // session.user.career = ''
-      // session.user.campus = ''
-      // session.user.careerYear = ''
-      // session.user.aboutMe = ''
-      // console.log('TOKEN_USER', token)
-      session.accessToken = token.accessToken
-
-      return session
-    },
     async jwt ({ token, user, account, profile }: any) {
-      // console.log('token', token)
-      // console.log('user', user)
-      // console.log('account', account)
-      // console.log('profile', profile)
+      // console.log('TOKEN token', token)
+      // console.log('TOKEN user', user)
+      // console.log('TOKEN account', account)
+      // console.log('TOKEN profile', profile)
+
       if (account?.access_token) {
         token.accessToken = account.access_token
       }
-      token.user = user
+      if (user) {
+        token.user = user
+      }
 
       return token
 
       // return token
     },
+    async session ({ token, session, user }: any) {
+      // console.log('SESSION user', user)
+      // console.log('SESSION callback', token, session)
+      // session.user.career = ''
+      // session.user.campus = ''
+      // session.user.careerYear = ''
+      // session.user.aboutMe = ''
+      // console.log('SESSION TOKEN_USER', token)
+
+      session.accessToken = token.accessToken
+      session.user = token.user
+
+      return session
+    },
     async redirect (request) {
       // console.log('request', request)
       // console.log('redirect callback', redirectUrl)
       // const redirect = redirectUrl
-      return redirectUrl
+      return '/complete-profile'
     }
   },
   pages: {

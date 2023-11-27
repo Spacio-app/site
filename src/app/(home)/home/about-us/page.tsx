@@ -13,10 +13,7 @@ const About = () => {
           </div>
           <div className="w-full flex justify-center">
             <p className="text-gray-600 w-[90%] md:w-[60%] text-center md:text-[25px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              Somos estudiantes del Instituto Profeional Duoc UC, de la carrera de Ingeniería en Informática, que se encuentran cursando el último año de la carrera. El proyecto se realizó en el ramo llamado Capstone, en un periodo de 6 meses, utilizando la metodología Kanban y la herramienta Github Project para la gestión de tareas.
             </p>
           </div>
         </div>
@@ -26,55 +23,30 @@ const About = () => {
           <CardProfileL
           name="Cristóbal Alvarez Palacios"
           role="Jefe de proyecto y Desarrollador Full Stack"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-          enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat."
-          src="https://holatelcel.com/wp-content/uploads/2020/03/Faker_Interna_Credito_LCK.jpg"
           />
         </div>
         <div className="mx-[5%] flex gap-6 justify-end">
           <CardProfileR
           name="Giovanni González Herrera"
           role="Desarrollador BackEnd"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-          enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat."
-          src="https://holatelcel.com/wp-content/uploads/2020/03/Faker_Interna_Credito_LCK.jpg"
           />
         </div>
         <div className="mx-[5%] flex lg:gap-6 justify-start">
           <CardProfileL
           name="Valentina Jofré Ladron De Guevara"
           role="Gestor, Analista QA y Diseñadora de proyecto"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-          enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat."
-          src="https://holatelcel.com/wp-content/uploads/2020/03/Faker_Interna_Credito_LCK.jpg"
           />
         </div>
         <div className="mx-[5%] flex gap-6 justify-end">
           <CardProfileR
           name="Diego Peña González"
           role="Gestor y Analista QA de proyecto"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-          enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat."
-          src="https://holatelcel.com/wp-content/uploads/2020/03/Faker_Interna_Credito_LCK.jpg"
           />
         </div>
         <div className="mx-[5%] flex gap-6 justify-start">
           <CardProfileL
           name="José Luis Sandoval Sánchez"
           role="Desarrollador FrontEnd"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-          enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat."
-          src="https://holatelcel.com/wp-content/uploads/2020/03/Faker_Interna_Credito_LCK.jpg"
           />
         </div>
       </div>

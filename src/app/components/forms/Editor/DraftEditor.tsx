@@ -27,13 +27,14 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 
-const DraftEditor = ({ setPostData }: any) => {
+const DraftEditor = ({ setPostData, editorState, setEditorState }: {
+  setPostData: any
+  editorState: any
+  setEditorState: any
+}) => {
   const imagePlugin = createImagePlugin()
   const [urlImage, setUrlImage] = useState('')
   const [modal, setModal] = useState(false)
-  const [editorState, setEditorState] = useState(
-    EditorState.createEmpty()
-  )
   const editor = useRef(null)
 
   useEffect(() => {

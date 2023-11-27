@@ -11,8 +11,8 @@ const CardCourse = ({ content }: { content: Spacio.Common.Content }) => {
   return (
     <>
       <div className='bg-white shadow-md rounded-lg overflow-hidden w-[90%] h-[100%] border'>
-        <div className='bg-gray-200 object-contain'>
-          <Image className="w-full min-h-[200px] max-h-[200px] object-contain" width={'100'} height={'100'} src={content.miniature as any} alt={''} />
+        <div className='bg-blue-400 object-contain'>
+          <Image className="w-full min-h-[200px] max-h-[150px] object-contain" width={'100'} height={'100'} src={content.miniature as any} alt={''} />
         </div>
         <div className='p-6'>
           <div className='pb-2 border-b border-gray-300'>

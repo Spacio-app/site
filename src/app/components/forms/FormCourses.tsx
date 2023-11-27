@@ -7,6 +7,7 @@ import { PlusCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
 import ProgressBar from './ProgressBar'
 
 const FormCourses = ({ session }: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
   const [loading, setLoading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
   const [message, setMessage] = useState('')
@@ -50,7 +51,7 @@ const FormCourses = ({ session }: any) => {
     }
 
     try {
-      const response = await axios.post('http://127.0.0.1:3001/contentCourse', data, {
+      const response = await axios.post(`${apiBaseUrl}/contentCourse`, data, {
         headers,
         onUploadProgress: (progressEvent) => {
           const total = progressEvent.total?.valueOf() ?? 1 // Valor predeterminado a 1 si total es undefined

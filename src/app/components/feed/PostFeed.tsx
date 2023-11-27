@@ -20,7 +20,8 @@ function PostFeed ({
   comments = [], // Cambia a un array de comentarios
   author,
   contenttype,
-  createdat
+  createdat,
+  miniature
 }: any) {
   const [commentsOpen, setCommentsOpen] = useState(false)
   const [displayedComments, setDisplayedComments] = useState([])
@@ -51,7 +52,7 @@ function PostFeed ({
         <PostContent
           titlePublication={title}
           text={description}
-          imageSrc={''}
+          imageSrc={miniature}
         />
         <div className='px-6 py-3 flex'>
           <ButtonComment

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const Sidebar = async () => {
   const session = await auth()
-  const { name, image } = session?.user as any
+  const { name, image, career, careerYear, campus, aboutMe } = session?.user as any
 
   return (
     <div className="h-screen flex flex-col gap-4 px-2">
@@ -38,7 +38,7 @@ const Sidebar = async () => {
         </div>
         <div>
           <div className='font-medium'>
-            <span>Antonio Varas</span>
+            <span>{campus}</span>
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@ const Sidebar = async () => {
         </div>
         <div>
           <div className='font-medium'>
-            <span>Ingeniería en Informática</span>
+            <span>{career}</span>
           </div>
         </div>
       </div>

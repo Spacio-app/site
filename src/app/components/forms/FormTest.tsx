@@ -18,6 +18,7 @@ import ProgressBar from './ProgressBar'
 // })
 
 const FormTest = ({ session }: any) => {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
   const { control, register, handleSubmit, setValue } = useForm({
     defaultValues: {
       title: '',
@@ -105,7 +106,7 @@ const FormTest = ({ session }: any) => {
 
     try {
       const response = await axios.post(
-        'http://127.0.0.1:3001/contentTest',
+        `${apiBaseUrl}/contentTest`,
         data,
         {
           headers,
@@ -134,7 +135,7 @@ const FormTest = ({ session }: any) => {
   }
 
   return (
-    <div className="border">
+    <div className="">
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div className="border-b text-xl font-semibold text-center py-4">
           <h2>Crear Prueba</h2>

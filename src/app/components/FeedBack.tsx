@@ -9,8 +9,8 @@ export const FeedBack = ({ contentID, session }: any) => {
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
 
   const [rating, setRating] = useState(0)
-  const [averageRating, setAverageRating] = useState(null)
-  const [ratingCount, setRatingCount] = useState(null)
+  const [averageRating, setAverageRating] = useState<number>()
+  const [ratingCount, setRatingCount] = useState()
   const { register, handleSubmit } = useForm()
   const onStarClick = (nextValue: any) => {
     setRating(nextValue)
@@ -39,6 +39,9 @@ export const FeedBack = ({ contentID, session }: any) => {
         const res = await response.json()
       }
     } catch (error) {
+      if (error) {
+        alert('Ya has calificado este contenido')
+      }
       console.error('Error al calificar:', error)
     }
   }
@@ -48,7 +51,7 @@ export const FeedBack = ({ contentID, session }: any) => {
     axios.get(`${apiBaseUrl}content/${contentID}/rating/average`)
       .then(response => {
         console.log('RESPONSE', response.data)
-        setAverageRating(response.data.average)
+        setAverageRating(response.data)
       })
       .catch(error => {
         console.log(error.response)
@@ -58,37 +61,51 @@ export const FeedBack = ({ contentID, session }: any) => {
     // Obtener el conteo de calificaciones
     axios.get(`${apiBaseUrl}content/${contentID}/rating/count`)
       .then(response => {
-        setRatingCount(response.data.count)
+        console.log('RESPONSE', response.data)
+        setRatingCount(response.data)
       })
       .catch(error => {
         console.error('Error al obtener el conteo de calificaciones:', error)
       })
-  }, [contentID, apiBaseUrl])
+  }, [])
 
   return (
     <div className="lg:w-1/3 md:w-full border border-gray-500 rounded-2xl flex-grow">
-      <div className="p-6">
-        <h2 className="font-bold">Deja tu FeedBack!</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <StarRatingComponent
-            starCount={5}// Número de estrellas
-            value={rating} // Valor inicial
-            onStarClick={onStarClick} // Manejador de clics en las estrellas
-            {...register('rating')}
-          />
-          <button type='submit' className="bg-blue-500 text-white px-4 py-2 mt-4">
-            Enviar Feedback
-          </button>
+      <div className="p-2">
+        <h2 className="font-bold text-center">FeedBack</h2>
+        <form className='flex flex-col justify-center items-center' onSubmit={handleSubmit(onSubmit)}>
+          <div className='flex justify-center items-center'>
+            <div className="w-[30%] justify-center items-center flex mt-2">mática
+              <div className="shadow-lg border-l-2 rounded-2xl w-fit p-8">
+              <p className="font-bold text-[28px]">
+                {averageRating ? averageRating.toFixed(1) : 'N/A'}
+              </p>
+              </div>
+            </div>
+            <div className='text-[28px] h-fit flex w-[70%] justify-center items-center'>
+              <div className='flex flex-col justify-center h-[60%] p-4'>
+                <div className='h-[80%]'>
+                  <StarRatingComponent
+                    starCount={5}// Número de estrellas
+                    value={rating} // Valor inicial
+                    onStarClick={onStarClick} // Manejador de clics en las estrellas
+                    {...register('rating')}
+                  />
+                </div>
+                <div className='h-[20%]'>
+                  <div className="p-2">
+                    <p className="text-[15px]">{ratingCount ?? ratingCount} Calificaciones</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='mt-4'>
+            <button type='submit' className="bg-blue-500 hover:bg-blue-400 text-white p-2 text-sm rounded-lg">
+              Enviar Feedback
+            </button>
+          </div>
         </form>
-      </div>
-      <div className="w-[100%] items-center flex p-3">
-        <div className="shadow-lg border-l-2 rounded-2xl w-fit p-11">
-          <p className="font-bold text-3xl">{averageRating ?? averageRating}</p>
-        </div>
-        <div className="ml-6">Puntaje</div>
-      </div>
-      <div className="p-3">
-        <p className="font-bold">Número de Calificaciones: {ratingCount ?? ratingCount}</p>
       </div>
     </div>
   )

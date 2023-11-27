@@ -10,13 +10,14 @@ const GoogleLoginButton = () => {
   // useEffect(() => {
   //   console.log('callbackUrl', callbackUrl)
   // }, [callbackUrl])
+  const callbackUrl = ''
 
   return (<>
     <button
       className='bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full text-center'
       style={{ width: '118px' }}
       onClick={() => {
-        void signIn('google', { callbackUrl: 'http://localhost:3000/' })
+        void signIn('google', { callbackUrl })
       }}
     >
       <svg

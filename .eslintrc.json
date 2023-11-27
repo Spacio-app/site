@@ -25,6 +25,7 @@
         "@typescript-eslint/return-await": "off",
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/no-unused-vars": "off",
-        "@typescript-eslint/quote-props": "off"
+        "@typescript-eslint/quote-props": "off",
+        "@typescript-eslint/no-implied-eval": "off"
     }
 }

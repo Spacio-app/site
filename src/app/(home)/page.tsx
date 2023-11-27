@@ -10,12 +10,9 @@ const Landing = async () => {
     <>
       <Header className={'bg-transparent z-[1] top-0'} sessionData={session} />
       <video autoPlay muted loop className='absolute top-0 z-[-1] w-full h-full lg:h-[calc(100vh)] object-cover'>
-        <source src="/prueba.mkv" type="video/mp4" />
+        <source src="/landing.mkv" type="video/mp4" />
       </video>
       <section className='relative mx-auto h-full lg:h-[calc(100vh-64px)] flex justify-center items-center'>
-        {/* {
-          session ? <p>{JSON.stringify(session)}</p> : <p>no hay sesion</p>
-        } */}
         <div className='w-full h-full flex flex-col-reverse lg:flex-row lg:max-w-[80%] xl:max-w-[70%] items-center justify-start lg:justify-center lg:gap-10'>
           <div className=' bg-black lg:bg-transparent w-full h-auto'>
             <Image
