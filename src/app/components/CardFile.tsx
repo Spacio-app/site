@@ -25,8 +25,7 @@ const CardFile = ({ content }: { content: Spacio.Common.Content }) => {
                 <div className='text-sm font-medium text-gray-900 capitalize'>
                 { content.author.name }
                 </div>
-                  <button onClick={handleClick}>Ver Documento</button>
-                  <a href={'#'} download>Descargar Documento</a>
+                  <a href={content.filesURL[0].fileURL} download>Descargar Documento</a>
               </div>
             </div>
           </div>
