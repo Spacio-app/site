@@ -1,31 +1,32 @@
-import CardCourse from '@/components/CardCourse'
-import CardFile from '@/components/CardFile'
-import CardPost from '@/components/CardPost'
-import CardTest from '@/components/CardTest'
-import { type ReactElement } from 'react'
-import { auth } from 'auth'
+import CardCourse from "@/components/CardCourse";
+import CardFile from "@/components/CardFile";
+import CardPost from "@/components/CardPost";
+import CardTest from "@/components/CardTest";
+import { type ReactElement } from "react";
+import { auth } from "auth";
 
 export const getProjects = async () => {
   // give me example url to fetch data
 
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
-  const res = await fetch(`${apiBaseUrl}content`, { cache: 'no-store' })
-  const projects = await res.json()
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const res = await fetch(`${apiBaseUrl}content`, { cache: "no-store" });
+  const projects = await res.json();
 
-  return projects
-}
+  return projects;
+};
 
 const page = async ({ extraProp }: any) => {
-  const session = await auth()
-  const projects = await getProjects()
-  console.log('EXTRAPROP', extraProp)
+  const session = await auth();
+  const projects = await getProjects();
   return (
     <>
       <section>
-        <div className='text-center mt-4'>
-          <h1 className='font-semibold text-[30px]'>¡Explora contenido interesante!</h1>
+        <div className="text-center mt-4">
+          <h1 className="font-semibold text-[30px]">
+            ¡Explora contenido interesante!
+          </h1>
         </div>
-        <div className='mt-4 flex gap-6 p-6'>
+        <div className="mt-4 flex gap-6 p-6">
           {/* <aside className="w-52 bg-gray-100 p-4 rounded-lg">
             <h2 className="text-lg font-medium mb-2">Filtros</h2>
             <div className="mb-4">
@@ -49,30 +50,28 @@ const page = async ({ extraProp }: any) => {
             <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Aplicar filtros</button>
           </aside> */}
           <div className="w-full grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-4 grid-flow gap-x-4 gap-y-20 justify-items-center items-center">
-            {
-              projects?.map((content: Spacio.Common.Content) => {
-                // <div key={id}>
-                //   <h1>{title}</h1>
-                //   <p>{completed}</p>
-                // </div>
-                let CardComponentType
-                if (content.contenttype === 'course') {
-                  CardComponentType = <CardCourse content={content} />
-                } else if (content.contenttype === 'test') {
-                  CardComponentType = <CardTest content={content} />
-                } else if (content.contenttype === 'file') {
-                  CardComponentType = <CardFile content={content} />
-                } else if (content.contenttype === 'post') {
-                  CardComponentType = <CardPost content={content} />
-                }
-                return (CardComponentType)
+            {projects?.map((content: Spacio.Common.Content) => {
+              // <div key={id}>
+              //   <h1>{title}</h1>
+              //   <p>{completed}</p>
+              // </div>
+              let CardComponentType;
+              if (content.contenttype === "course") {
+                CardComponentType = <CardCourse content={content} />;
+              } else if (content.contenttype === "test") {
+                CardComponentType = <CardTest content={content} />;
+              } else if (content.contenttype === "file") {
+                CardComponentType = <CardFile content={content} />;
+              } else if (content.contenttype === "post") {
+                CardComponentType = <CardPost content={content} />;
               }
-              )}
+              return CardComponentType;
+            })}
           </div>
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;
