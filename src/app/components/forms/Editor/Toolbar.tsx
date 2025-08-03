@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAlignCenter,
   faAlignLeft,
@@ -18,95 +17,95 @@ import {
   faSubscript,
   faSuperscript,
   faTextWidth,
-  faUnderline
-} from '@fortawesome/free-solid-svg-icons'
-import { RichUtils } from 'draft-js'
+  faUnderline,
+} from "@fortawesome/free-solid-svg-icons";
+import { RichUtils } from "draft-js";
 
 const Toolbar = ({ editorState, setEditorState }: any) => {
   const tools = [
     {
-      label: 'bold',
-      style: 'BOLD',
+      label: "bold",
+      style: "BOLD",
       icon: <FontAwesomeIcon icon={faBold} />,
-      method: 'inline'
+      method: "inline",
     },
     {
-      label: 'italic',
-      style: 'ITALIC',
+      label: "italic",
+      style: "ITALIC",
       icon: <FontAwesomeIcon icon={faItalic} />,
-      method: 'inline'
+      method: "inline",
     },
     {
-      label: 'underline',
-      style: 'UNDERLINE',
+      label: "underline",
+      style: "UNDERLINE",
       icon: <FontAwesomeIcon icon={faUnderline} />,
-      method: 'inline'
+      method: "inline",
     },
     {
-      label: 'highlight',
-      style: 'HIGHLIGHT',
+      label: "highlight",
+      style: "HIGHLIGHT",
       icon: <FontAwesomeIcon icon={faHighlighter} />,
-      method: 'inline'
+      method: "inline",
     },
     {
-      label: 'strike-through',
-      style: 'STRIKETHROUGH',
+      label: "strike-through",
+      style: "STRIKETHROUGH",
       icon: <FontAwesomeIcon icon={faStrikethrough} />,
-      method: 'inline'
+      method: "inline",
     },
     {
-      label: 'Superscript',
-      style: 'SUPERSCRIPT',
+      label: "Superscript",
+      style: "SUPERSCRIPT",
       icon: <FontAwesomeIcon icon={faSuperscript} />,
-      method: 'inline'
+      method: "inline",
     },
     {
-      label: 'Subscript',
-      style: 'SUBSCRIPT',
+      label: "Subscript",
+      style: "SUBSCRIPT",
       icon: <FontAwesomeIcon icon={faSubscript} />,
-      method: 'inline'
+      method: "inline",
     },
     {
-      label: 'Monospace',
-      style: 'CODE',
+      label: "Monospace",
+      style: "CODE",
       icon: <FontAwesomeIcon icon={faTextWidth} transform="grow-3" />,
-      method: 'inline'
+      method: "inline",
     },
     {
-      label: 'Blockquote',
-      style: 'blockQuote',
+      label: "Blockquote",
+      style: "blockQuote",
       icon: <FontAwesomeIcon icon={faQuoteRight} transform="grow-2" />,
-      method: 'block'
+      method: "block",
     },
     {
-      label: 'Unordered-List',
-      style: 'unordered-list-item',
-      method: 'block',
-      icon: <FontAwesomeIcon icon={faListUl} transform="grow-6" />
+      label: "Unordered-List",
+      style: "unordered-list-item",
+      method: "block",
+      icon: <FontAwesomeIcon icon={faListUl} transform="grow-6" />,
     },
     {
-      label: 'Ordered-List',
-      style: 'ordered-list-item',
-      method: 'block',
-      icon: <FontAwesomeIcon icon={faListOl} transform="grow-6" />
+      label: "Ordered-List",
+      style: "ordered-list-item",
+      method: "block",
+      icon: <FontAwesomeIcon icon={faListOl} transform="grow-6" />,
     },
     {
-      label: 'Code Block',
-      style: 'CODEBLOCK',
+      label: "Code Block",
+      style: "CODEBLOCK",
       icon: <FontAwesomeIcon icon={faCode} transform="grow-3" />,
-      method: 'inline'
+      method: "inline",
     },
     {
-      label: 'Uppercase',
-      style: 'UPPERCASE',
+      label: "Uppercase",
+      style: "UPPERCASE",
       icon: <FontAwesomeIcon icon={faChevronUp} transform="grow-3" />,
-      method: 'inline'
+      method: "inline",
     },
     {
-      label: 'lowercase',
-      style: 'LOWERCASE',
+      label: "lowercase",
+      style: "LOWERCASE",
       icon: <FontAwesomeIcon icon={faChevronDown} transform="grow-3" />,
-      method: 'inline'
+      method: "inline",
     },
     // {
     //   label: 'Left',
@@ -126,35 +125,35 @@ const Toolbar = ({ editorState, setEditorState }: any) => {
     //   icon: <FontAwesomeIcon icon={faAlignRight} transform="grow-2" />,
     //   method: 'block'
     // },
-    { label: 'P', style: 'image', method: 'block' },
-    { label: 'H1', style: 'header-one', method: 'block' },
-    { label: 'H2', style: 'header-two', method: 'block' },
-    { label: 'H3', style: 'header-three', method: 'block' },
-    { label: 'H4', style: 'header-four', method: 'block' },
-    { label: 'H5', style: 'header-five', method: 'block' },
-    { label: 'H6', style: 'header-six', method: 'block' }
-  ]
+    { label: "P", style: "image", method: "block" },
+    { label: "H1", style: "header-one", method: "block" },
+    { label: "H2", style: "header-two", method: "block" },
+    { label: "H3", style: "header-three", method: "block" },
+    { label: "H4", style: "header-four", method: "block" },
+    { label: "H5", style: "header-five", method: "block" },
+    { label: "H6", style: "header-six", method: "block" },
+  ];
 
   const applyStyle = (e: any, style: any, method: any) => {
-    e.preventDefault()
-    method === 'block'
+    e.preventDefault();
+    method === "block"
       ? setEditorState(RichUtils.toggleBlockType(editorState, style))
-      : setEditorState(RichUtils.toggleInlineStyle(editorState, style))
-  }
+      : setEditorState(RichUtils.toggleInlineStyle(editorState, style));
+  };
 
   const isActive = (style: any, method: any) => {
-    if (method === 'block') {
-      const selection = editorState.getSelection()
+    if (method === "block") {
+      const selection = editorState.getSelection();
       const blockType = editorState
         .getCurrentContent()
         .getBlockForKey(selection.getStartKey())
-        .getType()
-      return blockType === style
+        .getType();
+      return blockType === style;
     } else {
-      const currentStyle = editorState.getCurrentInlineStyle()
-      return currentStyle.has(style)
+      const currentStyle = editorState.getCurrentInlineStyle();
+      return currentStyle.has(style);
     }
-  }
+  };
 
   return (
     <div className="toolbar-grid">
@@ -162,19 +161,23 @@ const Toolbar = ({ editorState, setEditorState }: any) => {
         <button
           style={{
             color: isActive(item.style, item.method)
-              ? 'rgba(0, 0, 0, 1)'
-              : 'rgba(0, 0, 0, 0.3)'
+              ? "rgba(0, 0, 0, 1)"
+              : "rgba(0, 0, 0, 0.3)",
           }}
           key={`${item.label}-${idx}`}
           title={item.label}
-          onClick={(e) => { applyStyle(e, item.style, item.method) }}
-          onMouseDown={(e) => { e.preventDefault() }}
+          onClick={(e) => {
+            applyStyle(e, item.style, item.method);
+          }}
+          onMouseDown={(e) => {
+            e.preventDefault();
+          }}
         >
           {item.icon || item.label}
         </button>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Toolbar
+export default Toolbar;
